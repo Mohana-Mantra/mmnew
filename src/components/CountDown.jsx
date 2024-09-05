@@ -82,7 +82,7 @@ function CountDown() {
     }, []);
 
     return (
-        <div className="my-20 fixed z-50 bottom-0 left-0 !overflow-x-hidden">
+        <div>
             <h1
                 className={`${monoton.className} text-4xl md:text-5xl text-yellow mb-10 text-center`}
             >

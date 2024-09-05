@@ -15,7 +15,7 @@ export default function Home() {
             <ProShows />
             <Gallery />
             <Sponsers />
-            {/* <CountDown /> */}
+            <CountDown />
         </>
     );
 }

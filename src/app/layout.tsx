@@ -3,7 +3,6 @@ import { Lato } from "next/font/google";
 import "./globals.css";
 import Navbar from "../components/Navbar";
 import dynamic from "next/dynamic";
-import CountDown from "@/components/CountDown";
 
 const DynamicNavbar = dynamic(() => import("../components/Navbar"), {
     ssr: false,
@@ -26,7 +25,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     {/* <Navbar /> */}
                     <div className="flex-1 flex-grow">{children}</div>
                 </main>
-                {/* <CountDown /> */}
             </body>
         </html>
     );
