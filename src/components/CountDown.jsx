@@ -21,21 +21,7 @@ function CountDown() {
 
         return { days, hours, minutes, seconds };
     };
-
     const [count, setCount] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-
-    // useEffect(() => {
-    //     setInterval(() => {
-    //         const countDown = getDays();
-    //         setCount({
-    //             days: countDown.days,
-    //             hours: countDown.hours,
-    //             minutes: countDown.minutes,
-    //             seconds: countDown.seconds,
-    //         });
-    //     }, 1000);
-    // }, [count]);
-
     useEffect(() => {
         var target_date = new Date(2024, 9, 3);
         // var target_date = new Date().getTime() + 1000 * 3600 * 48;

@@ -17,6 +17,10 @@ import pic13 from "../../public/assets/gallery/Clip0035T01.jpg";
 import pic14 from "../../public/assets/gallery/GETH7222.jpg";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { cn } from "@/lib/utils";
+import { Monoton } from "next/font/google";
+
+const monoton = Monoton({ subsets: ["latin"], weight: "400" });
 
 function Gallery() {
     const [isOpen, setIsOpen] = useState(false);
@@ -73,7 +77,12 @@ function Gallery() {
 
                     {/* dc */}
                 </div>
-                <h1 className="text-4xl md:text-6xl font-bold font-anybody text-center text-[#306ef9]">
+                <h1
+                    className={cn(
+                        "text-4xl md:text-6xl font-bold text-yellow text-center",
+                        monoton.className
+                    )}
+                >
                     GALLERY
                 </h1>
             </div>

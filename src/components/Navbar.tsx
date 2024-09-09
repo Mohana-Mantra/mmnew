@@ -11,7 +11,7 @@ function Navbar() {
 
     return (
         <>
-            <header className="fixed rounded-b-[50px] top-0 inset-x-0 z-[100] hidden md:block w-full h-20 md:px-20 font-sulpher font-bold text-[18px]">
+            <header className="fixed rounded-b-[50px] top-0 inset-x-0 z-50 hidden md:block w-full h-20 md:px-20 font-sulpher font-bold text-[18px]">
                 <nav className="w-full h-full flex items-center justify-evenly">
                     <div className="h-full flex items-center justify-center gap-12">
                         <Link
@@ -51,7 +51,7 @@ function Navbar() {
                     </div>
 
                     <div className="flex items-center h-full gap-12">
-                        <Link
+                        {/* <Link
                             href="/register"
                             className={`border-[2px] border-secondary py-2 px-4 ${
                                 path === "/register" && "text-[#feca00]"
@@ -68,6 +68,15 @@ function Navbar() {
                             onClick={() => window.location.reload()}
                         >
                             Login
+                        </Link> */}
+                        <Link
+                            href="https://mmregistration.vercel.app/"
+                            className={`bg-secondary text-black px-4 py-2 border-[2px] border-secondary ${
+                                path === "/login" && "text-[#feca00]"
+                            }`}
+                            onClick={() => window.location.reload()}
+                        >
+                            Buy Your Pass
                         </Link>
                     </div>
                 </nav>

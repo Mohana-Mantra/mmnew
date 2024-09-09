@@ -60,7 +60,7 @@ function Details() {
                                     fill="white"
                                 />
                             </svg>
-                            <p className="font-bold text-lg">MBU</p>
+                            <p className="font-bold text-lg">MBU, Tirupati, INDIA</p>
                         </div>
                     </motion.div>
 

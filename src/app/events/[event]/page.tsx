@@ -62,46 +62,61 @@ export default function AllEvents({ params }: { params: any }) {
                                 </div>
                             </div>
                         </DialogTrigger>
-                        <DialogContent className="grid grid-cols-1 w-full md:w-auto md:grid-cols-2 h-fit md:flex-row bg-white">
-                            <div className="h-full relative w-full">
-                                <Image
-                                    src={event.image}
-                                    fill
-                                    alt={event.event}
-                                    className="object-cover rounded-lg object-center"
-                                />
-                            </div>
-                            <div className="flex flex-col gap-6 justify-between my-6 text-black">
-                                <h1 className="font-sulpher font-bold text-[#ff5f1f] text-3xl">
-                                    {event.event}
-                                </h1>
-                                <p className="font-sulpher">{event.description}</p>
-                                <div className="flex justify-between items-center h-fit">
-                                    <div>
-                                        <div className="flex items-center h-fit gap-4">
-                                            <Image
-                                                src={Calender}
-                                                height={16}
-                                                width={16}
-                                                alt="icon"
-                                            />
-                                            <p>{event.day}</p>
-                                        </div>
-                                        <div className="flex items-center h-fit gap-4">
-                                            <Image
-                                                src={Location}
-                                                height={16}
-                                                width={16}
-                                                alt="icon"
-                                            />
-                                            <p>{event.venue}</p>
-                                        </div>
-                                        <div className="flex items-center h-fit gap-4">
-                                            <Image src={Time} height={16} width={16} alt="icon" />
-                                            <p>{event.timings}</p>
+                        <DialogContent className="w-full md:w-auto h-fit overflow-y-scroll md:overflow-auto bg-white">
+                            <div className="grid grid-cols-1 w-full md:w-auto gap-6 md:grid-cols-2 md:flex-row">
+                                <div className="h-full relative w-full">
+                                    <Image
+                                        src={event.image}
+                                        fill
+                                        alt={event.event}
+                                        className="object-cover rounded-lg object-center"
+                                    />
+                                </div>
+                                <div className="flex flex-col gap-6 justify-between my-6 text-black">
+                                    <h1 className="font-sulpher font-bold text-[#ff5f1f] text-3xl">
+                                        {event.event}
+                                    </h1>
+                                    <p className="font-sulpher">{event.description}</p>
+                                    <div className="flex justify-between items-center h-fit">
+                                        <div>
+                                            <div className="flex items-center h-fit gap-4">
+                                                <Image
+                                                    src={Calender}
+                                                    height={16}
+                                                    width={16}
+                                                    alt="icon"
+                                                />
+                                                <p>{event.day}</p>
+                                            </div>
+                                            <div className="flex items-center h-fit gap-4">
+                                                <Image
+                                                    src={Location}
+                                                    height={16}
+                                                    width={16}
+                                                    alt="icon"
+                                                />
+                                                <p>{event.venue}</p>
+                                            </div>
+                                            <div className="flex items-center h-fit gap-4">
+                                                <Image
+                                                    src={Time}
+                                                    height={16}
+                                                    width={16}
+                                                    alt="icon"
+                                                />
+                                                <p>{event.timings}</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div className="text-black">
+                                <h1 className="font-bold text-xl">How to Play and Rules:</h1>
+                                <ol className="list-disc !ml-8">
+                                    {event.rules.map((rule, index) => (
+                                        <li key={index}>{rule}</li>
+                                    ))}
+                                </ol>
                             </div>
                         </DialogContent>
                     </Dialog>

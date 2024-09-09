@@ -27,7 +27,7 @@ function Sponsers() {
         <>
             <div className="bg-slate-900 py-20 mt-20 space-y-10 md:space-y-16">
                 <h1
-                    className={`text-center text-4xl md:text-[3.538rem] text-yellow ${monoton.className}`}
+                    className={`text-center text-2xl md:text-[2.8rem] text-yellow ${monoton.className}`}
                 >
                     sponsors
                 </h1>
@@ -50,7 +50,7 @@ function Sponsers() {
             </div>
             <div className="bg-slate-900 py-20 space-y-10 md:space-y-16">
                 <h1
-                    className={`text-center text-4xl md:text-[3.538rem] text-yellow ${monoton.className}`}
+                    className={`text-center text-2xl md:text-[2.8rem] text-yellow ${monoton.className}`}
                 >
                     our past sponsors
                 </h1>

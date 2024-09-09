@@ -27,7 +27,8 @@
         "**/*.ts",
         "**/*.tsx",
         ".next/types/**/*.ts",
-        "src/components/CountDown.jsx"
+        "src/components/CountDown.jsx",
+        "src/components/StickyCountdown.jsx"
     ],
     "exclude": ["node_modules"]
 }
