@@ -126,8 +126,8 @@ export default function AllEvents({ params }: { params: any }) {
     );
 }
 
-// export async function generateStaticParams() {
-//     return ["kalakshetra", "workshops", "tech", "spotevents"].map((event) => ({
-//         event,
-//     }));
-// }
+ export async function generateStaticParams() {
+     return ["kalakshetra", "workshops", "tech", "spotevents"].map((event) => ({
+         event,
+     }));
+ }
