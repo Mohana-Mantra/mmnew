@@ -39,7 +39,7 @@ export default function AllEvents({ params }: { params: any }) {
             <GradualSpacing
                 text={event}
                 className={cn(
-                    "text-center capitalize text-[3.538rem] md:text-5xl tracking-tighter text-yellow",
+                    "text-center capitalize text-2xl md:text-5xl tracking-tighter text-yellow",
                     monoton.className
                 )}
             />
@@ -126,8 +126,8 @@ export default function AllEvents({ params }: { params: any }) {
     );
 }
 
-export async function generateStaticParams() {
-    return ["kalakshetra", "workshops", "tech", "spotevents"].map((event) => ({
-        event,
-    }));
-}
+// export async function generateStaticParams() {
+//     return ["kalakshetra", "workshops", "tech", "spotevents"].map((event) => ({
+//         event,
+//     }));
+// }

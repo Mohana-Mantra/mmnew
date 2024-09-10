@@ -1,12 +1,11 @@
 "use client";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-// import { usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 function Navbar() {
-    const path = window.location.pathname;
-    // const path = usePathname();
+    const path = usePathname();
     const [isHamburgerOpen, setHamburgerOpen] = useState(false);
 
     return (
@@ -14,37 +13,24 @@ function Navbar() {
             <header className="fixed rounded-b-[50px] top-0 inset-x-0 z-50 hidden md:block w-full h-20 md:px-20 font-sulpher font-bold text-[18px]">
                 <nav className="w-full h-full flex items-center justify-evenly">
                     <div className="h-full flex items-center justify-center gap-12">
-                        <Link
-                            href="/"
-                            className={` ${path === "/" && "text-[#feca00]"}`}
-                            onClick={() => (window.location.pathname = "/")}
-                        >
+                        <Link href="/" className={` ${path === "/" && "text-[#feca00]"}`}>
                             Home
                         </Link>
                         <Link
                             href="/events"
                             className={` ${path.includes("/events") && "text-[#feca00]"}`}
-                            onClick={() => (window.location.pathname = "/events")}
                         >
                             Events
                         </Link>
-                        {/* <Link
-                    href="/merchandise"
-                    className={` ${path === "/merchandise" && "text-yellow-400"}`}
-                >
-                    Merchandise
-                </Link> */}
                         <Link
                             href="/gallery"
-                            className={`${path === "/gallery" && "text-[#feca00]"}`}
-                            onClick={() => (window.location.pathname = "/gallery")}
+                            className={`${path.includes("/gallery") && "text-[#feca00]"}`}
                         >
                             Gallery
                         </Link>
                         <Link
                             href="/contact"
-                            className={` ${path === "/contact" && "text-[#feca00]"}`}
-                            onClick={() => (window.location.pathname = "/contact")}
+                            className={` ${path.includes("/contact") && "text-[#feca00]"}`}
                         >
                             Contact
                         </Link>
@@ -74,7 +60,7 @@ function Navbar() {
                             className={`bg-secondary text-black px-4 py-2 border-[2px] border-secondary ${
                                 path === "/login" && "text-[#feca00]"
                             }`}
-                            onClick={() => window.location.reload()}
+                            // onClick={() => window.location.reload()}
                         >
                             Buy Your Pass
                         </Link>
@@ -135,42 +121,35 @@ function Navbar() {
                 </Link>
                 <Link
                     href="/events"
-                    className={` ${path === "/events" && "text-yellow-400"}`}
+                    className={` ${path.includes("/events") && "text-yellow-400"}`}
                     onClick={() => setHamburgerOpen(false)}
                 >
                     Events
                 </Link>
-                {/* <Link
-                    href="/merchandise"
-                    className={` ${path === "/merchandise" && "text-yellow-400"}`}
-                    onClick={() => setHamburgerOpen(false)}
-                >
-                    Merchandise
-                </Link> */}
                 <Link
                     href="/gallery"
-                    className={` ${path === "/gallary" && "text-yellow-400"}`}
+                    className={` ${path.includes("/gallary") && "text-yellow-400"}`}
                     onClick={() => setHamburgerOpen(false)}
                 >
                     Gallery
                 </Link>
                 <Link
                     href="/contact"
-                    className={` ${path === "/contact" && "text-yellow-400"}`}
+                    className={` ${path.includes("/contact") && "text-yellow-400"}`}
                     onClick={() => setHamburgerOpen(false)}
                 >
                     Contact
                 </Link>
                 <Link
                     href="/register"
-                    className={` ${path === "/register" && "text-yellow-400"}`}
+                    className={` ${path.includes("/register") && "text-yellow-400"}`}
                     onClick={() => setHamburgerOpen(false)}
                 >
                     Register
                 </Link>
                 <Link
                     href="/login"
-                    className={` ${path === "/login" && "text-yellow-400"}`}
+                    className={` ${path.includes("/login") && "text-yellow-400"}`}
                     onClick={() => setHamburgerOpen(false)}
                 >
                     Login

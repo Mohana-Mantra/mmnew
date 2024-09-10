@@ -1,10 +1,5 @@
 import { CardContainer, CardItem } from "@/components/ui/3d-card";
-import Image from "next/image";
 import Link from "next/link";
-import placeHolder from "../../../public/assets/placeholder.png";
-import Kalakshetra from "../../../public/assets/kalakshetra.png";
-import Workshop from "../../../public/assets/workshops.png";
-import Spotenevts from "../../../public/assets/spotevents.png";
 import { cn } from "@/lib/utils";
 import { Monoton } from "next/font/google";
 
@@ -12,10 +7,21 @@ const monoton = Monoton({ weight: ["400"], subsets: ["latin"] });
 
 export default function Events() {
     const eventsList = [
-        { title: "Kalakshetra", image: Kalakshetra.src, link: "/events/kalakshetra" },
-        { title: "Workshops & Tech", image: Workshop.src, link: "/events/workshops" },
-        // { title: "Tech", image: placeHolder.src, link: "/events/tech" },
-        { title: "SpotEvents", image: Spotenevts.src, link: "/events/spotevents" },
+        {
+            title: "Kalakshetra",
+            video: "../../../assets/kalakshetra.mp4",
+            link: "/events/kalakshetra",
+        },
+        {
+            title: "Workshops & Tech",
+            video: "../../../assets/workshops.mp4",
+            link: "/events/workshops",
+        },
+        {
+            title: "SpotEvents",
+            video: "../../../assets/spotevents.mp4",
+            link: "/events/spotevents",
+        },
     ];
 
     return (
@@ -39,9 +45,9 @@ export default function Events() {
                                             muted
                                             playsInline
                                             typeof="video/mp4"
-                                            className="w-full h-full object-cover rounded-lg object-center"
+                                            className="w-full h-full object-cover rounded-lg object-center pointer-events-none"
                                         >
-                                            <source src="../../../assets/spotevents.mp4" />
+                                            <source src={event.video} />
                                         </video>
                                     </CardItem>
                                     {/* <CardItem

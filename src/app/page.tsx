@@ -5,7 +5,6 @@ import ProShows from "@/components/ProShow";
 import Sponsers from "@/components/Sponsers";
 
 import "./style.css";
-import CountDown from "@/components/CountDown";
 
 export default function Home() {
     return (

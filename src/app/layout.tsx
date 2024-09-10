@@ -22,8 +22,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <html lang="en">
             <body className={inter.className}>
                 <main className="relative flex flex-col antialiased min-h-screen bg-primary">
-                    <DynamicNavbar />
-                    {/* <Navbar /> */}
+                    {/* <DynamicNavbar /> */}
+                    <Navbar />
                     <div className="flex-1 flex-grow" id="main-body">
                         {children}
                     </div>
