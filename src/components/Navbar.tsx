@@ -11,7 +11,7 @@ function Navbar() {
     return (
         <>
             {/* Desktop Navbar */}
-            <header className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 hidden md:block w-auto px-10 py-4 rounded-[10px] font-sulpher font-bold text-[18px] bg-white/10 backdrop-blur-[4px] border border-white/20 shadow-lg transition-all duration-500 ease-in-out hover:bg-white/20 hover:backdrop-blur-[6px] hover:shadow-2xl">
+            <header className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 hidden md:block w-[80%] px-10 py-4 rounded-[10px] font-sulpher font-bold text-[18px] bg-white/10 backdrop-blur-[4px] border border-white/20 shadow-lg transition-all duration-500 ease-in-out hover:bg-white/20 hover:backdrop-blur-[6px] hover:shadow-2xl">
                 <nav className="w-full h-full flex items-center justify-evenly">
                     <div className="h-full flex items-center justify-center gap-8">
                         <Link href="/" className={`${path === "/" && "text-[#feca00]"}`}>
