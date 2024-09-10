@@ -11,7 +11,7 @@ function Navbar() {
     return (
         <>
             {/* Desktop Navbar */}
-            <header className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 hidden md:block w-auto h-14 px-10 rounded-[45px] font-sulpher font-bold text-[18px] bg-white/10 backdrop-blur-lg border border-white/20">
+            <header className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 hidden md:block w-auto px-10 py-4 rounded-[10px] font-sulpher font-bold text-[18px] bg-white/10 backdrop-blur-[4px] border border-white/20 shadow-lg transition-all duration-500 ease-in-out hover:bg-white/20 hover:backdrop-blur-[6px] hover:shadow-2xl">
                 <nav className="w-full h-full flex items-center justify-evenly">
                     <div className="h-full flex items-center justify-center gap-8">
                         <Link href="/" className={`${path === "/" && "text-[#feca00]"}`}>
@@ -42,7 +42,7 @@ function Navbar() {
                             href="https://mmregistration.vercel.app/"
                             className={`bg-secondary text-black px-4 py-2 border-[2px] border-secondary ${
                                 path === "/login" && "text-[#feca00]"
-                            }`}
+                            } transition-all duration-300 ease-in-out hover:bg-black hover:text-white`}
                         >
                             Buy Your Pass
                         </Link>
@@ -52,11 +52,9 @@ function Navbar() {
 
             {/* Mobile Hamburger Menu */}
             <div
-                onClick={() =>
-                    setHamburgerOpen((prev) => !prev)
-                }
+                onClick={() => setHamburgerOpen((prev) => !prev)}
                 className={cn(
-                    "m-4 p-3 bg-black/10 backdrop-blur-lg border border-white/20 rounded-md w-10 aspect-square fixed z-[110] cursor-pointer top-0 left-0 md:hidden flex flex-col justify-between items-start transition-all ease-in-out duration-150",
+                    "m-4 p-3 bg-white/10 backdrop-blur-[4px] border border-white/20 rounded-md w-10 aspect-square fixed z-[110] cursor-pointer top-0 left-0 md:hidden flex flex-col justify-between items-start transition-all ease-in-out duration-150",
                     {
                         "items-center justify-center": isHamburgerOpen,
                     }
@@ -88,7 +86,7 @@ function Navbar() {
             {/* Mobile Menu */}
             <section
                 className={cn(
-                    "fixed z-[100] pl-6 pb-8 pr-10 bg-white/5 backdrop-blur-lg opacity-0 rounded-[14px] pt-20 border border-white flex flex-col gap-6 -translate-x-[101%] transition-all ease-in-out duration-700",
+                    "fixed z-[100] pl-6 pb-8 pr-10 bg-white/10 backdrop-blur-[4px] opacity-0 rounded-[14px] pt-20 border border-white/20 flex flex-col gap-6 -translate-x-[101%] transition-all ease-in-out duration-700",
                     {
                         "m-2 translate-x-0 opacity-100": isHamburgerOpen,
                     }
