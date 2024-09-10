@@ -11,7 +11,7 @@ function Navbar() {
     return (
         <>
             {/* Desktop Navbar */}
-            <header className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 hidden md:block w-[80%] px-10 py-4 rounded-[10px] font-sulpher font-bold text-[18px] bg-white/10 backdrop-blur-[4px] border border-white/20 shadow-lg transition-all duration-500 ease-in-out hover:bg-white/20 hover:backdrop-blur-[6px] hover:shadow-2xl">
+            <header className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 hidden md:block w-auto max-w-[80%] px-6 py-4 rounded-[45px] font-sulpher font-bold text-[18px] bg-[rgba(255,255,255,0.1)] backdrop-blur-[4px] border border-[rgba(255,255,255,0.18)] shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] transition-all duration-500 ease-in-out hover:bg-[rgba(255,255,255,0.2)] hover:backdrop-blur-[6px] hover:shadow-2xl">
                 <nav className="w-full h-full flex items-center justify-evenly">
                     <div className="h-full flex items-center justify-center gap-8">
                         <Link href="/" className={`${path === "/" && "text-[#feca00]"}`}>
@@ -54,7 +54,7 @@ function Navbar() {
             <div
                 onClick={() => setHamburgerOpen((prev) => !prev)}
                 className={cn(
-                    "m-4 p-3 bg-white/10 backdrop-blur-[4px] border border-white/20 rounded-md w-10 aspect-square fixed z-[110] cursor-pointer top-0 left-0 md:hidden flex flex-col justify-between items-start transition-all ease-in-out duration-150",
+                    "m-4 p-3 bg-[rgba(255,255,255,0.1)] backdrop-blur-[4px] border border-[rgba(255,255,255,0.18)] rounded-md w-10 aspect-square fixed z-[110] cursor-pointer top-0 left-0 md:hidden flex flex-col justify-between items-start transition-all ease-in-out duration-150",
                     {
                         "items-center justify-center": isHamburgerOpen,
                     }
@@ -86,7 +86,7 @@ function Navbar() {
             {/* Mobile Menu */}
             <section
                 className={cn(
-                    "fixed z-[100] pl-6 pb-8 pr-10 bg-white/10 backdrop-blur-[4px] opacity-0 rounded-[14px] pt-20 border border-white/20 flex flex-col gap-6 -translate-x-[101%] transition-all ease-in-out duration-700",
+                    "fixed z-[100] pl-6 pb-8 pr-10 bg-[rgba(255,255,255,0.1)] backdrop-blur-[4px] opacity-0 rounded-[45px] pt-20 border border-[rgba(255,255,255,0.18)] flex flex-col gap-6 -translate-x-[101%] transition-all ease-in-out duration-700",
                     {
                         "m-2 translate-x-0 opacity-100": isHamburgerOpen,
                     }
