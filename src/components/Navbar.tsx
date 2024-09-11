@@ -36,17 +36,17 @@ function Navbar() {
                         </Link>
                     </div>
 
-                    <div className="flex items-center h-full gap-12">
-                        {/* <Link
+                    <div className="flex items-center h-full gap-4 ml-12">
+                        { <Link
                             href="/register"
                             className={`border-[2px] border-secondary py-2 px-4 ${
                                 path === "/register" && "text-[#feca00]"
                             }`}
                             onClick={() => (window.location.pathname = "/register")}
                         >
-                            Register
+                            Login
                         </Link>
-                        <Link
+                        /*<Link
                             href="/login"
                             className={`bg-secondary text-black px-4 py-2 border-[2px] border-secondary ${
                                 path === "/login" && "text-[#feca00]"
@@ -57,7 +57,7 @@ function Navbar() {
                         </Link> */}
                         <Link
                             href="/inhouse"
-                            className={`bg-secondary text-black px-4 py-2 border-[2px] border-secondary ml-12 ${
+                            className={`bg-secondary text-black px-4 py-2 border-[2px] border-secondary  ${
                                 path === "/login" && "text-[#feca00]"
                             }`}
                             // onClick={() => window.location.reload()}
