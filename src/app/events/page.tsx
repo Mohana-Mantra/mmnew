@@ -45,7 +45,7 @@ export default function Events() {
                                             muted
                                             playsInline
                                             typeof="video/mp4"
-                                            className="w-full h-full object-cover rounded-lg object-center pointer-events-none"
+                                            className="w-full h-full object-cover rounded-lg object-center"
                                         >
                                             <source src={event.video} />
                                         </video>
