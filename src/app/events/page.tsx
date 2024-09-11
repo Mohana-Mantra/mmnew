@@ -25,7 +25,7 @@ export default function Events() {
     ];
 
     return (
-        <div className="py-8 px-4 md:py-28 space-y-6">
+        <div className="py-8 px-4 md:py-28 space-y-6 h-screen">
             <section className="grid grid-cols-1 lg:grid-cols-3 items-center justify-center w-full gap-4 md:gap-12 px-4 md:px-24 lg:px-[10rem]">
                 {eventsList.map((event, index) => {
                     return (

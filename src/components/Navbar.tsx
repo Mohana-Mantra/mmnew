@@ -56,10 +56,11 @@ function Navbar() {
                             Login
                         </Link> */}
                         <Link
-                            href="https://mmregistration.vercel.app/"
-                            className={`bg-secondary text-black px-4 py-2 border-[2px] border-secondary ml-12 ${path === "/login" && "text-[#feca00]"
-                                }`}
-                        // onClick={() => window.location.reload()}
+                            href="/inhouse"
+                            className={`bg-secondary text-black px-4 py-2 border-[2px] border-secondary ml-12 ${
+                                path === "/login" && "text-[#feca00]"
+                            }`}
+                            // onClick={() => window.location.reload()}
                         >
                             Buy Your Pass
                         </Link>

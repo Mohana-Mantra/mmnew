@@ -2,23 +2,31 @@ function Contact() {
     return (
         <div className="py-28">
             <h1 className="text-center text-4xl font-moul">Ask a Query</h1>
-            <form className="max-w-4xl mx-auto w-full p-4 md:px-20 space-y-4">
+            <form className="max-w-4xl mx-auto w-full p-4 md:px-20 space-y-4 text-black">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label htmlFor="name">Name</label>
+                        <label htmlFor="name" className="text-white">
+                            Name
+                        </label>
                         <input type="text" id="name" placeholder="Tony Stark" required />
                     </div>
                     <div>
-                        <label htmlFor="email">Email</label>
+                        <label htmlFor="email" className="text-white">
+                            Email
+                        </label>
                         <input type="email" id="email" placeholder="you@example.com" required />
                     </div>
                 </div>
                 <div>
-                    <label htmlFor="subject">Subject</label>
+                    <label htmlFor="subject" className="text-white">
+                        Subject
+                    </label>
                     <input type="text" id="subject" placeholder="Type your msg here..." required />
                 </div>
                 <div>
-                    <label htmlFor="description">Description</label>
+                    <label htmlFor="description" className="text-white">
+                        Description
+                    </label>
                     <textarea
                         id="description"
                         placeholder="Type your msg here..."
@@ -27,10 +35,10 @@ function Contact() {
                     ></textarea>
                 </div>
                 <div className="w-full max-w-96 mx-auto md:mx-0 flex flex-col">
-                    <span>Upload file</span>
+                    <span className="text-white">Upload file</span>
                     <label
                         htmlFor="file"
-                        className="w-48 py-3 rounded-md border border-white content-center text-center cursor-pointer"
+                        className="w-48 py-3 text-white rounded-md border border-white content-center text-center cursor-pointer"
                     >
                         Attach File
                         <input type="file" id="file" className="hidden" />

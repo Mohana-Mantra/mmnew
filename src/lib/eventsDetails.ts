@@ -1,4 +1,9 @@
 import placeHolder from "../../public/assets/placeholder.png";
+import actomania from "../../public/assets/kalakshetra/actomania.svg";
+import bandBattle from "../../public/assets/kalakshetra/bandbattle.svg";
+import karokeCatchup from "../../public/assets/kalakshetra/karaokecatchup.svg";
+import rampWalk from "../../public/assets/kalakshetra/rampwalk.svg";
+import voiceOfMM from "../../public/assets/kalakshetra/voiceofmm.svg";
 
 export const KALAKSHETRAEVENTS = [
     {
@@ -22,7 +27,7 @@ export const KALAKSHETRAEVENTS = [
         event: "Voice of MM",
         venue: "Indoor Stadium",
         timings: "01:00 P.M - 02:30 P.M",
-        image: placeHolder.src,
+        image: voiceOfMM.src,
         day: "Day 1",
         rules: [
             "This is a solo singing competition; no duets or group performances are allowed.",
@@ -39,7 +44,7 @@ export const KALAKSHETRAEVENTS = [
         event: "Band Battle",
         venue: "Indoor Stadium",
         timings: "03:00 P.M - 04:00 P.M",
-        image: placeHolder.src,
+        image: bandBattle.src,
         day: "Day 1",
         rules: [
             "Solo performance is also allowed.",
@@ -57,7 +62,7 @@ export const KALAKSHETRAEVENTS = [
         event: "Ramp Walk",
         venue: "Indoor Stadium",
         timings: "11:00 A.M - 01:00 P.M",
-        image: placeHolder.src,
+        image: rampWalk.src,
         day: "Day 2",
         rules: [
             "Participants must wear their best outfits during the ramp walk.",
@@ -91,7 +96,7 @@ export const KALAKSHETRAEVENTS = [
         event: "Karaoke Catchup",
         venue: "Room no - 4118",
         timings: "10:30 A.M",
-        image: placeHolder.src,
+        image: karokeCatchup.src,
         day: "Day 1,2",
         rules: [
             "Participants can sing any song of their choice.",
@@ -227,7 +232,7 @@ export const KALAKSHETRAEVENTS = [
         event: "Actomania (Dialogue King)",
         venue: "Room no - 4104",
         timings: "11:00 A.M",
-        image: placeHolder.src,
+        image: actomania.src,
         day: "Day 1",
         rules: [
             "Participants are given a set of dialogues to perform or can choose their own.",
@@ -339,201 +344,216 @@ export const KALAKSHETRAEVENTS = [
     },
 ];
 
-export const WORKSHOPEVENTS = [
+export const WORKSHOPS = [
     {
-        event: "Tech Exhibition",
-        venue: "New Academic Block",
-        timings: "10:30 A.M - 12:30 A.M",
+        eventName: "Find Flag Without Lag",
+        slug: "find-flag-without-lag",
         image: placeHolder.src,
-        day: "Day 1",
-        rules: [
-            "Only group performances are allowed, with a minimum of 3 participants and a maximum of 8 per group.",
-            "Performances should be 3-5 minutes long, including entry and exit.",
-            "Music tracks should be submitted at least 24 hours before the event in MP3 format.",
-            "Props are allowed, but they must be arranged by the participants themselves.",
-            "Judging criteria include choreography, synchronization, costume, and overall impact.",
-            "No offensive or inappropriate content is permitted in the performances.",
+        about: "A team-based competition where participants solve aptitude questions to receive clues. The clues lead them to hidden flags, and the teams must retrieve the flags to qualify for the next round. The event consists of three rounds, with the team having the highest points declared as the winner.",
+        howToPlay: [
+            "Form teams of 5 participants.",
+            "Solve aptitude questions to get clues.",
+            "One member retrieves the flag based on the clues.",
+            "Teams that retrieve a flag qualify for the next round.",
+            "Round 2 and 3 involve flags with different point values.",
+            "The team with the highest points after 3 rounds wins.",
         ],
-        description:
-            "Lets Nacho is the dance event, where you can enjoy great music and dance , With a fun atmosphere and energetic beats, it's the perfect chance to let loose and have a blast on the dance floor. Come join the fun and show off your moves. In this event there is no solo performances… Only group performances are there.. Min 3 persons and Max 8 persons in a group.",
-    },
-    {
-        event: "3-D DMD Competition",
-        venue: "SIEMENS & IDEA LAB",
-        timings: "01:00 P.M - 02:30 P.M",
-        image: placeHolder.src,
-        day: "Day 1",
         rules: [
-            "This is a solo singing competition; no duets or group performances are allowed.",
-            "Each participant is allowed a maximum of 4 minutes for their performance.",
-            "Participants can sing a song of any genre or language.",
-            "No pre-recorded vocals are allowed; only instrumental backing tracks can be used.",
-            "Judging will be based on vocal quality, song choice, stage presence, and overall performance.",
-            "Contestants must submit their song choice 24 hours before the event.",
+            "Teams must consist of exactly 5 participants.",
+            "Teams that fail to retrieve a flag in Round 1 are eliminated.",
+            "Different colored flags have different point values in Rounds 2 and 3.",
+            "No interference with other teams is allowed.",
+            "A time limit may be imposed for solving questions and finding flags.",
         ],
-        description:
-            "Voice of MM is the Singing Competition, where people show off their singing skills. Contestants perform songs in front of a panel of judges. In this event there is only solo performance.",
+        venue: "Campus SH-5",
+        date: "October 5, 2024",
     },
     {
-        event: "Band Battle",
-        venue: "Indoor Stadium",
-        timings: "03:00 P.M - 04:00 P.M",
+        eventName: "ARVR Workshop",
+        slug: "arvr-workshop",
         image: placeHolder.src,
-        day: "Day 1",
-        description:
-            "Band Battle is a competition where different musical bands play their best songs using various instruments. It is best chance to show their skills and creativity.",
+        about: "A two-day hands-on learning experience about Augmented Reality and Virtual Reality (ARVR) technology. Participants will learn how ARVR devices are built and will construct their own devices by the end of the workshop.",
+        howToPlay: [
+            "Individual participation.",
+            "Day 1: Learn the basics of ARVR devices, hardware, and software installation.",
+            "Day 2: Build your own ARVR device using the knowledge gained.",
+        ],
+        rules: [
+            "Participants must bring a laptop, headphones, and mouse.",
+            "No team participation; individual work only.",
+            "Certificates will be provided upon completion.",
+            "Punctuality and attendance for both days are mandatory.",
+        ],
+        venue: "MNS Block 510 and 511",
+        date: "October 4-5, 2024",
     },
     {
-        event: "Ramp Walk",
-        venue: "Indoor Stadium",
-        timings: "11:00 A.M - 01:00 P.M",
+        eventName: "Bridge-o-Mania",
+        slug: "bridge-o-mania",
         image: placeHolder.src,
-        day: "Day 2",
-        description:
-            "Ramp walk is a part of fashion show where models walk along a long, raised runway to show case clothing and accessories.  As they walk, they display different outfits, striking poses to highlight the design and style. The goal is to present fashion in a visually appealing way and capture the audiences attention.",
+        about: "A one-day event where participants construct a bridge using Popsicle sticks, glue, and thread. The goal is to build a structure that can hold the maximum load.",
+        howToPlay: [
+            "Form a team of 1 or 2 participants.",
+            "Use provided materials (Popsicle sticks, glue, thread) to construct a bridge.",
+            "The bridge will be tested by adding incremental loads.",
+            "The bridge that holds the most weight wins.",
+        ],
+        rules: [
+            "Teams can have a maximum of 2 members.",
+            "Only Popsicle sticks, glue, and thread are allowed.",
+            "No external materials or assistance is permitted.",
+            "Bridges must be completed within the time limit.",
+        ],
+        venue: "Mechanical Workshop",
+        date: "October 5, 2024",
     },
     {
-        event: "Picture Perfect (Photography Contest)",
-        venue: "Room no - 4102",
-        timings: "10:30 A.M - 12:00 P.M",
+        eventName: "Life Saver Workshop",
+        slug: "life-saver-workshop",
         image: placeHolder.src,
-        day: "Day 1",
-        description:
-            "Picture perfection is a photography event where people showcase their best photos. The event highlights outstanding photography and celebrates the skills of the photographers.",
+        about: "A two-day workshop aimed at teaching essential life-saving skills. Participants will practice on a human dummy to gain hands-on experience.",
+        howToPlay: [
+            "Attend the workshop led by Dr. Tejo Rao from Maruthi Hospital.",
+            "Learn and practice life-saving techniques using a human dummy.",
+        ],
+        rules: [
+            "Attendance for both days is required.",
+            "Active participation in hands-on sessions is mandatory.",
+            "Punctuality is expected from all participants.",
+        ],
+        venue: "SH-1",
+        date: "October 4-5, 2024",
     },
     {
-        event: "Karaoke Catchup",
-        venue: "Room no - 4118",
-        timings: "10:30 A.M",
+        eventName: "Robo War",
+        slug: "robo-war",
         image: placeHolder.src,
-        day: "Day 1,2",
-        description:
-            "Karaoke catch up is all about singing, laughing, and reconnecting with friends. Whether you’re here to perform or just enjoy the music, this is the perfect opportunity to let loose and have a great time together. No pressure, just good vibes and great tunes.",
+        about: "A robotics competition where participants design and build robots using Arduino Uno remote control Robo Kits to push their opponents' robots out of the pitch.",
+        howToPlay: [
+            "Design and build a robot using the Arduino Uno Robo Kit.",
+            "Compete in one-on-one elimination matches.",
+            "The goal is to push the opponent's robot out of the pitch.",
+            "The last robot remaining in the pitch wins.",
+        ],
+        rules: [
+            "Robots must be built using the Arduino Uno remote control Robo Kit.",
+            "The robot that is forced out of the pitch loses the match.",
+            "Elimination format: The last robot standing wins.",
+        ],
+        venue: "Pharmacy Block",
+        date: "October 5, 2024",
     },
     {
-        event: "Hall of Game (Play Station)",
-        venue: "Room no - 4117",
-        timings: "10:30 A.M",
+        eventName: "Virtual Modelling",
+        slug: "virtual-modelling",
         image: placeHolder.src,
-        day: "Day 1,2",
-        description:
-            "Hall of game means play station. Play station is just an entertainment game. Which is called Ps4.  In this playstation there is multiplayer and single-player games.",
+        about: "A two-round competition where participants narrate a story based on random prompts and create a 3D video using AI tools in the second round.",
+        howToPlay: [
+            "Round 1: Narrate a story based on 5 random chits drawn from a box.",
+            "Round 2: Create a 3D video using AI tools based on the narrated story.",
+            "The most creative and visually appealing video wins.",
+        ],
+        rules: [
+            "Teams of 2-3 participants or solo participation is allowed.",
+            "Creativity in storytelling is key for advancing to Round 2.",
+            "Adherence to video quality and event rules is required.",
+        ],
+        venue: "Computer Lab",
+        date: "October 5, 2024",
+    },
+];
+
+export const SPOTEVENTS = [
+    {
+        eventName: "TELEMATCH",
+        slug: "telematch",
+        image: placeHolder.src,
+        about: "Telematch is a popular format for team building activities designed to promote teamwork, communication, and collaboration.",
+        howToPlay:
+            "Players race to the finish line while balancing a task. Includes events like Adventure Run, Human Wheelbarrow Race, Tug of War, etc.",
+        rules: [
+            "Number of person: One person per game.",
+            "Fair Play: Teams caught cheating will be disqualified.",
+        ],
     },
     {
-        event: "Chicken Dinner (PubG)",
-        venue: "Room no - 4116",
-        timings: "10:30 A.M",
+        eventName: "LUCKY DRAW",
+        slug: "lucky-draw",
         image: placeHolder.src,
-        day: "Day 1",
-        description:
-            "Chicken Dinner means Pubg game. Pubg is the game where we play in mobille and entertained. Every game is a thrilling fight for survival. In pubg there is only squad matches… There is no solo matches.",
+        about: "A random selection process where participants enter for a chance to win prizes.",
+        howToPlay: "Participants fill a coupon; winners are drawn randomly.",
+        rules: ["One coupon per participant.", "Only one prize per person."],
     },
     {
-        event: "High Jinks - Buzz Wire",
-        venue: "G-Block Pathway",
-        timings: "10:30 A.M",
+        eventName: "DIGITAL EVENTS",
+        slug: "digital-events",
         image: placeHolder.src,
-        day: "Day 1,2",
-        description:
-            "Buzz wire is a challenging and fun game that tests you hand-eye coordination and steady hand. The goal is to guide a metal loop along a twisted wire without touching it. If the loop touches the wire, it triggers a 'buzz' sound, and you have to start over. It’s a great game for all ages, combining concentration, patience, and a bit of friendly competition!",
+        about: "Participants engage in virtual activities and competitions, often hosted online.",
+        howToPlay: "Participants compete in modes like CLASSIC or BERMUDA in squads of four.",
+        rules: ["Four people per game.", "No APK apps allowed."],
     },
     {
-        event: "High Jinks - Push-up Challenge",
-        venue: "G-Block Main Entrance",
-        timings: "10:30 A.M",
+        eventName: "FOOD CHALLENGE",
+        slug: "food-challenge",
         image: placeHolder.src,
-        day: "Day 1,2",
-        description:
-            "Push up challenge is a fitness and funny event. This event is helps you to test your strength and endurance. It’s a great way to challenge yourself, improve your upper body strength.",
+        about: "Participants compete to eat large quantities of food within a time limit.",
+        howToPlay: "Eat pani puri within the time limit to proceed to the next round.",
+        rules: ["Only one person can participate; no help is allowed."],
     },
     {
-        event: "Whisper Challenge",
-        venue: "Room no - 4103",
-        timings: "11:00 A.M",
+        eventName: "BOX CRICKET",
+        slug: "box-cricket",
         image: placeHolder.src,
-        day: "Day 1,2",
-        description:
-            "The Whisper Challenge is a hilarious game where players try to guess phrases while wearing noise-canceling headphones. One person whispers a phrase, and the other has to read their lips and guess what they’re saying. The results are often funny misinterpretations and lots of laughter. It's a great way to break the ice and have fun with friends.",
+        about: "A modified version of cricket played in a smaller, enclosed space.",
+        howToPlay:
+            "Batsmen must keep one foot within the crease while batting. Hitting the ceiling results in no runs or dismissal.",
+        rules: ["Usually six players per team.", "Each bowler has a different number of overs."],
     },
     {
-        event: "Hand DIY T-shirts",
-        venue: "G-Block Pathway",
-        timings: "10:30 A.M",
+        eventName: "RING TOSS",
+        slug: "ring-toss",
         image: placeHolder.src,
-        day: "Day 1,2",
-        description:
-            "Hand Diy T shirts is a custom-made, personalized T-shirts is decorated using various hand-crafted techniques. By this t-shirts you can make the memories. Your friends can print their hands on the T-shirts by the colours and they can write anything about you on the t-shirt. This is one of the best memory for you.",
+        about: "Players aim to throw rings onto targets to win rewards.",
+        howToPlay:
+            "Players take turns tossing rings at the target. Points are awarded for successful tosses.",
+        rules: ["Players throw from a set distance.", "Each player gets three rings."],
     },
     {
-        event: "Period Pain Simulator",
-        venue: "G-Block Main Entrance",
-        timings: "10:30 A.M",
+        eventName: "FLAG PLOTTING",
+        slug: "flag-plotting",
         image: placeHolder.src,
-        day: "Day 1,2",
-        description:
-            "Period pain simulator is an event, that participants will have the opportunity to experience the menstrual cramps. This is one of the best experience to you.",
+        about: "Players place flags on a map to capture territories or win prizes.",
+        howToPlay: "Participants plot areas on a map. If the area contains a prize, they win.",
+        rules: ["No prize is awarded if the plotted area doesn’t contain a gift."],
     },
     {
-        event: "Actomania (Dialogue King)",
-        venue: "Room no - 4104",
-        timings: "11:00 A.M",
+        eventName: "ESCAPE THE ROOM",
+        slug: "escape-the-room",
         image: placeHolder.src,
-        day: "Day 1",
-        description:
-            "Actomania is Dialogue King. Actomania is a challenging event that celebrates the art of dialogue delivery in the world of acting. The participants will show their talent by the dialogues. This event will be like fun event.",
+        about: "An immersive, live-action game where participants must solve puzzles to escape within a time limit.",
+        howToPlay:
+            "Participants must follow a correct path through a maze, with only one person allowed in the maze at a time.",
+        rules: ["No mobile phones or outside tools.", "Don't damage anything."],
     },
     {
-        event: "Ultimate Battle - Short Film",
-        venue: "Room no - 4106",
-        timings: "11:00 A.M",
+        eventName: "TREASURE HUNT",
+        slug: "treasure-hunt",
         image: placeHolder.src,
-        day: "Day 2",
-        description:
-            "The Short Film Showcase is a vibrant event dedicated to celebrating the creativity and storytelling prowess of filmmakers through the art of short films.",
+        about: "Participants solve riddles and clues to find hidden treasures.",
+        howToPlay:
+            "Teams solve aptitude questions to find clues leading to treasures. The process repeats with different clues in multiple rounds.",
+        rules: [
+            "Teams that fail to retrieve a clue in the first round are eliminated.",
+            "There is a time limit for solving questions and finding flags.",
+        ],
     },
     {
-        event: "Ultimate Battle - Sitcom",
-        venue: "Room no - 4105",
-        timings: "11:00 A.M",
+        eventName: "FUN GAMES",
+        slug: "fun-games",
         image: placeHolder.src,
-        day: "Day 2",
-        description:
-            "Sitcom means Situational comedy. Sitcom Spectacular is a lively event where participants and audiences come together to create, perform, and enjoy original short situational comedies (sitcoms) in a fun and interactive setting.",
-    },
-    {
-        event: "Ultimate Battle - Reel Master",
-        venue: "Room no - 4103",
-        timings: "11:00 A.M",
-        image: placeHolder.src,
-        day: "Day 2",
-        description:
-            "Reel Master is an exciting event that celebrates the art of short-form video creation, where participants compete to craft the most engaging, creative, and impactful reels. Whether you're a seasoned content creator or just starting out, this event offers a platform to showcase your skills in storytelling, editing, and visual creativity.",
-    },
-    {
-        event: "Ultimate Battle - Meme Challenge",
-        venue: "Room no - 4104",
-        timings: "11:00 A.M",
-        image: placeHolder.src,
-        day: "Day 2",
-        description:
-            "The Meme Challenge is a hilarious and creative event where participants compete to create the most viral, funny, and clever memes. This event is perfect for meme enthusiasts, digital creators, and anyone with a sharp wit and a love for internet humor.",
-    },
-    {
-        event: "Ultimate Battle - Stand-up Talkies",
-        venue: "Room no - 4101",
-        timings: "11:00 A.M",
-        image: placeHolder.src,
-        day: "Day 2",
-        description:
-            "Stand-Up Talkies is a dynamic event that blends the sharp wit of stand-up comedy with engaging discussions on topics that matter. This event is designed for comedy lovers who appreciate humor with a twist of insight, where comedians not only deliver their funniest material but also engage in lively, thought-provoking conversations.",
-    },
-    {
-        event: "Turbo Tracks Challenge (F1 race in mini track)",
-        venue: "Beside G-Block",
-        timings: "10:30 A.M",
-        image: placeHolder.src,
-        day: "Day 1,2",
-        description:
-            "Turbo tracks challenge is mini car race(toy car) track. The turbo track challenge is an entertaining event. In this event there is a set like off roads. In that off road there is two mini cars. In that off road the two mini cars are raced.",
+        venue: "MNS Pathway",
+        about: "Lighthearted games designed to entertain and engage players.",
+        howToPlay: "Players follow given statements and directions to play the games correctly.",
+        rules: ["One person per game.", "There may be a time limit for completing tasks."],
     },
 ];
