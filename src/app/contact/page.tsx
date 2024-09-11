@@ -8,7 +8,7 @@ function Contact() {
     const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
         if (event.target.files) {
             const files = Array.from(event.target.files);
-            setUploadedFiles(files);
+            setUploadedFiles(prevFiles => [...prevFiles, ...files]);
         }
     };
 
@@ -25,12 +25,25 @@ function Contact() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label htmlFor="name" className="text-white">
-                            Name
+                           First Name
                         </label>
                         <input
                             type="text"
                             id="name"
-                            placeholder="Tony Stark"
+                            placeholder="Tony "
+                            required
+                            name="name"
+                            className="w-full p-2 rounded-md"
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="name" className="text-white">
+                            Last Name
+                        </label>
+                        <input
+                            type="text"
+                            id="name"
+                            placeholder="Stark"
                             required
                             name="name"
                             className="w-full p-2 rounded-md"
@@ -46,6 +59,19 @@ function Contact() {
                             placeholder="you@example.com"
                             required
                             name="email"
+                            className="w-full p-2 rounded-md"
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="phone" className="text-white">
+                            Phone Number
+                        </label>
+                        <input
+                            type="tel"
+                            id="phone"
+                            placeholder="+91 234 567 890 (WhatsApp)"
+                            required
+                            name="phone"
                             className="w-full p-2 rounded-md"
                         />
                     </div>
@@ -110,15 +136,15 @@ function Contact() {
                 </div>
             </form>
             <div className="text-center mt-10">
-                <h2 className="text-white text-2xl">Contact us on                 <a
+                <h2 className="text-white text-2xl">Contact us on WhatsApp</h2>
+                <a
                     href="https://wa.me/1234567890" // Replace with your WhatsApp number
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-green-500 text-xl"
                 >
-                    WhatsApp
-                </a></h2>
-
+                    +1 234 567 890
+                </a>
             </div>
         </div>
     );
