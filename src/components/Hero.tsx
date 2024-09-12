@@ -26,7 +26,12 @@ export default function Hero() {
                     />
                 </Suspense>
                 <div className="h-screen absolute inset-0 bg-none flex flex-wrap items-center w-full justify-center z-0 lg:hidden">
-                    <h1 className={cn("font-bold text-5xl text-center", Xirod.className)}>
+                    <h1
+                        className={cn(
+                            "font-bold text-5xl text-center select-none mb-5",
+                            Xirod.className
+                        )}
+                    >
                         MOHANA MANTRA
                     </h1>
                 </div>
