@@ -1,6 +1,3 @@
-// import "../style.css";
-import inHouseImg from "../../../public/assets/mm2k24reg.png";
-
 const InHouse = () => {
     return (
         <div className="min-h-screen bg-primary flex items-center justify-center p-4">
@@ -12,7 +9,7 @@ const InHouse = () => {
                 <div className="bg-white p-6 rounded-b-lg shadow-lg">
                     <div className="text-center mb-4">
                         <img
-                            src={inHouseImg.src}
+                            src="https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133753/uqwbidsxcrockemrydm2.png"
                             alt="Mohana Mantra 2024"
                             className="w-32 h-auto mx-auto"
                         />

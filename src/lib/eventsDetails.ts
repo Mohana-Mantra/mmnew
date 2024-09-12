@@ -1,38 +1,14 @@
-import placeHolder from "../../public/assets/placeholder.png";
-import actomania from "../../public/assets/kalakshetra/actomania.svg";
 import bandBattle from "../../public/assets/kalakshetra/bandbattle.svg";
-import buzzWire from "../../public/assets/kalakshetra/buzzwire.svg";
-import chickenDinner from "../../public/assets/kalakshetra/chickendinner.svg";
-import karokeCatchup from "../../public/assets/kalakshetra/karaokecatchup.svg";
-import memeChallenge from "../../public/assets/kalakshetra/memechallange.svg";
 import picturePerfect from "../../public/assets/kalakshetra/pictureperfect.svg";
 import pushUp from "../../public/assets/kalakshetra/pushupchallenge.svg";
-import rampWalk from "../../public/assets/kalakshetra/rampwalk.svg";
-import reelContest from "../../public/assets/kalakshetra/reelcontest.svg";
 import shortFilm from "../../public/assets/kalakshetra/shortfilm.svg";
 import sitCom from "../../public/assets/kalakshetra/sitcom.svg";
-import standUp from "../../public/assets/kalakshetra/standup.png";
-import turboTracks from "../../public/assets/kalakshetra/turbotracks.svg";
-import voiceOfMM from "../../public/assets/kalakshetra/voiceofmm.svg";
-import letsNacho from "../../public/assets/kalakshetra/letsnacho.png";
-import handDiy from "../../public/assets/kalakshetra/handdiytshirt.png";
-import whisper from "../../public/assets/kalakshetra/whisperchallange.png";
-import halloffame from "../../public/assets/kalakshetra/halloffame.svg";
-import periodPain from "../../public/assets/kalakshetra/periodpain.svg";
+import placeHolder from "../../public/assets/placeholder.png";
 
 // Spot Events
-import foodChallenge from "../../public/assets/spotevents/foodchallenge.png";
-import treasure from "../../public/assets/spotevents/treasure.jpg";
 
 // Workshops
-import vrExperience from "../../public/assets/workshops/vrexperience.png";
-import Compettition from "../../public/assets/workshops/3d-compettition.jpg";
 import brevityBlitz from "../../public/assets/workshops/brevity-blitz.jpg";
-import codeSprint from "../../public/assets/workshops/code-sprint.jpg";
-import quiz from "../../public/assets/workshops/quiz.jpg";
-import virtualModelling from "../../public/assets/workshops/virtual-modelling.jpg";
-import techTalk from "../../public/assets/workshops/techTalk.jpg";
-import findFlag from "../../public/assets/workshops/findflag.svg";
 
 export const KALAKSHETRAEVENTS = [
     {
@@ -814,7 +790,7 @@ export const WORKSHOPS = [
     {
         eventName: "Brevity Blitz",
         slug: "brevity-blitz",
-        image: brevityBlitz.src,
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726137033/brevity-blitz_fxdp23.jpg",
         about: "A fast-paced solo-participation competition that tests participants' reading comprehension and presentation skills under time constraints. Participants must flawlessly present complex text within a set time limit.",
         howToPlay: [
             "Prepare a presentation of a paragraph with complex words.",
