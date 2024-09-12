@@ -18,6 +18,21 @@ import letsNacho from "../../public/assets/kalakshetra/letsnacho.png";
 import handDiy from "../../public/assets/kalakshetra/handdiytshirt.png";
 import whisper from "../../public/assets/kalakshetra/whisperchallange.png";
 import halloffame from "../../public/assets/kalakshetra/halloffame.svg";
+import periodPain from "../../public/assets/kalakshetra/periodpain.svg";
+
+// Spot Events
+import foodChallenge from "../../public/assets/spotevents/foodchallenge.png";
+import treasure from "../../public/assets/spotevents/treasure.jpg";
+
+// Workshops
+import vrExperience from "../../public/assets/workshops/vrexperience.png";
+import Compettition from "../../public/assets/workshops/3d-compettition.jpg";
+import brevityBlitz from "../../public/assets/workshops/brevity-blitz.jpg";
+import codeSprint from "../../public/assets/workshops/code-sprint.jpg";
+import quiz from "../../public/assets/workshops/quiz.jpg";
+import virtualModelling from "../../public/assets/workshops/virtual-modelling.jpg";
+import techTalk from "../../public/assets/workshops/techTalk.jpg";
+import findFlag from "../../public/assets/workshops/findflag.svg";
 
 export const KALAKSHETRAEVENTS = [
     {
@@ -229,7 +244,7 @@ export const KALAKSHETRAEVENTS = [
         event: "Period Pain Simulator",
         venue: "G-Block Main Entrance",
         timings: "10:30 A.M",
-        image: placeHolder.src,
+        image: periodPain.src,
         day: "Day 1,2",
         rules: [
             "Participants(targeted people: boys) wear a period pain simulator device for 5 minutes to experience menstrual cramps.",
@@ -509,7 +524,7 @@ export const SPOTEVENTS = [
     {
         eventName: "FOOD CHALLENGE",
         slug: "food-challenge",
-        image: placeHolder.src,
+        image: foodChallenge.src,
         about: "Participants compete to eat large quantities of food within a time limit.",
         howToPlay: "Eat pani puri within the time limit to proceed to the next round.",
         rules: ["Only one person can participate; no help is allowed."],
@@ -552,7 +567,7 @@ export const SPOTEVENTS = [
     {
         eventName: "TREASURE HUNT",
         slug: "treasure-hunt",
-        image: placeHolder.src,
+        image: treasure.src,
         about: "Participants solve riddles and clues to find hidden treasures.",
         howToPlay:
             "Teams solve aptitude questions to find clues leading to treasures. The process repeats with different clues in multiple rounds.",
@@ -576,7 +591,7 @@ export const WORKSHOPS = [
     {
         eventName: "Find Flag Without Lag",
         slug: "find-flag-without-lag",
-        image: placeHolder.src,
+        image: findFlag.src,
         about: "A team-based competition where participants solve aptitude questions to receive clues. The clues lead them to hidden flags, and the teams must retrieve the flags to qualify for the next round. The event consists of three rounds, with the team having the highest points declared as the winner.",
         howToPlay: [
             "Form teams of 5 participants.",
@@ -599,7 +614,7 @@ export const WORKSHOPS = [
     {
         eventName: "ARVR Workshop",
         slug: "arvr-workshop",
-        image: placeHolder.src,
+        image: vrExperience.src,
         about: "A two-day hands-on learning experience about Augmented Reality and Virtual Reality (ARVR) technology. Participants will learn how ARVR devices are built and will construct their own devices by the end of the workshop.",
         howToPlay: [
             "Individual participation.",
@@ -674,7 +689,7 @@ export const WORKSHOPS = [
     {
         eventName: "Virtual Modelling",
         slug: "virtual-modelling",
-        image: placeHolder.src,
+        image: virtualModelling.src,
         about: "A two-round competition where participants narrate a story based on random prompts and create a 3D video using AI tools in the second round.",
         howToPlay: [
             "Round 1: Narrate a story based on 5 random chits drawn from a box.",
@@ -692,7 +707,7 @@ export const WORKSHOPS = [
     {
         eventName: "Code Sprint",
         slug: "code-sprint",
-        image: placeHolder.src,
+        image: codeSprint.src,
         about: "A two-round high-energy coding competition designed to challenge participants' problem-solving abilities and coding proficiency. Participants will solve coding puzzles and generate functional code in a race against time.",
         howToPlay: [
             "Round 1: Solve 10 coding puzzles within a 1-hour time limit.",
@@ -728,7 +743,7 @@ export const WORKSHOPS = [
     {
         eventName: "3-D Design Modelling and Development Competition",
         slug: "3d-design-modelling-competition",
-        image: placeHolder.src,
+        image: Compettition.src,
         about: "A solo-participation event where participants demonstrate their skills in 3-D modeling and printing. Participants first compete in a 3-D modeling contest and then print their designs on a 3-D printer.",
         howToPlay: [
             "Day 1: Attend a demo class and participate in the 3-D modeling competition.",
@@ -746,7 +761,7 @@ export const WORKSHOPS = [
     {
         eventName: "Quizonomics",
         slug: "quizonomics",
-        image: placeHolder.src,
+        image: quiz.src,
         about: "A dynamic quiz competition focusing on General Economics and simple mathematics. Participants compete in teams, progressing through elimination rounds to claim victory.",
         howToPlay: [
             "Round 1: Answer 50 questions on General Economics and simple mathematics.",
@@ -764,7 +779,7 @@ export const WORKSHOPS = [
     {
         eventName: "Tech Exhibition",
         slug: "tech-exhibition",
-        image: placeHolder.src,
+        image: techTalk.src,
         about: "A two-day event where students from top institutions present their innovative product designs. The projects are exhibited, and feedback from the audience determines the winners.",
         howToPlay: [
             "Submit a project manuscript a week before the event.",
@@ -799,7 +814,7 @@ export const WORKSHOPS = [
     {
         eventName: "Brevity Blitz",
         slug: "brevity-blitz",
-        image: placeHolder.src,
+        image: brevityBlitz.src,
         about: "A fast-paced solo-participation competition that tests participants' reading comprehension and presentation skills under time constraints. Participants must flawlessly present complex text within a set time limit.",
         howToPlay: [
             "Prepare a presentation of a paragraph with complex words.",
