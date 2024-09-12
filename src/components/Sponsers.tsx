@@ -4,23 +4,15 @@ import hetro from "../../public/assets/sponsers/hetro.png";
 import makeMyTrip from "../../public/assets/sponsers/make-my-trip.png";
 import prakashArts from "../../public/assets/sponsers/prakash-arts.png";
 import redFM from "../../public/assets/sponsers/redfm.png";
+import PrakashA60 from "../../public/assets/sponsers/new/prakash.jpg";
+import racloo from "./public/assets/sponsers/new/racloop.jpg";
+import talkingh from "../../public\assets\sponsers\new\talkingheads.jpg"
 import { InfiniteMovingSponsers } from "./ui/moving-cards";
 import { Monoton } from "next/font/google";
 
 const monoton = Monoton({ subsets: ["latin"], weight: "400" });
 
-const presentSopnsors = [
-    {
-        image: cityCable.src as string,
-        height: cityCable.height,
-        width: cityCable.width,
-    },
-    {
-        image: prakashArts.src as string,
-        height: prakashArts.height,
-        width: prakashArts.width,
-    },
-];
+
 
 function Sponsers() {
     return (
@@ -32,20 +24,29 @@ function Sponsers() {
                     sponsors
                 </h1>
                 <div className="flex h-fit items-center justify-center gap-10">
+
                     <Image
                         alt="city cable"
                         className="object-cover object-center rounded-xl"
                         width={300}
                         height={200}
-                        src={cityCable}
+                        src={PrakashA60}
                     />
                     <Image
                         alt="city cable"
                         className="object-cover object-center rounded-xl"
                         width={300}
                         height={200}
-                        src={prakashArts}
+                        src={racloo}
                     />
+                    <Image
+                        alt="city cable"
+                        className="object-cover object-center rounded-xl"
+                        width={300}
+                        height={200}
+                        src={talkingh}
+                    />
+
                 </div>
             </div>
             <div className="bg-slate-900 py-20 space-y-10 md:space-y-16">
