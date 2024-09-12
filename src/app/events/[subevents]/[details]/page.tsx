@@ -1,7 +1,5 @@
-import Image from "next/image";
 import { SPOTEVENTS, WORKSHOPS } from "@/lib/eventsDetails";
-import Calender from "../../../../../public/assets/icons/calendar-lines.svg";
-import Time from "../../../../../public/assets/icons/clock-three.svg";
+import Image from "next/image";
 // import Location from "../../../../public/assets/icons/map-marker.svg";
 
 const SubEventDetails = ({
@@ -48,11 +46,21 @@ const SubEventDetails = ({
                         <div className="flex justify-between items-center h-fit">
                             <div>
                                 <div className="flex items-center h-fit gap-4">
-                                    <Image src={Calender} height={16} width={16} alt="icon" />
+                                    <Image
+                                        src="https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133425/icons/mqmmcdjyqxydptuic0aq.svg"
+                                        height={16}
+                                        width={16}
+                                        alt="icon"
+                                    />
                                     <p>Day 1 & 2</p>
                                 </div>
                                 <div className="flex items-center h-fit gap-4">
-                                    <Image src={Time} height={16} width={16} alt="icon" />
+                                    <Image
+                                        src="https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133426/icons/fc2lzpiqbj6yjuzxe0gp.svg"
+                                        height={16}
+                                        width={16}
+                                        alt="icon"
+                                    />
                                     <p>09:00 AM - 04:00 PM</p>
                                 </div>
                             </div>
@@ -113,11 +121,21 @@ const SubEventDetails = ({
                         <div className="flex justify-between items-center h-fit">
                             <div>
                                 <div className="flex items-center h-fit gap-4">
-                                    <Image src={Calender} height={16} width={16} alt="icon" />
+                                    <Image
+                                        src="https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133425/icons/mqmmcdjyqxydptuic0aq.svg"
+                                        height={16}
+                                        width={16}
+                                        alt="icon"
+                                    />
                                     <p>Day 1 & 2</p>
                                 </div>
                                 <div className="flex items-center h-fit gap-4">
-                                    <Image src={Time} height={16} width={16} alt="icon" />
+                                    <Image
+                                        src="https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133426/icons/fc2lzpiqbj6yjuzxe0gp.svg"
+                                        height={16}
+                                        width={16}
+                                        alt="icon"
+                                    />
                                     <p>09:00 AM - 04:00 PM</p>
                                 </div>
                             </div>

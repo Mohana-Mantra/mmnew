@@ -2,7 +2,7 @@
 import { Monoton } from "next/font/google";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import revanth from "../../public/assets/proshow1.png";
+// import revanth from "../../public/assets/proshow1.png";
 
 const monoton = Monoton({ subsets: ["latin"], weight: "400" });
 
@@ -10,7 +10,7 @@ const proshowDay1 = {
     day: "Day 1",
     aboutDay:
         "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nostrum reprehenderit ipsum enim ratione necessitatibus!",
-    guestImage: revanth.src,
+    // guestImage: revanth.src,
     events: "50+ EVENTS",
     countries: "10+ COUNTRIES",
     guestInfo: {

@@ -1,7 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import instaLogo from "../../public/assets/instagram.png";
 import WordRotate from "./ui/WordRotate";
 import { LampContainer } from "./ui/lamp";
 
@@ -198,7 +197,12 @@ function Details() {
                     }}
                     className="bg-white/10 backdrop-blur-3xl flex flex-col gap-8 py-8 px-14 rounded-xl font-anybody"
                 >
-                    <Image src={instaLogo} height={40} width={40} alt="Instagram logo" />
+                    <Image
+                        src="https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133751/hdqlplouvuwkmtsrjt6e.png"
+                        height={40}
+                        width={40}
+                        alt="Instagram logo"
+                    />
                     <h1 className="font-semibold text-xl max-w-[250px] line-clamp-2">
                         Follow us on Instagram for further details
                     </h1>
