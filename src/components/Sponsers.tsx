@@ -7,13 +7,13 @@ const monoton = Monoton({ subsets: ["latin"], weight: "400" });
 function Sponsers() {
     return (
         <>
-            <div className="bg-slate-900 py-20 mt-20 space-y-10 md:space-y-16">
+            <div className="bg-slate-900 py-20 mt-20 w-full space-y-10 md:space-y-16">
                 <h1
                     className={`text-center text-2xl md:text-[2.8rem] text-yellow ${monoton.className}`}
                 >
                     sponsors
                 </h1>
-                <div className="flex flex-wrap h-fit items-center justify-center gap-8">
+                <div className="flex flex-wrap h-fit items-center overflow-hidden w-full px-6 justify-center gap-8">
                     <div className="relative h-40 rounded-lg aspect-[1080/544]">
                         <Image
                             src="https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133435/sponsers/new/pjpawnhw6hb4ttjswi5x.jpg"
@@ -22,7 +22,7 @@ function Sponsers() {
                             alt="sponsers"
                         />
                     </div>
-                    <div className="relative h-40 rounded-lg aspect-[964/344]">
+                    <div className="mx-4 relative h-40 rounded-lg aspect-[964/344]">
                         <Image
                             src="https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133437/sponsers/new/mzmr8epxsnrtr9mtaxv1.jpg"
                             fill

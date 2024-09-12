@@ -1,4 +1,11 @@
 import React, { Suspense } from "react";
+import localFont from "next/font/local";
+import { cn } from "@/lib/utils";
+
+const Xirod = localFont({
+    src: "../../fonts/Xirod.otf",
+    display: "swap",
+});
 
 const Spline = React.lazy(() => import("@splinetool/react-spline/next"));
 
@@ -15,9 +22,14 @@ export default function Hero() {
                 <Suspense fallback={<div className="h-screen absolute inset-0 bg-none" />}>
                     <Spline
                         scene="https://prod.spline.design/OxQV59a9KqPrdaYL/scene.splinecode"
-                        className="absolute h-full w-full inset-0 z-0 !bg-none"
+                        className="absolute h-full w-full inset-0 z-0 !bg-none hidden lg:flex"
                     />
                 </Suspense>
+                <div className="h-screen absolute inset-0 bg-none flex flex-wrap items-center w-full justify-center z-0 lg:hidden">
+                    <h1 className={cn("font-bold text-5xl text-center", Xirod.className)}>
+                        MOHANA MANTRA
+                    </h1>
+                </div>
             </div>
         </>
     );
