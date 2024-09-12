@@ -1,16 +1,45 @@
 import placeHolder from "../../public/assets/placeholder.png";
 import actomania from "../../public/assets/kalakshetra/actomania.svg";
 import bandBattle from "../../public/assets/kalakshetra/bandbattle.svg";
+import buzzWire from "../../public/assets/kalakshetra/buzzwire.svg";
+import chickenDinner from "../../public/assets/kalakshetra/chickendinner.svg";
 import karokeCatchup from "../../public/assets/kalakshetra/karaokecatchup.svg";
+import memeChallenge from "../../public/assets/kalakshetra/memechallange.svg";
+import picturePerfect from "../../public/assets/kalakshetra/pictureperfect.svg";
+import pushUp from "../../public/assets/kalakshetra/pushupchallenge.svg";
 import rampWalk from "../../public/assets/kalakshetra/rampwalk.svg";
+import reelContest from "../../public/assets/kalakshetra/reelcontest.svg";
+import shortFilm from "../../public/assets/kalakshetra/shortfilm.svg";
+import sitCom from "../../public/assets/kalakshetra/sitcom.svg";
+import standUp from "../../public/assets/kalakshetra/standup.png";
+import turboTracks from "../../public/assets/kalakshetra/turbotracks.svg";
 import voiceOfMM from "../../public/assets/kalakshetra/voiceofmm.svg";
+import letsNacho from "../../public/assets/kalakshetra/letsnacho.png";
+import handDiy from "../../public/assets/kalakshetra/handdiytshirt.png";
+import whisper from "../../public/assets/kalakshetra/whisperchallange.png";
+import halloffame from "../../public/assets/kalakshetra/halloffame.svg";
+import periodPain from "../../public/assets/kalakshetra/periodpain.svg";
+
+// Spot Events
+import foodChallenge from "../../public/assets/spotevents/foodchallenge.png";
+import treasure from "../../public/assets/spotevents/treasure.jpg";
+
+// Workshops
+import vrExperience from "../../public/assets/workshops/vrexperience.png";
+import Compettition from "../../public/assets/workshops/3d-compettition.jpg";
+import brevityBlitz from "../../public/assets/workshops/brevity-blitz.jpg";
+import codeSprint from "../../public/assets/workshops/code-sprint.jpg";
+import quiz from "../../public/assets/workshops/quiz.jpg";
+import virtualModelling from "../../public/assets/workshops/virtual-modelling.jpg";
+import techTalk from "../../public/assets/workshops/techTalk.jpg";
+import findFlag from "../../public/assets/workshops/findflag.svg";
 
 export const KALAKSHETRAEVENTS = [
     {
         event: "Let's Nacho",
         venue: "Indoor Stadium",
         timings: "10:30 A.M - 12:30 A.M",
-        image: placeHolder.src,
+        image: letsNacho.src,
         day: "Day 1",
         rules: [
             "Only group performances are allowed, with a minimum of 3 participants and a maximum of 8 per group.",
@@ -79,7 +108,7 @@ export const KALAKSHETRAEVENTS = [
         event: "Picture Perfect (Photography Contest)",
         venue: "Room no - 4102",
         timings: "10:30 A.M - 12:00 P.M",
-        image: placeHolder.src,
+        image: picturePerfect.src,
         day: "Day 1",
         rules: [
             " Participant can submit photographs through google forms.",
@@ -113,7 +142,7 @@ export const KALAKSHETRAEVENTS = [
         event: "Hall of Game (Play Station)",
         venue: "Room no - 4117",
         timings: "10:30 A.M",
-        image: placeHolder.src,
+        image: halloffame.src,
         day: "Day 1,2",
         rules: [
             "Players can choose from a range of single-player or multiplayer games on PS4.",
@@ -130,7 +159,7 @@ export const KALAKSHETRAEVENTS = [
         event: "Chicken Dinner (PubG)",
         venue: "Room no - 4116",
         timings: "10:30 A.M",
-        image: placeHolder.src,
+        image: chickenDinner.src,
         day: "Day 1",
         rules: [
             "Only squad matches are allowed; no solo or duo matches.",
@@ -147,7 +176,7 @@ export const KALAKSHETRAEVENTS = [
         event: "High Jinks - Buzz Wire",
         venue: "G-Block Pathway",
         timings: "10:30 A.M",
-        image: placeHolder.src,
+        image: buzzWire.src,
         day: "Day 1,2",
         rules: [
             "Participants must guide the metal loop along the twisted wire without touching it.",
@@ -164,7 +193,7 @@ export const KALAKSHETRAEVENTS = [
         event: "High Jinks - Push-up Challenge",
         venue: "G-Block Main Entrance",
         timings: "10:30 A.M",
-        image: placeHolder.src,
+        image: pushUp.src,
         day: "Day 1,2",
         rules: [
             "Participants compete to perform the maximum number of push-ups within 1 minute.",
@@ -181,7 +210,7 @@ export const KALAKSHETRAEVENTS = [
         event: "Whisper Challenge",
         venue: "Room no - 4103",
         timings: "11:00 A.M",
-        image: placeHolder.src,
+        image: whisper.src,
         day: "Day 1,2",
         rules: [
             "Two players form a team; one wears noise-canceling headphones while the other whispers a phrase.",
@@ -198,7 +227,7 @@ export const KALAKSHETRAEVENTS = [
         event: "Hand DIY T-shirts",
         venue: "G-Block Pathway",
         timings: "10:30 A.M",
-        image: placeHolder.src,
+        image: handDiy.src,
         day: "Day 1,2",
         rules: [
             "Participants create personalized T-shirts using paint, markers, and other craft supplies.",
@@ -215,7 +244,7 @@ export const KALAKSHETRAEVENTS = [
         event: "Period Pain Simulator",
         venue: "G-Block Main Entrance",
         timings: "10:30 A.M",
-        image: placeHolder.src,
+        image: periodPain.src,
         day: "Day 1,2",
         rules: [
             "Participants(targeted people: boys) wear a period pain simulator device for 5 minutes to experience menstrual cramps.",
@@ -249,7 +278,7 @@ export const KALAKSHETRAEVENTS = [
         event: "Ultimate Battle - Short Film",
         venue: "Room no - 4106",
         timings: "11:00 A.M",
-        image: placeHolder.src,
+        image: shortFilm.src,
         day: "Day 2",
         rules: [
             "Participants must submit their short films, which should not exceed 10 minutes in length.",
@@ -265,7 +294,7 @@ export const KALAKSHETRAEVENTS = [
         event: "Ultimate Battle - Sitcom",
         venue: "Room no - 4105",
         timings: "11:00 A.M",
-        image: placeHolder.src,
+        image: sitCom.src,
         day: "Day 2",
         rules: [
             "Groups create and perform original situational comedies not exceeding 5 minutes.",
@@ -281,7 +310,7 @@ export const KALAKSHETRAEVENTS = [
         event: "Ultimate Battle - Reel Master",
         venue: "Room no - 4103",
         timings: "11:00 A.M",
-        image: placeHolder.src,
+        image: reelContest.src,
         day: "Day 2",
         rules: [
             "Participants create and submit short videos (reels) no longer than 1 minute.",
@@ -297,7 +326,7 @@ export const KALAKSHETRAEVENTS = [
         event: "Ultimate Battle - Meme Challenge",
         venue: "Room no - 4104",
         timings: "11:00 A.M",
-        image: placeHolder.src,
+        image: memeChallenge.src,
         day: "Day 2",
         rules: [
             "Participants create and submit original memes.",
@@ -313,7 +342,7 @@ export const KALAKSHETRAEVENTS = [
         event: "Ultimate Battle - Stand-up Talkies",
         venue: "Room no - 4101",
         timings: "11:00 A.M",
-        image: placeHolder.src,
+        image: standUp.src,
         day: "Day 2",
         rules: [
             "Each comedian has 5 minutes to perform their routine.",
@@ -329,7 +358,7 @@ export const KALAKSHETRAEVENTS = [
         event: "Turbo Tracks Challenge (F1 race in mini track)",
         venue: "Beside G-Block",
         timings: "10:30 A.M",
-        image: placeHolder.src,
+        image: turboTracks.src,
         day: "Day 1,2",
         rules: [
             "Participants race two mini cars on a specially designed off-road track.",
@@ -344,11 +373,225 @@ export const KALAKSHETRAEVENTS = [
     },
 ];
 
+// export const WORKSHOPS = [
+//     {
+//         eventName: "Find Flag Without Lag",
+//         slug: "find-flag-without-lag",
+//         image: placeHolder.src,
+//         about: "A team-based competition where participants solve aptitude questions to receive clues. The clues lead them to hidden flags, and the teams must retrieve the flags to qualify for the next round. The event consists of three rounds, with the team having the highest points declared as the winner.",
+//         howToPlay: [
+//             "Form teams of 5 participants.",
+//             "Solve aptitude questions to get clues.",
+//             "One member retrieves the flag based on the clues.",
+//             "Teams that retrieve a flag qualify for the next round.",
+//             "Round 2 and 3 involve flags with different point values.",
+//             "The team with the highest points after 3 rounds wins.",
+//         ],
+//         rules: [
+//             "Teams must consist of exactly 5 participants.",
+//             "Teams that fail to retrieve a flag in Round 1 are eliminated.",
+//             "Different colored flags have different point values in Rounds 2 and 3.",
+//             "No interference with other teams is allowed.",
+//             "A time limit may be imposed for solving questions and finding flags.",
+//         ],
+//         venue: "Campus SH-5",
+//         date: "October 5, 2024",
+//     },
+//     {
+//         eventName: "ARVR Workshop",
+//         slug: "arvr-workshop",
+//         image: placeHolder.src,
+//         about: "A two-day hands-on learning experience about Augmented Reality and Virtual Reality (ARVR) technology. Participants will learn how ARVR devices are built and will construct their own devices by the end of the workshop.",
+//         howToPlay: [
+//             "Individual participation.",
+//             "Day 1: Learn the basics of ARVR devices, hardware, and software installation.",
+//             "Day 2: Build your own ARVR device using the knowledge gained.",
+//         ],
+//         rules: [
+//             "Participants must bring a laptop, headphones, and mouse.",
+//             "No team participation; individual work only.",
+//             "Certificates will be provided upon completion.",
+//             "Punctuality and attendance for both days are mandatory.",
+//         ],
+//         venue: "MNS Block 510 and 511",
+//         date: "October 4-5, 2024",
+//     },
+//     {
+//         eventName: "Bridge-o-Mania",
+//         slug: "bridge-o-mania",
+//         image: placeHolder.src,
+//         about: "A one-day event where participants construct a bridge using Popsicle sticks, glue, and thread. The goal is to build a structure that can hold the maximum load.",
+//         howToPlay: [
+//             "Form a team of 1 or 2 participants.",
+//             "Use provided materials (Popsicle sticks, glue, thread) to construct a bridge.",
+//             "The bridge will be tested by adding incremental loads.",
+//             "The bridge that holds the most weight wins.",
+//         ],
+//         rules: [
+//             "Teams can have a maximum of 2 members.",
+//             "Only Popsicle sticks, glue, and thread are allowed.",
+//             "No external materials or assistance is permitted.",
+//             "Bridges must be completed within the time limit.",
+//         ],
+//         venue: "Mechanical Workshop",
+//         date: "October 5, 2024",
+//     },
+//     {
+//         eventName: "Life Saver Workshop",
+//         slug: "life-saver-workshop",
+//         image: placeHolder.src,
+//         about: "A two-day workshop aimed at teaching essential life-saving skills. Participants will practice on a human dummy to gain hands-on experience.",
+//         howToPlay: [
+//             "Attend the workshop led by Dr. Tejo Rao from Maruthi Hospital.",
+//             "Learn and practice life-saving techniques using a human dummy.",
+//         ],
+//         rules: [
+//             "Attendance for both days is required.",
+//             "Active participation in hands-on sessions is mandatory.",
+//             "Punctuality is expected from all participants.",
+//         ],
+//         venue: "SH-1",
+//         date: "October 4-5, 2024",
+//     },
+//     {
+//         eventName: "Robo War",
+//         slug: "robo-war",
+//         image: placeHolder.src,
+//         about: "A robotics competition where participants design and build robots using Arduino Uno remote control Robo Kits to push their opponents' robots out of the pitch.",
+//         howToPlay: [
+//             "Design and build a robot using the Arduino Uno Robo Kit.",
+//             "Compete in one-on-one elimination matches.",
+//             "The goal is to push the opponent's robot out of the pitch.",
+//             "The last robot remaining in the pitch wins.",
+//         ],
+//         rules: [
+//             "Robots must be built using the Arduino Uno remote control Robo Kit.",
+//             "The robot that is forced out of the pitch loses the match.",
+//             "Elimination format: The last robot standing wins.",
+//         ],
+//         venue: "Pharmacy Block",
+//         date: "October 5, 2024",
+//     },
+//     {
+//         eventName: "Virtual Modelling",
+//         slug: "virtual-modelling",
+//         image: placeHolder.src,
+//         about: "A two-round competition where participants narrate a story based on random prompts and create a 3D video using AI tools in the second round.",
+//         howToPlay: [
+//             "Round 1: Narrate a story based on 5 random chits drawn from a box.",
+//             "Round 2: Create a 3D video using AI tools based on the narrated story.",
+//             "The most creative and visually appealing video wins.",
+//         ],
+//         rules: [
+//             "Teams of 2-3 participants or solo participation is allowed.",
+//             "Creativity in storytelling is key for advancing to Round 2.",
+//             "Adherence to video quality and event rules is required.",
+//         ],
+//         venue: "Computer Lab",
+//         date: "October 5, 2024",
+//     },
+// ];
+
+export const SPOTEVENTS = [
+    {
+        eventName: "TELEMATCH",
+        slug: "telematch",
+        image: placeHolder.src,
+        about: "Telematch is a popular format for team building activities designed to promote teamwork, communication, and collaboration.",
+        howToPlay:
+            "Players race to the finish line while balancing a task. Includes events like Adventure Run, Human Wheelbarrow Race, Tug of War, etc.",
+        rules: [
+            "Number of person: One person per game.",
+            "Fair Play: Teams caught cheating will be disqualified.",
+        ],
+    },
+    {
+        eventName: "LUCKY DRAW",
+        slug: "lucky-draw",
+        image: placeHolder.src,
+        about: "A random selection process where participants enter for a chance to win prizes.",
+        howToPlay: "Participants fill a coupon; winners are drawn randomly.",
+        rules: ["One coupon per participant.", "Only one prize per person."],
+    },
+    {
+        eventName: "DIGITAL EVENTS",
+        slug: "digital-events",
+        image: placeHolder.src,
+        about: "Participants engage in virtual activities and competitions, often hosted online.",
+        howToPlay: "Participants compete in modes like CLASSIC or BERMUDA in squads of four.",
+        rules: ["Four people per game.", "No APK apps allowed."],
+    },
+    {
+        eventName: "FOOD CHALLENGE",
+        slug: "food-challenge",
+        image: foodChallenge.src,
+        about: "Participants compete to eat large quantities of food within a time limit.",
+        howToPlay: "Eat pani puri within the time limit to proceed to the next round.",
+        rules: ["Only one person can participate; no help is allowed."],
+    },
+    {
+        eventName: "BOX CRICKET",
+        slug: "box-cricket",
+        image: placeHolder.src,
+        about: "A modified version of cricket played in a smaller, enclosed space.",
+        howToPlay:
+            "Batsmen must keep one foot within the crease while batting. Hitting the ceiling results in no runs or dismissal.",
+        rules: ["Usually six players per team.", "Each bowler has a different number of overs."],
+    },
+    {
+        eventName: "RING TOSS",
+        slug: "ring-toss",
+        image: placeHolder.src,
+        about: "Players aim to throw rings onto targets to win rewards.",
+        howToPlay:
+            "Players take turns tossing rings at the target. Points are awarded for successful tosses.",
+        rules: ["Players throw from a set distance.", "Each player gets three rings."],
+    },
+    {
+        eventName: "FLAG PLOTTING",
+        slug: "flag-plotting",
+        image: placeHolder.src,
+        about: "Players place flags on a map to capture territories or win prizes.",
+        howToPlay: "Participants plot areas on a map. If the area contains a prize, they win.",
+        rules: ["No prize is awarded if the plotted area doesn’t contain a gift."],
+    },
+    {
+        eventName: "ESCAPE THE ROOM",
+        slug: "escape-the-room",
+        image: placeHolder.src,
+        about: "An immersive, live-action game where participants must solve puzzles to escape within a time limit.",
+        howToPlay:
+            "Participants must follow a correct path through a maze, with only one person allowed in the maze at a time.",
+        rules: ["No mobile phones or outside tools.", "Don't damage anything."],
+    },
+    {
+        eventName: "TREASURE HUNT",
+        slug: "treasure-hunt",
+        image: treasure.src,
+        about: "Participants solve riddles and clues to find hidden treasures.",
+        howToPlay:
+            "Teams solve aptitude questions to find clues leading to treasures. The process repeats with different clues in multiple rounds.",
+        rules: [
+            "Teams that fail to retrieve a clue in the first round are eliminated.",
+            "There is a time limit for solving questions and finding flags.",
+        ],
+    },
+    {
+        eventName: "FUN GAMES",
+        slug: "fun-games",
+        image: placeHolder.src,
+        venue: "MNS Pathway",
+        about: "Lighthearted games designed to entertain and engage players.",
+        howToPlay: "Players follow given statements and directions to play the games correctly.",
+        rules: ["One person per game.", "There may be a time limit for completing tasks."],
+    },
+];
+
 export const WORKSHOPS = [
     {
         eventName: "Find Flag Without Lag",
         slug: "find-flag-without-lag",
-        image: placeHolder.src,
+        image: findFlag.src,
         about: "A team-based competition where participants solve aptitude questions to receive clues. The clues lead them to hidden flags, and the teams must retrieve the flags to qualify for the next round. The event consists of three rounds, with the team having the highest points declared as the winner.",
         howToPlay: [
             "Form teams of 5 participants.",
@@ -371,7 +614,7 @@ export const WORKSHOPS = [
     {
         eventName: "ARVR Workshop",
         slug: "arvr-workshop",
-        image: placeHolder.src,
+        image: vrExperience.src,
         about: "A two-day hands-on learning experience about Augmented Reality and Virtual Reality (ARVR) technology. Participants will learn how ARVR devices are built and will construct their own devices by the end of the workshop.",
         howToPlay: [
             "Individual participation.",
@@ -446,7 +689,7 @@ export const WORKSHOPS = [
     {
         eventName: "Virtual Modelling",
         slug: "virtual-modelling",
-        image: placeHolder.src,
+        image: virtualModelling.src,
         about: "A two-round competition where participants narrate a story based on random prompts and create a 3D video using AI tools in the second round.",
         howToPlay: [
             "Round 1: Narrate a story based on 5 random chits drawn from a box.",
@@ -461,99 +704,129 @@ export const WORKSHOPS = [
         venue: "Computer Lab",
         date: "October 5, 2024",
     },
-];
-
-export const SPOTEVENTS = [
     {
-        eventName: "TELEMATCH",
-        slug: "telematch",
-        image: placeHolder.src,
-        about: "Telematch is a popular format for team building activities designed to promote teamwork, communication, and collaboration.",
-        howToPlay:
-            "Players race to the finish line while balancing a task. Includes events like Adventure Run, Human Wheelbarrow Race, Tug of War, etc.",
-        rules: [
-            "Number of person: One person per game.",
-            "Fair Play: Teams caught cheating will be disqualified.",
+        eventName: "Code Sprint",
+        slug: "code-sprint",
+        image: codeSprint.src,
+        about: "A two-round high-energy coding competition designed to challenge participants' problem-solving abilities and coding proficiency. Participants will solve coding puzzles and generate functional code in a race against time.",
+        howToPlay: [
+            "Round 1: Solve 10 coding puzzles within a 1-hour time limit.",
+            "Participants can choose a time slot between 9:00 AM and 12:30 PM.",
+            "Round 2: Qualified participants must write functional code to match given outputs.",
         ],
-    },
-    {
-        eventName: "LUCKY DRAW",
-        slug: "lucky-draw",
-        image: placeHolder.src,
-        about: "A random selection process where participants enter for a chance to win prizes.",
-        howToPlay: "Participants fill a coupon; winners are drawn randomly.",
-        rules: ["One coupon per participant.", "Only one prize per person."],
-    },
-    {
-        eventName: "DIGITAL EVENTS",
-        slug: "digital-events",
-        image: placeHolder.src,
-        about: "Participants engage in virtual activities and competitions, often hosted online.",
-        howToPlay: "Participants compete in modes like CLASSIC or BERMUDA in squads of four.",
-        rules: ["Four people per game.", "No APK apps allowed."],
-    },
-    {
-        eventName: "FOOD CHALLENGE",
-        slug: "food-challenge",
-        image: placeHolder.src,
-        about: "Participants compete to eat large quantities of food within a time limit.",
-        howToPlay: "Eat pani puri within the time limit to proceed to the next round.",
-        rules: ["Only one person can participate; no help is allowed."],
-    },
-    {
-        eventName: "BOX CRICKET",
-        slug: "box-cricket",
-        image: placeHolder.src,
-        about: "A modified version of cricket played in a smaller, enclosed space.",
-        howToPlay:
-            "Batsmen must keep one foot within the crease while batting. Hitting the ceiling results in no runs or dismissal.",
-        rules: ["Usually six players per team.", "Each bowler has a different number of overs."],
-    },
-    {
-        eventName: "RING TOSS",
-        slug: "ring-toss",
-        image: placeHolder.src,
-        about: "Players aim to throw rings onto targets to win rewards.",
-        howToPlay:
-            "Players take turns tossing rings at the target. Points are awarded for successful tosses.",
-        rules: ["Players throw from a set distance.", "Each player gets three rings."],
-    },
-    {
-        eventName: "FLAG PLOTTING",
-        slug: "flag-plotting",
-        image: placeHolder.src,
-        about: "Players place flags on a map to capture territories or win prizes.",
-        howToPlay: "Participants plot areas on a map. If the area contains a prize, they win.",
-        rules: ["No prize is awarded if the plotted area doesn’t contain a gift."],
-    },
-    {
-        eventName: "ESCAPE THE ROOM",
-        slug: "escape-the-room",
-        image: placeHolder.src,
-        about: "An immersive, live-action game where participants must solve puzzles to escape within a time limit.",
-        howToPlay:
-            "Participants must follow a correct path through a maze, with only one person allowed in the maze at a time.",
-        rules: ["No mobile phones or outside tools.", "Don't damage anything."],
-    },
-    {
-        eventName: "TREASURE HUNT",
-        slug: "treasure-hunt",
-        image: placeHolder.src,
-        about: "Participants solve riddles and clues to find hidden treasures.",
-        howToPlay:
-            "Teams solve aptitude questions to find clues leading to treasures. The process repeats with different clues in multiple rounds.",
         rules: [
-            "Teams that fail to retrieve a clue in the first round are eliminated.",
-            "There is a time limit for solving questions and finding flags.",
+            "Solve 10 coding puzzles within 1 hour in Round 1.",
+            "Write functional code based on provided outputs in Round 2.",
+            "The best and most effective code wins.",
         ],
+        venue: "Campus SH-5",
+        date: "October 4, 2024",
     },
     {
-        eventName: "FUN GAMES",
-        slug: "fun-games",
+        eventName: "Care-a-thon",
+        slug: "care-a-thon",
         image: placeHolder.src,
-        venue: "MNS Pathway",
-        about: "Lighthearted games designed to entertain and engage players.",
-        howToPlay: "Players follow given statements and directions to play the games correctly.",
-        rules: ["One person per game.", "There may be a time limit for completing tasks."],
+        about: "A healthcare-based hackathon where participants develop innovative solutions to given problem statements related to healthcare. The event involves project submissions, exhibitions, and final presentations.",
+        howToPlay: [
+            "Form teams of 2-5 participants.",
+            "Submit project reports based on healthcare problem statements.",
+            "Exhibit projects and present final solutions.",
+        ],
+        rules: [
+            "Teams must consist of 2-5 members.",
+            "Submit project reports by the deadline (September 30, 2024).",
+            "Judging criteria include innovation, feasibility, and impact.",
+        ],
+        venue: "RL-lab, Mohan Babu University",
+        date: "October 3-5, 2024",
+    },
+    {
+        eventName: "3-D Design Modelling and Development Competition",
+        slug: "3d-design-modelling-competition",
+        image: Compettition.src,
+        about: "A solo-participation event where participants demonstrate their skills in 3-D modeling and printing. Participants first compete in a 3-D modeling contest and then print their designs on a 3-D printer.",
+        howToPlay: [
+            "Day 1: Attend a demo class and participate in the 3-D modeling competition.",
+            "Day 2: Qualified participants will print their 3-D models.",
+            "The participant with a defect-free model wins.",
+        ],
+        rules: [
+            "Solo participation only.",
+            "Participants must complete their 3-D models within the given time.",
+            "Models must be printed without defects to win.",
+        ],
+        venue: "SIEMENS & IDEA LAB Campus",
+        date: "October 4-5, 2024",
+    },
+    {
+        eventName: "Quizonomics",
+        slug: "quizonomics",
+        image: quiz.src,
+        about: "A dynamic quiz competition focusing on General Economics and simple mathematics. Participants compete in teams, progressing through elimination rounds to claim victory.",
+        howToPlay: [
+            "Round 1: Answer 50 questions on General Economics and simple mathematics.",
+            "Round 2: Identify famous CEOs based on clues.",
+            "Round 3: The suspense round, details revealed only to qualified teams.",
+        ],
+        rules: [
+            "Teams must consist of exactly 3 members.",
+            "Each question in Round 1 has a 10-second time limit.",
+            "The best team after the suspense round wins.",
+        ],
+        venue: "Campus SH-5",
+        date: "October 4, 2024",
+    },
+    {
+        eventName: "Tech Exhibition",
+        slug: "tech-exhibition",
+        image: techTalk.src,
+        about: "A two-day event where students from top institutions present their innovative product designs. The projects are exhibited, and feedback from the audience determines the winners.",
+        howToPlay: [
+            "Submit a project manuscript a week before the event.",
+            "Exhibit the project and engage with visitors.",
+            "Collect feedback from students and faculty.",
+        ],
+        rules: [
+            "Teams can consist of 2-4 members or solo participation.",
+            "Project manuscripts must be submitted in advance.",
+            "Feedback points determine the winning projects.",
+        ],
+        venue: "New Academic Block Campus",
+        date: "October 4-5, 2024",
+    },
+    {
+        eventName: "Spell Quest",
+        slug: "spell-quest",
+        image: placeHolder.src,
+        about: "A solo-participation competition designed to test participants' spelling and grammar skills. The event consists of two challenging rounds with the winner being recognized for their mastery of the English language.",
+        howToPlay: [
+            "Round 1: Pronounce and spell a given word correctly.",
+            "Round 2: Rewrite a paragraph without any spelling or grammatical errors.",
+        ],
+        rules: [
+            "Solo participation only.",
+            "Participants must spell words correctly and eliminate errors in the paragraph.",
+            "The best performer in both rounds wins.",
+        ],
+        venue: "Campus SH-4",
+        date: "October 5, 2024",
+    },
+    {
+        eventName: "Brevity Blitz",
+        slug: "brevity-blitz",
+        image: brevityBlitz.src,
+        about: "A fast-paced solo-participation competition that tests participants' reading comprehension and presentation skills under time constraints. Participants must flawlessly present complex text within a set time limit.",
+        howToPlay: [
+            "Prepare a presentation of a paragraph with complex words.",
+            "Present the paragraph without mistakes in pronunciation or delivery.",
+            "Complete the presentation within the allotted time.",
+        ],
+        rules: [
+            "Solo participation only.",
+            "Flawless pronunciation and clear delivery are required.",
+            "Strict time limits are enforced for both preparation and presentation.",
+        ],
+        venue: "Campus SH-4",
+        date: "October 5, 2024",
     },
 ];

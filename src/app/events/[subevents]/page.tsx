@@ -22,6 +22,10 @@ export default function AllEvents({ params }: { params: any }) {
         eventsVar = WORKSHOPS;
     }
 
+    const loader = () => {
+        return <div className="w-full h-full bg-slate-700 animate-pulse"></div>;
+    };
+
     return (
         <div className="py-8 px-4 md:px-16 lg:px-40 md:py-32 space-y-6">
             <GradualSpacing
@@ -37,24 +41,27 @@ export default function AllEvents({ params }: { params: any }) {
                         {KALAKSHETRAEVENTS.map((event, index) => (
                             <Dialog key={event.event + index}>
                                 <DialogTrigger asChild>
-                                    <div className="space-y-2 rounded-lg hover:scale-110 transition-transform duration-300 ease-out">
+                                    <div className="space-y-2 rounded-lg hover:scale-105 transition-transform duration-500 ease-out">
                                         <div className="relative aspect-square w-full cursor-pointer">
                                             <Image
                                                 src={event.image}
                                                 alt={event.event}
                                                 fill
+                                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                                placeholder="blur"
+                                                blurDataURL={event.image}
                                                 className="w-full h-64 object-cover rounded-lg"
                                             />
                                         </div>
                                         <div className="flex flex-col items-center rounded-lg">
-                                            <h3 className="text-white text-2xl font-bold">
+                                            <h3 className="text-white text-2xl text-center font-bold">
                                                 {event.event}
                                             </h3>
-                                            <p className="text-white text-sm">{event.timings}</p>
+                                            <p className="text-white">{event.timings}</p>
                                         </div>
                                     </div>
                                 </DialogTrigger>
-                                <DialogContent className="w-full md:w-auto h-fit hover:scale-110 transition-transform duration-300 ease-out overflow-y-scroll md:overflow-auto bg-white">
+                                <DialogContent className="w-full md:w-auto h-fit hover:scale-110 transition-transform duration-500 ease-out overflow-y-scroll md:overflow-auto bg-white">
                                     <div className="grid grid-cols-1 w-full md:w-auto gap-6 md:grid-cols-2 md:flex-row">
                                         <div className="h-full relative w-full">
                                             <Image
@@ -121,7 +128,7 @@ export default function AllEvents({ params }: { params: any }) {
                         {eventsVar?.map((event, index) => (
                             <Link
                                 href={`${subevents}/${event.slug}`}
-                                className="space-y-2 rounded-lg  hover:scale-110 transition-transform duration-300 ease-out"
+                                className="space-y-2 rounded-lg  hover:scale-105 transition-transform duration-300 ease-out"
                                 key={event.slug + index}
                             >
                                 <div className="relative aspect-square w-full cursor-pointer">
@@ -129,14 +136,15 @@ export default function AllEvents({ params }: { params: any }) {
                                         src={event.image}
                                         alt={event.slug}
                                         fill
+                                        // placeholder="blur"
                                         className="w-full h-64 object-cover rounded-lg"
                                     />
                                 </div>
-                                <div className="flex flex-col items-center rounded-lg">
-                                    <h3 className="text-white text-2xl font-bold">
+                                <div className="flex flex-col items-center gap-2 rounded-lg">
+                                    <h3 className="text-white text-2xl text-center font-bold">
                                         {event.eventName}
                                     </h3>
-                                    <p className="text-white text-sm">09:00 AM - 04:00 PM</p>
+                                    <p className="text-white">09:00 AM - 04:00 PM</p>
                                 </div>
                             </Link>
                         ))}
