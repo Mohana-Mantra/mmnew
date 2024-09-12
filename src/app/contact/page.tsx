@@ -17,7 +17,7 @@ function Contact() {
             <h1 className="text-center text-4xl font-moul">Ask a Query</h1>
             <form
                 target="_blank"
-                action="https://formsubmit.co/mmgithub2k24@gmail.com"
+                action="https://formsubmit.co/mohanamantra@mbu.asia"
                 method="POST"
                 encType="multipart/form-data"
                 className="max-w-4xl mx-auto w-full p-4 md:px-20 space-y-4 text-black"
