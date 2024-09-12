@@ -5,8 +5,8 @@ import makeMyTrip from "../../public/assets/sponsers/make-my-trip.png";
 import prakashArts from "../../public/assets/sponsers/prakash-arts.png";
 import redFM from "../../public/assets/sponsers/redfm.png";
 import PrakashA60 from "../../public/assets/sponsers/new/prakash.jpg";
-import racloo from "./public/assets/sponsers/new/racloop.jpg";
-import talkingh from "../../public\assets\sponsers\new\talkingheads.jpg"
+import racloo from "../../public/assets/sponsers/new/racloop.jpg";
+import talkingh from "../../public/assets/sponsers/new/talkingheads.jpg"
 import { InfiniteMovingSponsers } from "./ui/moving-cards";
 import { Monoton } from "next/font/google";
 
