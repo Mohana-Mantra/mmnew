@@ -9,17 +9,17 @@ export default function Events() {
     const eventsList = [
         {
             title: "Kalakshetra",
-            video: "../../../assets/kalakshetra.mp4",
+            video: "https://res.cloudinary.com/dbjy9s3cz/video/upload/v1726133759/meyg1boduaquqrhgb7o2.mp4",
             link: "/events/kalakshetra",
         },
         {
             title: "Workshops & Tech",
-            video: "../../../assets/workshops.mp4",
+            video: "https://res.cloudinary.com/dbjy9s3cz/video/upload/v1726133794/ughoruxqykzlwzcvjqwq.mp4",
             link: "/events/workshops",
         },
         {
             title: "SpotEvents",
-            video: "../../../assets/spotevents.mp4",
+            video: "https://res.cloudinary.com/dbjy9s3cz/video/upload/v1726133759/srzs3kfwhzpurixnkbfo.mp4",
             link: "/events/spotevents",
         },
     ];

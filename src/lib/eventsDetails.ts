@@ -56,7 +56,7 @@ export const KALAKSHETRAEVENTS = [
         event: "Voice of MM",
         venue: "Indoor Stadium",
         timings: "01:00 P.M - 02:30 P.M",
-        image: voiceOfMM.src,
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133468/kalakshetra/nderav9iagpmkx0afke2.svg",
         day: "Day 1",
         rules: [
             "This is a solo singing competition; no duets or group performances are allowed.",

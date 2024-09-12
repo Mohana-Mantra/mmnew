@@ -8,7 +8,7 @@ export default function Hero() {
             <div className="h-screen relative w-full">
                 <div className="video-background">
                     <video autoPlay loop muted playsInline>
-                        <source src="../../assets/hero_vid.mp4" />
+                        <source src="https://res.cloudinary.com/dbjy9s3cz/video/upload/v1726134169/ra2cbms9kmmvhwzbxa8w.mp4" />
                         Your browser does not support the video tag.
                     </video>
                 </div>
