@@ -30,7 +30,7 @@ function Sponsers() {
                         src={cityCable}
                     />
                     <Image
-                        alt="city cable"
+                        alt="talkingh"
                         className="object-cover object-center rounded-xl"
                         width={300}
                         height={200}
