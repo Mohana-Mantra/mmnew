@@ -31,14 +31,16 @@ function Sponsers() {
                 >
                     sponsors
                 </h1>
-                <div className="flex h-fit items-center justify-center gap-10">
-                    <Image
-                        alt="city cable"
-                        className="object-cover object-center rounded-xl"
-                        width={300}
-                        height={200}
-                        src={cityCable}
-                    />
+                <div className="grid grid- h-fit items-center justify-center gap-10">
+                    <div className="aspect-[300/200]">
+                        <Image
+                            alt="city cable"
+                            className="object-cover object-center rounded-xl"
+                            width={300}
+                            height={200}
+                            src={cityCable}
+                        />
+                    </div>
                     <Image
                         alt="city cable"
                         className="object-cover object-center rounded-xl"
