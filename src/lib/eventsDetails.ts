@@ -39,7 +39,7 @@ export const KALAKSHETRAEVENTS = [
         event: "Let's Nacho",
         venue: "Indoor Stadium",
         timings: "10:30 A.M - 12:30 A.M",
-        image: letsNacho.src,
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726136577/letsnacho_r0rcoo.png",
         day: "Day 1",
         rules: [
             "Only group performances are allowed, with a minimum of 3 participants and a maximum of 8 per group.",
@@ -91,7 +91,7 @@ export const KALAKSHETRAEVENTS = [
         event: "Ramp Walk",
         venue: "Indoor Stadium",
         timings: "11:00 A.M - 01:00 P.M",
-        image: rampWalk.src,
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133480/kalakshetra/hsusanr9e1reuffknrph.svg",
         day: "Day 2",
         rules: [
             "Participants must wear their best outfits during the ramp walk.",
@@ -125,7 +125,7 @@ export const KALAKSHETRAEVENTS = [
         event: "Karaoke Catchup",
         venue: "Room no - 4118",
         timings: "10:30 A.M",
-        image: karokeCatchup.src,
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133483/kalakshetra/j7ominlzgd8t6ssvpdkb.svg",
         day: "Day 1,2",
         rules: [
             "Participants can sing any song of their choice.",
@@ -142,7 +142,7 @@ export const KALAKSHETRAEVENTS = [
         event: "Hall of Game (Play Station)",
         venue: "Room no - 4117",
         timings: "10:30 A.M",
-        image: halloffame.src,
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726136592/halloffame_rc3ayz.svg",
         day: "Day 1,2",
         rules: [
             "Players can choose from a range of single-player or multiplayer games on PS4.",
@@ -159,7 +159,7 @@ export const KALAKSHETRAEVENTS = [
         event: "Chicken Dinner (PubG)",
         venue: "Room no - 4116",
         timings: "10:30 A.M",
-        image: chickenDinner.src,
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133493/kalakshetra/pcdli8khgzq4ilutdcfe.svg",
         day: "Day 1",
         rules: [
             "Only squad matches are allowed; no solo or duo matches.",
@@ -176,7 +176,7 @@ export const KALAKSHETRAEVENTS = [
         event: "High Jinks - Buzz Wire",
         venue: "G-Block Pathway",
         timings: "10:30 A.M",
-        image: buzzWire.src,
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726136572/buzzwire_rdli8j.svg",
         day: "Day 1,2",
         rules: [
             "Participants must guide the metal loop along the twisted wire without touching it.",
@@ -210,7 +210,7 @@ export const KALAKSHETRAEVENTS = [
         event: "Whisper Challenge",
         venue: "Room no - 4103",
         timings: "11:00 A.M",
-        image: whisper.src,
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726136585/whisperchallange_sogzqf.png",
         day: "Day 1,2",
         rules: [
             "Two players form a team; one wears noise-canceling headphones while the other whispers a phrase.",
@@ -227,7 +227,7 @@ export const KALAKSHETRAEVENTS = [
         event: "Hand DIY T-shirts",
         venue: "G-Block Pathway",
         timings: "10:30 A.M",
-        image: handDiy.src,
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726136573/handdiytshirt_d4btpq.png",
         day: "Day 1,2",
         rules: [
             "Participants create personalized T-shirts using paint, markers, and other craft supplies.",
@@ -244,7 +244,7 @@ export const KALAKSHETRAEVENTS = [
         event: "Period Pain Simulator",
         venue: "G-Block Main Entrance",
         timings: "10:30 A.M",
-        image: periodPain.src,
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726136573/periodpain_cqjj79.svg",
         day: "Day 1,2",
         rules: [
             "Participants(targeted people: boys) wear a period pain simulator device for 5 minutes to experience menstrual cramps.",
@@ -261,7 +261,7 @@ export const KALAKSHETRAEVENTS = [
         event: "Actomania (Dialogue King)",
         venue: "Room no - 4104",
         timings: "11:00 A.M",
-        image: actomania.src,
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133614/kalakshetra/rswlh2rgc2xjfcv7jzsw.svg",
         day: "Day 1",
         rules: [
             "Participants are given a set of dialogues to perform or can choose their own.",
@@ -310,7 +310,7 @@ export const KALAKSHETRAEVENTS = [
         event: "Ultimate Battle - Reel Master",
         venue: "Room no - 4103",
         timings: "11:00 A.M",
-        image: reelContest.src,
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726136571/reelcontest_w4ezn9.svg",
         day: "Day 2",
         rules: [
             "Participants create and submit short videos (reels) no longer than 1 minute.",
@@ -326,7 +326,7 @@ export const KALAKSHETRAEVENTS = [
         event: "Ultimate Battle - Meme Challenge",
         venue: "Room no - 4104",
         timings: "11:00 A.M",
-        image: memeChallenge.src,
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726136581/memechallange_ktq0ym.svg",
         day: "Day 2",
         rules: [
             "Participants create and submit original memes.",
@@ -342,7 +342,7 @@ export const KALAKSHETRAEVENTS = [
         event: "Ultimate Battle - Stand-up Talkies",
         venue: "Room no - 4101",
         timings: "11:00 A.M",
-        image: standUp.src,
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726136571/standup_a4daem.png",
         day: "Day 2",
         rules: [
             "Each comedian has 5 minutes to perform their routine.",
@@ -358,7 +358,7 @@ export const KALAKSHETRAEVENTS = [
         event: "Turbo Tracks Challenge (F1 race in mini track)",
         venue: "Beside G-Block",
         timings: "10:30 A.M",
-        image: turboTracks.src,
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726136583/turbotracks_z85vq9.svg",
         day: "Day 1,2",
         rules: [
             "Participants race two mini cars on a specially designed off-road track.",
@@ -524,7 +524,7 @@ export const SPOTEVENTS = [
     {
         eventName: "FOOD CHALLENGE",
         slug: "food-challenge",
-        image: foodChallenge.src,
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726137004/foodchallenge_cgnlov.png",
         about: "Participants compete to eat large quantities of food within a time limit.",
         howToPlay: "Eat pani puri within the time limit to proceed to the next round.",
         rules: ["Only one person can participate; no help is allowed."],
@@ -567,7 +567,7 @@ export const SPOTEVENTS = [
     {
         eventName: "TREASURE HUNT",
         slug: "treasure-hunt",
-        image: treasure.src,
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726137002/treasure_x69otv.jpg",
         about: "Participants solve riddles and clues to find hidden treasures.",
         howToPlay:
             "Teams solve aptitude questions to find clues leading to treasures. The process repeats with different clues in multiple rounds.",
@@ -591,7 +591,7 @@ export const WORKSHOPS = [
     {
         eventName: "Find Flag Without Lag",
         slug: "find-flag-without-lag",
-        image: findFlag.src,
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726137037/findflag_j1b19o.svg",
         about: "A team-based competition where participants solve aptitude questions to receive clues. The clues lead them to hidden flags, and the teams must retrieve the flags to qualify for the next round. The event consists of three rounds, with the team having the highest points declared as the winner.",
         howToPlay: [
             "Form teams of 5 participants.",
@@ -614,7 +614,7 @@ export const WORKSHOPS = [
     {
         eventName: "ARVR Workshop",
         slug: "arvr-workshop",
-        image: vrExperience.src,
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726137049/vrexperience_ioski7.png",
         about: "A two-day hands-on learning experience about Augmented Reality and Virtual Reality (ARVR) technology. Participants will learn how ARVR devices are built and will construct their own devices by the end of the workshop.",
         howToPlay: [
             "Individual participation.",
@@ -689,7 +689,7 @@ export const WORKSHOPS = [
     {
         eventName: "Virtual Modelling",
         slug: "virtual-modelling",
-        image: virtualModelling.src,
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726137039/virtual-modelling_jlaeq8.jpg",
         about: "A two-round competition where participants narrate a story based on random prompts and create a 3D video using AI tools in the second round.",
         howToPlay: [
             "Round 1: Narrate a story based on 5 random chits drawn from a box.",
@@ -707,7 +707,7 @@ export const WORKSHOPS = [
     {
         eventName: "Code Sprint",
         slug: "code-sprint",
-        image: codeSprint.src,
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726137034/code-sprint_bsftgr.jpg",
         about: "A two-round high-energy coding competition designed to challenge participants' problem-solving abilities and coding proficiency. Participants will solve coding puzzles and generate functional code in a race against time.",
         howToPlay: [
             "Round 1: Solve 10 coding puzzles within a 1-hour time limit.",
@@ -743,7 +743,7 @@ export const WORKSHOPS = [
     {
         eventName: "3-D Design Modelling and Development Competition",
         slug: "3d-design-modelling-competition",
-        image: Compettition.src,
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726137040/3d-compettition_uxzqxo.jpg",
         about: "A solo-participation event where participants demonstrate their skills in 3-D modeling and printing. Participants first compete in a 3-D modeling contest and then print their designs on a 3-D printer.",
         howToPlay: [
             "Day 1: Attend a demo class and participate in the 3-D modeling competition.",
@@ -761,7 +761,7 @@ export const WORKSHOPS = [
     {
         eventName: "Quizonomics",
         slug: "quizonomics",
-        image: quiz.src,
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726137036/quiz_txkjmg.jpg",
         about: "A dynamic quiz competition focusing on General Economics and simple mathematics. Participants compete in teams, progressing through elimination rounds to claim victory.",
         howToPlay: [
             "Round 1: Answer 50 questions on General Economics and simple mathematics.",
@@ -779,7 +779,7 @@ export const WORKSHOPS = [
     {
         eventName: "Tech Exhibition",
         slug: "tech-exhibition",
-        image: techTalk.src,
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726137037/techTalk_jf4pvz.jpg",
         about: "A two-day event where students from top institutions present their innovative product designs. The projects are exhibited, and feedback from the audience determines the winners.",
         howToPlay: [
             "Submit a project manuscript a week before the event.",

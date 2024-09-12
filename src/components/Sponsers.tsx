@@ -1,14 +1,6 @@
-import Image from "next/image";
-import cityCable from "../../public/assets/sponsers/city-cable.png";
-import hetro from "../../public/assets/sponsers/hetro.png";
-import makeMyTrip from "../../public/assets/sponsers/make-my-trip.png";
-import prakashArts from "../../public/assets/sponsers/prakash-arts.png";
-import redFM from "../../public/assets/sponsers/redfm.png";
-import PrakashA60 from "../../public/assets/sponsers/new/prakash.jpg";
-import racloo from "../../public/assets/sponsers/new/racloop.jpg";
-import talkingh from "../../public/assets/sponsers/new/talkingheads.jpg";
-import { InfiniteMovingSponsers } from "./ui/moving-cards";
 import { Monoton } from "next/font/google";
+import Image from "next/image";
+import { InfiniteMovingSponsers } from "./ui/moving-cards";
 
 const monoton = Monoton({ subsets: ["latin"], weight: "400" });
 
@@ -21,21 +13,39 @@ function Sponsers() {
                 >
                     sponsors
                 </h1>
-                <div className="flex h-fit items-center justify-center gap-10">
-                    <Image
-                        alt="city cable"
-                        className="object-cover object-center rounded-xl"
-                        width={300}
-                        height={200}
-                        src={cityCable}
-                    />
-                    <Image
-                        alt="talkingh"
-                        className="object-cover object-center rounded-xl"
-                        width={300}
-                        height={200}
-                        src={talkingh}
-                    />
+                <div className="flex flex-wrap h-fit items-center justify-center gap-8">
+                    <div className="relative h-40 rounded-lg aspect-[1080/544]">
+                        <Image
+                            src="https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133435/sponsers/new/pjpawnhw6hb4ttjswi5x.jpg"
+                            fill
+                            className="object-cover rounded-lg"
+                            alt="sponsers"
+                        />
+                    </div>
+                    <div className="relative h-40 rounded-lg aspect-[964/344]">
+                        <Image
+                            src="https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133437/sponsers/new/mzmr8epxsnrtr9mtaxv1.jpg"
+                            fill
+                            className="object-cover rounded-lg"
+                            alt="sponsers"
+                        />
+                    </div>
+                    <div className="relative h-40 rounded-lg aspect-[919/856]">
+                        <Image
+                            src="https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726136977/WhatsApp_Image_2024-09-12_at_15.46.16_3b55eefa_rr6a3s.jpg"
+                            fill
+                            className="object-cover rounded-lg"
+                            alt="sponsers"
+                        />
+                    </div>
+                    <div className="relative h-40 rounded-lg aspect-[540/330]">
+                        <Image
+                            src="https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133437/sponsers/new/xlv1wa4ilusygwc5fgwa.jpg"
+                            fill
+                            className="object-cover rounded-lg"
+                            alt="sponsers"
+                        />
+                    </div>
                 </div>
             </div>
             <div className="bg-slate-900 py-20 space-y-10 md:space-y-16">
@@ -50,26 +60,30 @@ function Sponsers() {
                     speed="slow"
                     items={[
                         {
-                            image: hetro.src as string,
-                            height: hetro.height,
-                            width: hetro.width,
+                            image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133434/sponsers/ftz8npac6rvtnnk4njn1.png",
+                            height: 200,
+                            width: 300,
                         },
                         {
-                            image: cityCable.src as string,
-                            height: cityCable.height,
-                            width: cityCable.width,
+                            image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133432/sponsers/fbmxx6gj6h5gzureb0gs.png",
+                            height: 200,
+                            width: 300,
                         },
                         {
-                            image: makeMyTrip.src as string,
-                            height: makeMyTrip.height,
-                            width: makeMyTrip.width,
+                            image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133434/sponsers/y3emwyi3svo2c6hywpie.png",
+                            height: 200,
+                            width: 300,
                         },
                         {
-                            image: prakashArts.src as string,
-                            height: prakashArts.height,
-                            width: prakashArts.width,
+                            image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133437/sponsers/fhhbvbfprm47dxjelwed.png",
+                            height: 200,
+                            width: 300,
                         },
-                        { image: redFM.src as string, height: redFM.height, width: redFM.width },
+                        {
+                            image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133438/sponsers/vgwhp8urvhl3zdvlw5pl.png",
+                            height: 200,
+                            width: 300,
+                        },
                     ]}
                 />
             </div>

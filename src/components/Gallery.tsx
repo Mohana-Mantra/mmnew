@@ -1,24 +1,9 @@
 "use client";
-import { InfiniteMovingCards } from "./ui/moving-cards";
-import Television from "../../public/assets/gallery.png";
-import pic1 from "../../public/assets/gallery/IMG20230817155441.jpg";
-import pic2 from "../../public/assets/gallery/pic1.jpg";
-import pic3 from "../../public/assets/gallery/pic2.jpg";
-import pic4 from "../../public/assets/gallery/pic3.jpg";
-import pic5 from "../../public/assets/gallery/DSC06900.jpg";
-import pic6 from "../../public/assets/gallery/C0128T01.jpg";
-import pic7 from "../../public/assets/gallery/GETH7234.jpg";
-import pic8 from "../../public/assets/gallery/C0039T01.jpg";
-import pic9 from "../../public/assets/gallery/Clip0029T01.jpg";
-import pic10 from "../../public/assets/gallery/GETH7229.jpg";
-import pic11 from "../../public/assets/gallery/GETH1049.jpg";
-import pic12 from "../../public/assets/gallery/C0128T01.jpg";
-import pic13 from "../../public/assets/gallery/Clip0035T01.jpg";
-import pic14 from "../../public/assets/gallery/GETH7222.jpg";
-import Image from "next/image";
-import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Monoton } from "next/font/google";
+import Image from "next/image";
+import { useState } from "react";
+import { InfiniteMovingCards } from "./ui/moving-cards";
 
 const monoton = Monoton({ subsets: ["latin"], weight: "400" });
 
@@ -42,7 +27,11 @@ function Gallery() {
                         onClick={openModal}
                         className="relative aspect-[100/69] w-80 cursor-pointer"
                     >
-                        <Image src={Television} fill alt="TV" />
+                        <Image
+                            src="https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133751/vhii4zd2lnl4sgchpjn1.png"
+                            fill
+                            alt="TV"
+                        />
                     </div>
 
                     {isOpen && (
@@ -90,26 +79,54 @@ function Gallery() {
                 pauseOnHover={false}
                 direction="left"
                 items={[
-                    { image: pic1.src as string },
-                    { image: pic2.src as string },
-                    { image: pic3.src as string },
-                    { image: pic4.src as string },
-                    { image: pic5.src as string },
-                    { image: pic6.src as string },
-                    { image: pic7.src as string },
+                    {
+                        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133599/gallery/gtydpnsmmnknfwmhtssj.jpg",
+                    },
+                    {
+                        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133544/gallery/yllhbmnebolei4nqodus.jpg",
+                    },
+                    {
+                        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133490/gallery/v2dnjee5sgzde4ngijac.jpg",
+                    },
+                    {
+                        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133458/gallery/phamhmic5t6sadmibo6s.jpg",
+                    },
+                    {
+                        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133437/gallery/j7wt8aepekjn3minfbp4.jpg",
+                    },
+                    {
+                        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133429/gallery/rpxh7tsud776nrhu7v9b.jpg",
+                    },
+                    {
+                        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133429/gallery/bjqh6dmc0tivhvtlpjm2.jpg",
+                    },
                 ]}
             />
             <InfiniteMovingCards
                 direction="right"
                 pauseOnHover={false}
                 items={[
-                    { image: pic11.src as string },
-                    { image: pic12.src as string },
-                    { image: pic8.src as string },
-                    { image: pic9.src as string },
-                    { image: pic10.src as string },
-                    { image: pic13.src as string },
-                    { image: pic14.src as string },
+                    {
+                        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133554/gallery/b6pqulukwtcmyxo27e98.jpg",
+                    },
+                    {
+                        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133538/gallery/qri4reqqmbnl5mlsbugr.jpg",
+                    },
+                    {
+                        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133469/gallery/xcskkieldro4hco7chis.jpg",
+                    },
+                    {
+                        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133437/gallery/nbp1xwdbx0nch0ubmvbz.jpg",
+                    },
+                    {
+                        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133429/gallery/uexunumgxvxu2avcnyre.jpg",
+                    },
+                    {
+                        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133437/gallery/ceolt5xfvjiygoiktduv.jpg",
+                    },
+                    {
+                        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133429/gallery/zjm24mgrf8xzao46ojof.jpg",
+                    },
                 ]}
             />
         </section>

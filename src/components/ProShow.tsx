@@ -1,13 +1,8 @@
 "use client";
 import { Monoton } from "next/font/google";
-import revanth from "../../public/assets/proshow1.png";
-import ProshowDay2 from "./ProshowDay2";
-import { cn } from "@/lib/utils";
 import Image from "next/image";
-import hardCore1 from "../../public/assets/hardcore1.png";
-import hardCore3 from "../../public/assets/hardcore2.png";
-import hardCore2 from "../../public/assets/hardcore3.png";
 import { useEffect, useState } from "react";
+import revanth from "../../public/assets/proshow1.png";
 
 const monoton = Monoton({ subsets: ["latin"], weight: "400" });
 
@@ -27,16 +22,22 @@ const proshowDay1 = {
 };
 
 const ProShows = () => {
-    const [day2Img, setDay2Img] = useState(hardCore2);
+    const [day2Img, setDay2Img] = useState(
+        "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133752/jologx6mpoanajsgtrx8.png"
+    );
 
     useEffect(() => {
         const item = document.getElementById("samlpe");
         item?.addEventListener("mouseenter", () => {
-            setDay2Img(hardCore3);
+            setDay2Img(
+                "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133752/vnhtfn04zt626e5peiws.png"
+            );
         });
 
         item?.addEventListener("mouseleave", () => {
-            setDay2Img(hardCore2);
+            setDay2Img(
+                "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133752/jologx6mpoanajsgtrx8.png"
+            );
         });
     }, [day2Img]);
 
@@ -84,7 +85,11 @@ const ProShows = () => {
             <h1 className={`${monoton.className} text-5xl text-yellow px-12 pt-12`}>PROSHOWS</h1>
             <div className="w-full grid h-auto grid-cols-1 md:grid-cols-2 gap-10 p-10">
                 <div className={`w-full aspect-[1494/1158] relative`}>
-                    <Image src={hardCore1} alt="Hardcore" fill />
+                    <Image
+                        src="https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133751/f7gk77gr3naijfp9rxeg.png"
+                        alt="Hardcore"
+                        fill
+                    />
                 </div>
                 <div className={`w-full aspect-[1494/1158] relative`} id="samlpe">
                     <Image src={day2Img} alt="Hardcore" fill />
