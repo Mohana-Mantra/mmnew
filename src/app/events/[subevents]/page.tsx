@@ -1,12 +1,9 @@
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/Dialog";
 import GradualSpacing from "@/components/ui/gradual-spacing";
-import Image from "next/image";
-import Calender from "../../../../public/assets/icons/calendar-lines.svg";
-import Time from "../../../../public/assets/icons/clock-three.svg";
-import Location from "../../../../public/assets/icons/map-marker.svg";
 import { KALAKSHETRAEVENTS, SPOTEVENTS, WORKSHOPS } from "@/lib/eventsDetails";
-import { Monoton } from "next/font/google";
 import { cn } from "@/lib/utils";
+import { Monoton } from "next/font/google";
+import Image from "next/image";
 import Link from "next/link";
 
 const monoton = Monoton({ subsets: ["latin"], weight: "400" });
@@ -80,7 +77,7 @@ export default function AllEvents({ params }: { params: any }) {
                                                 <div>
                                                     <div className="flex items-center h-fit gap-4">
                                                         <Image
-                                                            src={Calender}
+                                                            src="https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133425/icons/mqmmcdjyqxydptuic0aq.svg"
                                                             height={16}
                                                             width={16}
                                                             alt="icon"
@@ -89,7 +86,7 @@ export default function AllEvents({ params }: { params: any }) {
                                                     </div>
                                                     <div className="flex items-center h-fit gap-4">
                                                         <Image
-                                                            src={Location}
+                                                            src="https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133430/icons/eezseuk4hioa3akqlfhq.svg"
                                                             height={16}
                                                             width={16}
                                                             alt="icon"
@@ -98,7 +95,7 @@ export default function AllEvents({ params }: { params: any }) {
                                                     </div>
                                                     <div className="flex items-center h-fit gap-4">
                                                         <Image
-                                                            src={Time}
+                                                            src="https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133426/icons/fc2lzpiqbj6yjuzxe0gp.svg"
                                                             height={16}
                                                             width={16}
                                                             alt="icon"
