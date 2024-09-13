@@ -46,6 +46,14 @@ function Sponsers() {
                             alt="sponsers"
                         />
                     </div>
+                    <div className="relative h-40 rounded-lg aspect-[800/800]">
+                        <Image
+                            src="https://res.cloudinary.com/dbjy9s3cz/image/upload/c_crop,w_800,h_800,ar_1:1/v1726230224/14bbdafd-9023-41cb-9e54-ab26cbaf8ef8.png"
+                            fill
+                            className="object-cover rounded-lg"
+                            alt="sponsers"
+                        />
+                    </div>
                 </div>
             </div>
             <div className="bg-slate-900 py-20 space-y-10 md:space-y-16">
