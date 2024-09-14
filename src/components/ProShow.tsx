@@ -22,23 +22,25 @@ const proshowDay1 = {
 };
 
 const ProShows = () => {
-    const [day2Img, setDay2Img] = useState(
-        "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133752/jologx6mpoanajsgtrx8.png"
-    );
+    const [day2Img, setDay2Img] = useState({
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133752/jologx6mpoanajsgtrx8.png",
+        number: 1,
+    });
 
     useEffect(() => {
-        const item = document.getElementById("samlpe");
-        item?.addEventListener("mouseenter", () => {
-            setDay2Img(
-                "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133752/vnhtfn04zt626e5peiws.png"
-            );
-        });
-
-        item?.addEventListener("mouseleave", () => {
-            setDay2Img(
-                "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133752/jologx6mpoanajsgtrx8.png"
-            );
-        });
+        setInterval(() => {
+            if (day2Img.number === 1) {
+                setDay2Img({
+                    image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133752/vnhtfn04zt626e5peiws.png",
+                    number: 2,
+                });
+            } else {
+                setDay2Img({
+                    image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133752/jologx6mpoanajsgtrx8.png",
+                    number: 1,
+                });
+            }
+        }, 3000);
     }, [day2Img]);
 
     // return (
@@ -92,7 +94,7 @@ const ProShows = () => {
                     />
                 </div>
                 <div className={`w-full aspect-[1494/1158] relative`} id="samlpe">
-                    <Image src={day2Img} alt="Hardcore" fill />
+                    <Image src={day2Img.image} alt="Hardcore" fill />
                 </div>
             </div>
         </div>

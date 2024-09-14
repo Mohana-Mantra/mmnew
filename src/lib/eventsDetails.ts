@@ -3,12 +3,7 @@ import picturePerfect from "../../public/assets/kalakshetra/pictureperfect.svg";
 import pushUp from "../../public/assets/kalakshetra/pushupchallenge.svg";
 import shortFilm from "../../public/assets/kalakshetra/shortfilm.svg";
 import sitCom from "../../public/assets/kalakshetra/sitcom.svg";
-import placeHolder from "../../public/assets/placeholder.png";
-
-// Spot Events
-
-// Workshops
-import brevityBlitz from "../../public/assets/workshops/brevity-blitz.jpg";
+import voice from "../../public/assets/kalakshetra/voiceofmm.svg";
 
 export const KALAKSHETRAEVENTS = [
     {
@@ -32,7 +27,7 @@ export const KALAKSHETRAEVENTS = [
         event: "Voice of MM",
         venue: "Indoor Stadium",
         timings: "01:00 P.M - 02:30 P.M",
-        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133468/kalakshetra/nderav9iagpmkx0afke2.svg",
+        image: voice.src,
         day: "Day 1",
         rules: [
             "This is a solo singing competition; no duets or group performances are allowed.",
@@ -44,24 +39,6 @@ export const KALAKSHETRAEVENTS = [
         ],
         description:
             "Voice of MM is the Singing Competition, where people show off their singing skills. Contestants perform songs in front of a panel of judges. In this event there is only solo performance.",
-    },
-    {
-        event: "Band Battle",
-        venue: "Indoor Stadium",
-        timings: "03:00 P.M - 04:00 P.M",
-        image: bandBattle.src,
-        day: "Day 1",
-        rules: [
-            "Solo performance is also allowed.",
-            "Each band must have a minimum of 3 members.",
-            "Bands are allowed a maximum of 10 minutes for their performance, including setup time.",
-            "Any genre of music is allowed, and both original compositions and covers are accepted.",
-            "All instruments and sound equipment must be arranged by the bands themselves.",
-            "Judging criteria include originality, musicality, stage presence, and audience engagement.",
-            "Offensive or inappropriate lyrics and performances are strictly prohibited.",
-        ],
-        description:
-            "Band Battle is a competition where different musical bands play their best songs using various instruments. It is best chance to show their skills and creativity.",
     },
     {
         event: "Ramp Walk",
@@ -198,6 +175,24 @@ export const KALAKSHETRAEVENTS = [
         ],
         description:
             "The Whisper Challenge is a hilarious game where players try to guess phrases while wearing noise-canceling headphones. One person whispers a phrase, and the other has to read their lips and guess what they’re saying. The results are often funny misinterpretations and lots of laughter. It's a great way to break the ice and have fun with friends.",
+    },
+    {
+        event: "Band Battle",
+        venue: "Indoor Stadium",
+        timings: "03:00 P.M - 04:00 P.M",
+        image: bandBattle.src,
+        day: "Day 1",
+        rules: [
+            "Solo performance is also allowed.",
+            "Each band must have a minimum of 3 members.",
+            "Bands are allowed a maximum of 10 minutes for their performance, including setup time.",
+            "Any genre of music is allowed, and both original compositions and covers are accepted.",
+            "All instruments and sound equipment must be arranged by the bands themselves.",
+            "Judging criteria include originality, musicality, stage presence, and audience engagement.",
+            "Offensive or inappropriate lyrics and performances are strictly prohibited.",
+        ],
+        description:
+            "Band Battle is a competition where different musical bands play their best songs using various instruments. It is best chance to show their skills and creativity.",
     },
     {
         event: "Hand DIY T-shirts",
@@ -472,7 +467,7 @@ export const SPOTEVENTS = [
     {
         eventName: "TELEMATCH",
         slug: "telematch",
-        image: placeHolder.src,
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726211734/telemath_jqhxmu.jpg",
         about: "Telematch is a popular format for team building activities designed to promote teamwork, communication, and collaboration.",
         howToPlay:
             "Players race to the finish line while balancing a task. Includes events like Adventure Run, Human Wheelbarrow Race, Tug of War, etc.",
@@ -484,7 +479,7 @@ export const SPOTEVENTS = [
     {
         eventName: "LUCKY DRAW",
         slug: "lucky-draw",
-        image: placeHolder.src,
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726211733/luckydraw_mjioyc.jpg",
         about: "A random selection process where participants enter for a chance to win prizes.",
         howToPlay: "Participants fill a coupon; winners are drawn randomly.",
         rules: ["One coupon per participant.", "Only one prize per person."],
@@ -492,7 +487,7 @@ export const SPOTEVENTS = [
     {
         eventName: "DIGITAL EVENTS",
         slug: "digital-events",
-        image: placeHolder.src,
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726211736/digital-events_itpeuh.jpg",
         about: "Participants engage in virtual activities and competitions, often hosted online.",
         howToPlay: "Participants compete in modes like CLASSIC or BERMUDA in squads of four.",
         rules: ["Four people per game.", "No APK apps allowed."],
@@ -508,7 +503,7 @@ export const SPOTEVENTS = [
     {
         eventName: "BOX CRICKET",
         slug: "box-cricket",
-        image: placeHolder.src,
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726211735/boxcircket_wkx9fz.jpg",
         about: "A modified version of cricket played in a smaller, enclosed space.",
         howToPlay:
             "Batsmen must keep one foot within the crease while batting. Hitting the ceiling results in no runs or dismissal.",
@@ -517,7 +512,7 @@ export const SPOTEVENTS = [
     {
         eventName: "RING TOSS",
         slug: "ring-toss",
-        image: placeHolder.src,
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726211733/ringtoss_zwyu9f.jpg",
         about: "Players aim to throw rings onto targets to win rewards.",
         howToPlay:
             "Players take turns tossing rings at the target. Points are awarded for successful tosses.",
@@ -526,7 +521,7 @@ export const SPOTEVENTS = [
     {
         eventName: "FLAG PLOTTING",
         slug: "flag-plotting",
-        image: placeHolder.src,
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726211739/flagplotting_ugcbf4.jpg",
         about: "Players place flags on a map to capture territories or win prizes.",
         howToPlay: "Participants plot areas on a map. If the area contains a prize, they win.",
         rules: ["No prize is awarded if the plotted area doesn’t contain a gift."],
@@ -534,7 +529,7 @@ export const SPOTEVENTS = [
     {
         eventName: "ESCAPE THE ROOM",
         slug: "escape-the-room",
-        image: placeHolder.src,
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726211737/escaperoom_uzbj67.jpg",
         about: "An immersive, live-action game where participants must solve puzzles to escape within a time limit.",
         howToPlay:
             "Participants must follow a correct path through a maze, with only one person allowed in the maze at a time.",
@@ -555,7 +550,7 @@ export const SPOTEVENTS = [
     {
         eventName: "FUN GAMES",
         slug: "fun-games",
-        image: placeHolder.src,
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726211733/fungames_cw6bsc.jpg",
         venue: "MNS Pathway",
         about: "Lighthearted games designed to entertain and engage players.",
         howToPlay: "Players follow given statements and directions to play the games correctly.",
@@ -609,7 +604,7 @@ export const WORKSHOPS = [
     {
         eventName: "Bridge-o-Mania",
         slug: "bridge-o-mania",
-        image: placeHolder.src,
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726211768/Bridge-o-mania_bwu01z.jpg",
         about: "A one-day event where participants construct a bridge using Popsicle sticks, glue, and thread. The goal is to build a structure that can hold the maximum load.",
         howToPlay: [
             "Form a team of 1 or 2 participants.",
@@ -629,7 +624,7 @@ export const WORKSHOPS = [
     {
         eventName: "Life Saver Workshop",
         slug: "life-saver-workshop",
-        image: placeHolder.src,
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726211767/lifeSaver_gd6um9.jpg",
         about: "A two-day workshop aimed at teaching essential life-saving skills. Participants will practice on a human dummy to gain hands-on experience.",
         howToPlay: [
             "Attend the workshop led by Dr. Tejo Rao from Maruthi Hospital.",
@@ -646,7 +641,7 @@ export const WORKSHOPS = [
     {
         eventName: "Robo War",
         slug: "robo-war",
-        image: placeHolder.src,
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726211227/roboWar_jfzjh2.svg",
         about: "A robotics competition where participants design and build robots using Arduino Uno remote control Robo Kits to push their opponents' robots out of the pitch.",
         howToPlay: [
             "Design and build a robot using the Arduino Uno Robo Kit.",
@@ -701,7 +696,7 @@ export const WORKSHOPS = [
     {
         eventName: "Care-a-thon",
         slug: "care-a-thon",
-        image: placeHolder.src,
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726212908/1575c155-790f-437a-9e8d-41a3adb15f91.png",
         about: "A healthcare-based hackathon where participants develop innovative solutions to given problem statements related to healthcare. The event involves project submissions, exhibitions, and final presentations.",
         howToPlay: [
             "Form teams of 2-5 participants.",
@@ -773,7 +768,7 @@ export const WORKSHOPS = [
     {
         eventName: "Spell Quest",
         slug: "spell-quest",
-        image: placeHolder.src,
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726213121/spell_wxgxkj.jpg",
         about: "A solo-participation competition designed to test participants' spelling and grammar skills. The event consists of two challenging rounds with the winner being recognized for their mastery of the English language.",
         howToPlay: [
             "Round 1: Pronounce and spell a given word correctly.",
