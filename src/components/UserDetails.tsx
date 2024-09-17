@@ -18,20 +18,24 @@ const UserDetails = ({ user }: { user: User }) => {
                 .from('users')
                 .select('*')
                 .eq('user_id', user.id)
-                .single();
-                
+                .maybeSingle();  // Changes here: use maybeSingle instead of single
+    
             if (error) {
                 setError(error.message);
             } else if (data) {
                 setPhoneNumber(data.phone_number || "");
                 setInstituteName(data.institute_name || "");
                 setYearOfStudy(data.year_of_study || "");
+            } else {
+                // No user found, handle appropriately
+                setError("No user details found.");
             }
             setLoading(false);
         };
-
+    
         fetchUserDetails();
     }, [user.id]);
+    
 
     const updateUserDetails = async () => {
         setLoading(true);
