@@ -10,6 +10,7 @@ const UserDetails = ({ user }: { user: User }) => {
         instituteName: "",
         yearOfStudy: ""
     });
+    const [editMode, setEditMode] = useState(false);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -42,12 +43,14 @@ const UserDetails = ({ user }: { user: User }) => {
         setDetails(prev => ({ ...prev, [name]: value }));
     };
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
+    const handleEdit = () => {
+        setEditMode(true);
+    };
+
+    const handleSave = async () => {
         setLoading(true);
         const { error } = await supabase.from('users').update({
             full_name: details.fullName,
-            email: details.email,
             phone_number: details.phoneNumber,
             institute_name: details.instituteName,
             year_of_study: details.yearOfStudy,
@@ -61,6 +64,7 @@ const UserDetails = ({ user }: { user: User }) => {
             alert("Details updated successfully!");
         }
         setLoading(false);
+        setEditMode(false);
     };
 
     if (loading) {
@@ -68,32 +72,29 @@ const UserDetails = ({ user }: { user: User }) => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <div className="space-y-4">
             <h2 className="font-bold text-2xl mb-4">User Details</h2>
-            <label>
-                Name:
-                <input type="text" name="fullName" value={details.fullName} onChange={handleChange} />
-            </label>
-            <label>
-                Email:
-                <input type="email" name="email" value={details.email} onChange={handleChange} />
-            </label>
-            <label>
-                Phone Number:
-                <input type="text" name="phoneNumber" value={details.phoneNumber} onChange={handleChange} />
-            </label>
-            <label>
-                Institute Name:
-                <input type="text" name="instituteName" value={details.instituteName} onChange={handleChange} />
-            </label>
-            <label>
-                Year of Study:
-                <input type="text" name="yearOfStudy" value={details.yearOfStudy} onChange={handleChange} />
-            </label>
-            <button type="submit" disabled={loading}>
-                Save Changes
-            </button>
-        </form>
+            <div className="space-y-2">
+                <p>Name: {editMode ? <input type="text" name="fullName" value={details.fullName} onChange={handleChange} /> : details.fullName}</p>
+                <p>Email: {details.email}</p>  {/* Email remains uneditable */}
+                {editMode && (
+                    <>
+                        <p>Phone Number: <input type="text" name="phoneNumber" value={details.phoneNumber} onChange={handleChange} /></p>
+                        <p>Institute Name: <input type="text" name="instituteName" value={details.instituteName} onChange={handleChange} /></p>
+                        <p>Year of Study: <input type="text" name="yearOfStudy" value={details.yearOfStudy} onChange={handleChange} /></p>
+                    </>
+                )}
+            </div>
+            {editMode ? (
+                <button onClick={handleSave} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    Save Changes
+                </button>
+            ) : (
+                <button onClick={handleEdit} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    Update Details
+                </button>
+            )}
+        </div>
     );
 };
 
