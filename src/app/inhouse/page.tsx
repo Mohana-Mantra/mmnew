@@ -14,7 +14,7 @@ const InHouse = () => {
                             className="w-32 h-auto mx-auto"
                         />
                     </div>
-                    <h3 className="text-center text-black text-xl font-medium mb-6"> This page is only for the Students from SVCE & MBU <br />Date: 04 to 06 Oct</h3>
+                    <h3 className="text-center text-black text-xl font-medium mb-6"> This page is only for the Students from SVEC & MBU <br /><br />Date: 04 to 06 Oct</h3>
                     <div className="text-center">
                         <a
                             href="https://forms.gle/RjWN1vABmDMiicsZ7"
