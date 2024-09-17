@@ -11,7 +11,7 @@ const InHouse = () => {
                         <img
                             src="https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133753/uqwbidsxcrockemrydm2.png"
                             alt="Mohana Mantra 2024"
-                            className="w-32 h-auto mx-auto"
+                            className="w-48 h-auto mx-auto"
                         />
                     </div>
                     <h3 className="text-center text-black text-xl font-medium mb-6"> This page is only for the Students from SVEC & MBU <br /><br />Date: 04 to 06 Oct</h3>
