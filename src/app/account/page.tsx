@@ -9,7 +9,6 @@ import MyTicket from "@/components/MyTicket";
 import MyPayment from "@/components/MyPayment";
 import CampusAmbassador from "@/components/CampusAmbassador";
 
-
 export default function Account() {
     const [user, setUser] = useState<null | User>(null);
     const [activeTab, setActiveTab] = useState(0);
@@ -80,6 +79,7 @@ export default function Account() {
                     className="px-4 py-2 text-white bg-red-600 hover:bg-red-500 rounded-md"
                     onClick={async () => {
                         await supabase.auth.signOut();
+                        handleLogout();
                     }}
                 >
                     Logout
