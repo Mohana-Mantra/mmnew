@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import { User } from "@supabase/supabase-js";
 import { useRouter } from "next/navigation";
-import MyTicket from "@/components/MyTicket";
 
 interface Payment {
     id: number;
@@ -70,7 +69,7 @@ const MyPayment = ({ user }: { user: User }) => {
                     </p>
                     <button
                         className="bg-blue-600 hover:bg-blue-700 text-white mt-4 p-2 rounded-md"
-                        onClick={() => router.push("/myticket")}
+                        onClick={() => router.push("/account/myticket")}
                     >
                         Register
                     </button>
