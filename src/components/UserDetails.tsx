@@ -75,7 +75,8 @@ const UserDetails = ({ user }: { user: User }) => {
                 <div>
                     <p>Name: {userData.full_name || "N/A"}</p>
                     <p>Email: {userData.email}</p>
-                    {/* Display other fields similarly */}
+                    <p>Phone Number: {userData.phone_number}</p>
+                    
                 </div>
             )}
             <button onClick={() => setEditMode(!editMode)}>
