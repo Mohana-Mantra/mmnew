@@ -7,6 +7,8 @@ import { cn } from "@/lib/utils";
 import UserDetails from "@/components/UserDetails";
 import MyTicket from "@/components/MyTicket";
 import MyPayment from "@/components/MyPayment";
+import CampusAmbassador from "@/components/CampusAmbassador";
+
 
 export default function Account() {
     const [user, setUser] = useState<null | User>(null);
@@ -68,9 +70,9 @@ export default function Account() {
                 <button
                     className={cn(
                         "px-4 py-2 text-white hover:bg-gray-700 rounded-md",
-                        activeTab === 1 ? "bg-gray-700" : ""
+                        activeTab === 3 ? "bg-gray-700" : ""
                     )}
-                    onClick={() => setActiveTab(1)}
+                    onClick={() => setActiveTab(3)}
                 >
                     Campus Ambassador
                 </button>
@@ -87,6 +89,7 @@ export default function Account() {
                 {activeTab === 0 && <UserDetails user={user} />}
                 {activeTab === 1 && <MyTicket user={user} />}
                 {activeTab === 2 && <MyPayment user={user} />}
+                {activeTab === 3 && <CampusAmbassador user={user} />}
             </div>
         </div>
     );
