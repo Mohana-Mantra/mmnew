@@ -102,8 +102,11 @@ export default function AuthForm() {
             }
 
             if (session) {
+                console.log("Session data: ", session);  // Log session data for debugging
                 const user = session.user;
                 if (user) {
+                    console.log("User data: ", user);  // Log user data for debugging
+
                     // Upsert user data to users table
                     const { error: insertError } = await supabase.from('users').upsert({
                         user_id: user.id,
@@ -119,8 +122,10 @@ export default function AuthForm() {
                     });
 
                     if (insertError) {
+                        console.error("Upsert error: ", insertError);
                         setErrorMessage(insertError.message);
                     } else {
+                        console.log("User successfully inserted into the users table.");
                         router.push("/account");
                     }
                 }
