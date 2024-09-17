@@ -65,7 +65,7 @@ const MyPayment = ({ user }: { user: User }) => {
                 <div>
                     <h2 className="text-2xl font-bold">Register for Mohana Mantra 2K24</h2>
                     <p>
-                        You haven't registered for the Mohana Mantra 2K24 event yet. Purchase the event pass to participate.
+                        You haven&#39;t registered for the Mohana Mantra 2K24 event yet. Purchase the event pass to participate.
                     </p>
                     <button
                         className="bg-yellow mt-4 p-2 rounded-md"
