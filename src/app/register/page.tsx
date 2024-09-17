@@ -7,21 +7,17 @@ import { useRouter } from "next/navigation";
 import { IconBrandGoogle } from "@tabler/icons-react";
 
 export default function AuthForm() {
-    const [isLogin, setIsLogin] = useState(false); // Set default to registration page
+    const [isLogin, setIsLogin] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
-    const router = useRouter(); // To navigate after login/register
+    const router = useRouter();
 
     useEffect(() => {
         const getUser = async () => {
-            const {
-                data: { session },
-            } = await supabase.auth.getSession();
-
+            const { data: { session } } = await supabase.auth.getSession();
             if (session) {
                 router.push("/account");
             }
         };
-
         getUser();
     }, []);
 
@@ -39,7 +35,7 @@ export default function AuthForm() {
             if (error) {
                 setErrorMessage(error.message);
             } else {
-                router.push("/account"); // Navigate to the home page after login
+                router.push("/account");
             }
         } else {
             // Handle registration
@@ -52,22 +48,40 @@ export default function AuthForm() {
                     },
                 },
             });
+
             if (error) {
                 setErrorMessage(error.message);
             } else {
-                router.push("/account"); // Navigate to the home page after registration
+                const { user } = data;
+
+                // Null check for user
+                if (user) {
+                    const { error: insertError } = await supabase.from('users').insert({
+                        user_id: user.id,
+                        full_name: `${firstName} ${lastName}`,
+                        email: user.email,
+                    });
+
+                    if (insertError) {
+                        setErrorMessage(insertError.message);
+                    } else {
+                        router.push("/account");
+                    }
+                } else {
+                    setErrorMessage("User is null after sign-up.");
+                }
             }
         }
     };
 
     const signInWithGoogle = async () => {
-        const { error, data } = await supabase.auth.signInWithOAuth({
+        const { error } = await supabase.auth.signInWithOAuth({
             provider: "google",
         });
         if (error) {
             setErrorMessage(error.message);
-        } else if (data) {
-            router.push("/account"); // Navigate to home after successful login
+        } else {
+            router.push("/account");
         }
     };
 
