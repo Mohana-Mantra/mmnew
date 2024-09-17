@@ -12,6 +12,7 @@ interface Payment {
 
 const MyTicket = ({ user }: { user: User }) => {
     const [ticketPurchased, setTicketPurchased] = useState(false);
+    const [ticketPrice, setTicketPrice] = useState(500); // Default ticket price
     const [loading, setLoading] = useState(true);
     const [errorMessage, setErrorMessage] = useState("");
     const router = useRouter();
@@ -19,22 +20,40 @@ const MyTicket = ({ user }: { user: User }) => {
     useEffect(() => {
         const fetchPaymentInfo = async () => {
             setLoading(true);
+
             try {
-                const { data: payments, error } = await supabase
+                // Check if the user's institution is listed in the 'institutes' table
+                const { data: institute, error: instituteError } = await supabase
+                    .from("institutes")
+                    .select("*")
+                    .eq("name", user.user_metadata?.institute_name)
+                    .eq("is_listed", true)
+                    .single();
+
+                if (instituteError) {
+                    console.error("Error fetching institute information:", instituteError.message);
+                } else if (institute) {
+                    // If the institution is listed, set the ticket price to 0
+                    setTicketPrice(0);
+                }
+
+                // Fetch the user's payment information
+                const { data: payments, error: paymentError } = await supabase
                     .from("payments")
                     .select("*")
                     .eq("user_id", user.id)
                     .eq("payment_status", "completed");
 
-                if (error) {
+                if (paymentError) {
                     setErrorMessage("Error fetching payment information.");
-                    console.error("Error fetching payments:", error.message);
+                    console.error("Error fetching payments:", paymentError.message);
                 } else if (payments && payments.length > 0) {
                     setTicketPurchased(true); // User has purchased a ticket
                 }
             } catch (error) {
                 setErrorMessage("An unexpected error occurred.");
             }
+
             setLoading(false);
         };
 
@@ -42,16 +61,14 @@ const MyTicket = ({ user }: { user: User }) => {
     }, [user.id]);
 
     const handlePayment = async () => {
-        // You would integrate a payment gateway like Razorpay here.
-        // For now, let's simulate a successful payment and insert the record into the payments table.
-
+        // Simulate a successful payment and insert the record into the payments table
         const { data, error } = await supabase
             .from("payments")
             .insert({
                 user_id: user.id,
-                amount: 500,
+                amount: ticketPrice,
                 payment_status: "completed",
-                transaction_id: `txn_${Date.now()}`, // Simulating a transaction ID
+                transaction_id: `txn_${Date.now()}`, // Simulate a transaction ID
                 created_at: new Date().toISOString(),
             });
 
@@ -73,18 +90,18 @@ const MyTicket = ({ user }: { user: User }) => {
                 <div>
                     <h2 className="text-2xl font-bold">Your Mohana Mantra Pass</h2>
                     <p>Congratulations! You have successfully purchased the event pass.</p>
-                    <p>Amount Paid: ₹500</p>
+                    <p>Amount Paid: ₹{ticketPrice === 0 ? "Free" : ticketPrice}</p>
                     <p>Transaction ID: {`txn_${Date.now()}`}</p>
                 </div>
             ) : (
                 <div>
                     <h2 className="text-2xl font-bold">Mohana Mantra Event Pass</h2>
-                    <p>The pass price is ₹500.</p>
+                    <p>The pass price is ₹{ticketPrice === 0 ? "Free" : ticketPrice}.</p>
                     <button
-                        className="bg-blue-600 hover:bg-blue-700 text-white mt-4 p-2 rounded-md"
+                        className="bg-yellow mt-4 p-2 rounded-md"
                         onClick={handlePayment}
                     >
-                        Buy Pass for ₹500
+                        {ticketPrice === 0 ? "Get Free Pass" : `Buy Pass for ₹${ticketPrice}`}
                     </button>
                     {errorMessage && <p className="text-red-500 mt-4">{errorMessage}</p>}
                 </div>
