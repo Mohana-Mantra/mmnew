@@ -1,13 +1,8 @@
+import StickyCountdown from "@/components/StickyCountdown";
 import type { Metadata } from "next";
 import { Lato } from "next/font/google";
-import "./globals.css";
 import Navbar from "../components/Navbar";
-import dynamic from "next/dynamic";
-import StickyCountdown from "@/components/StickyCountdown";
-
-const DynamicNavbar = dynamic(() => import("../components/Navbar"), {
-    ssr: false,
-});
+import "./globals.css";
 
 const inter = Lato({ subsets: ["latin"], weight: ["100", "300", "400", "700"] });
 
@@ -22,7 +17,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <html lang="en">
             <body className={inter.className}>
                 <main className="relative flex flex-col antialiased min-h-screen bg-primary">
-                    {/* <DynamicNavbar /> */}
                     <Navbar />
                     <div className="flex-1 flex-grow" id="main-body">
                         {children}

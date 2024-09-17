@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Label } from "../../components/ui/label";
 import { Input } from "../../components/ui/input";
 import { supabase } from "@/lib/supabaseClient";
@@ -10,6 +10,20 @@ export default function AuthForm() {
     const [isLogin, setIsLogin] = useState(false); // Set default to registration page
     const [errorMessage, setErrorMessage] = useState("");
     const router = useRouter(); // To navigate after login/register
+
+    useEffect(() => {
+        const getUser = async () => {
+            const {
+                data: { session },
+            } = await supabase.auth.getSession();
+
+            if (session) {
+                router.push("/account");
+            }
+        };
+
+        getUser();
+    }, []);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -47,13 +61,13 @@ export default function AuthForm() {
     };
 
     const signInWithGoogle = async () => {
-        const { error } = await supabase.auth.signInWithOAuth({
+        const { error, data } = await supabase.auth.signInWithOAuth({
             provider: "google",
         });
         if (error) {
             setErrorMessage(error.message);
-        } else {
-            router.push("/"); // Navigate to home after successful login
+        } else if (data) {
+            router.push("/account"); // Navigate to home after successful login
         }
     };
 

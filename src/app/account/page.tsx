@@ -9,6 +9,7 @@ export default function Account() {
     const router = useRouter();
 
     useEffect(() => {
+        console.log(user);
         const getUser = async () => {
             const { data } = await supabase.auth.getSession();
             if (data.session) {
