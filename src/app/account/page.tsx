@@ -66,6 +66,15 @@ export default function Account() {
                     My Payment
                 </button>
                 <button
+                    className={cn(
+                        "px-4 py-2 text-white hover:bg-gray-700 rounded-md",
+                        activeTab === 1 ? "bg-gray-700" : ""
+                    )}
+                    onClick={() => setActiveTab(1)}
+                >
+                    Campus Ambassador
+                </button>
+                <button
                     className="px-4 py-2 text-white bg-red-600 hover:bg-red-500 rounded-md"
                     onClick={async () => {
                         await supabase.auth.signOut();
