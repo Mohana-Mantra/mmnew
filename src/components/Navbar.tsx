@@ -2,6 +2,7 @@
 import { supabase } from "@/lib/supabaseClient";
 import { cn } from "@/lib/utils";
 import { User } from "@supabase/supabase-js";
+import { IconUser, IconUserCircle } from "@tabler/icons-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -51,16 +52,7 @@ function Navbar() {
                     </div>
 
                     <div className="flex items-center h-full gap-4 ml-12">
-                        {user ? (
-                            <Link
-                                href="/account"
-                                className={`border-[2px] border-secondary py-2 px-4 ${
-                                    path === "/account" && "text-[#feca00]"
-                                }`}
-                            >
-                                Account
-                            </Link>
-                        ) : (
+                        {!user && (
                             <Link
                                 href="/register"
                                 className={`border-[2px] border-secondary py-2 px-4 ${
@@ -79,6 +71,12 @@ function Navbar() {
                         >
                             Buy Your Pass
                         </Link>
+
+                        {user && (
+                            <Link href="/account">
+                                <IconUserCircle size={32} />
+                            </Link>
+                        )}
                     </div>
                 </nav>
             </header>
