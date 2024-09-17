@@ -15,10 +15,11 @@ export default function Account() {
     const router = useRouter();
 
     useEffect(() => {
+        console.log(user);
         const getUser = async () => {
             const { data } = await supabase.auth.getSession();
             if (data.session) {
-                setUser(data.session.user);
+                setUser(data?.session?.user);
             } else {
                 router.push("/register"); // Redirect to register if no user is logged in
             }
@@ -76,12 +77,15 @@ export default function Account() {
                 </button>
                 <button
                     className="px-4 py-2 text-white bg-red-600 hover:bg-red-500 rounded-md"
-                    onClick={handleLogout}
+                    onClick={async () => {
+                        await supabase.auth.signOut();
+                        handleLogout();
+                    }}
                 >
                     Logout
                 </button>
             </aside>
-            <div className="flex-grow p-4">
+            <div className="w-full h-full">
                 {activeTab === 0 && <UserDetails user={user} />}
                 {activeTab === 1 && <MyTicket user={user} />}
                 {activeTab === 2 && <MyPayment user={user} />}
