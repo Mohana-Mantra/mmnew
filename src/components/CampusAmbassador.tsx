@@ -58,7 +58,7 @@ const CampusAmbassador = ({ user }: { user: User }) => {
             {/* Apply Now Button */}
             <div className="mt-8">
                 <button
-                    className="bg-yellow-500 text-black font-bold py-3 px-6 rounded-md hover:bg-yellow-600 transition duration-300"
+                    className="bg-#fecb00 text-black font-bold py-3 px-6 rounded-md hover:bg-yellow-600 transition duration-300"
                     onClick={() => {
                         // You can connect this button to your application form, e.g., redirect or open modal.
                         alert("Redirecting to Campus Ambassador Application Form");

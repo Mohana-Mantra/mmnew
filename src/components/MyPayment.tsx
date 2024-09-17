@@ -68,7 +68,7 @@ const MyPayment = ({ user }: { user: User }) => {
                         You haven&#39;t registered for the Mohana Mantra 2K24 event yet. Purchase the event pass to participate.
                     </p>
                     <button
-                        className="bg-yellow mt-4 p-2 rounded-md"
+                        className="bg-#fecb00 text-black mt-4 p-2 rounded-md"
                         onClick={() => router.push("/account/myticket")}
                     >
                         Purchase Pass and Register
