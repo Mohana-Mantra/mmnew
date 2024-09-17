@@ -1,13 +1,13 @@
 const InHouse = () => {
     return (
-        <div className="min-h-screen bg-primary flex items-center justify-center p-4">
+        <div className="min-h-screen bg-primary flex items-center justify-center p-4 mt-6">
             <div className="w-full max-w-lg">
                 <div className="bg-gray-800 text-white text-center p-5 rounded-t-lg">
                     <h1 className="text-2xl font-semibold">Registration Form</h1>
                     <h3 className="text-lg">MOHANA MANTRA 2024</h3>
                 </div>
                 <div className="bg-white p-6 rounded-b-lg shadow-lg">
-                    <div className="text-center mb-4 mt-6">
+                    <div className="text-center mb-4">
                         <img
                             src="https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133753/uqwbidsxcrockemrydm2.png"
                             alt="Mohana Mantra 2024"
