@@ -1,84 +1,99 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { User } from "@supabase/supabase-js";
 import { supabase } from "@/lib/supabaseClient";
 
 const UserDetails = ({ user }: { user: User }) => {
-    const [name, setName] = useState(user.user_metadata?.full_name || "");
-    const [editing, setEditing] = useState(false);
-    const [errorMessage, setErrorMessage] = useState("");
-    const [successMessage, setSuccessMessage] = useState("");
+    const [details, setDetails] = useState({
+        fullName: "",
+        email: "",
+        phoneNumber: "",
+        instituteName: "",
+        yearOfStudy: ""
+    });
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // Initialize name from user data
-        setName(user.user_metadata?.full_name || "");
-    }, [user]);
+        const fetchUserDetails = async () => {
+            const { data, error } = await supabase
+                .from('users')
+                .select('*')
+                .eq('user_id', user.id)
+                .single();
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        if (!name) {
-            setErrorMessage("Name cannot be empty.");
-            return;
-        }
+            if (error) {
+                console.error("Error fetching user details:", error.message);
+            } else if (data) {
+                setDetails({
+                    fullName: data.full_name || "",
+                    email: data.email || "",
+                    phoneNumber: data.phone_number || "",
+                    instituteName: data.institute_name || "",
+                    yearOfStudy: data.year_of_study || ""
+                });
+            }
+            setLoading(false);
+        };
 
-        const { error } = await supabase
-            .from("users")
-            .update({ full_name: name, updated_at: new Date() })
-            .eq("user_id", user.id);
+        fetchUserDetails();
+    }, [user.id]);
 
-        if (error) {
-            setErrorMessage(error.message);
-        } else {
-            setSuccessMessage("Name updated successfully!");
-            setEditing(false);
-        }
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setDetails(prev => ({ ...prev, [name]: value }));
     };
 
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setLoading(true);
+        const { error } = await supabase.from('users').update({
+            full_name: details.fullName,
+            email: details.email,
+            phone_number: details.phoneNumber,
+            institute_name: details.instituteName,
+            year_of_study: details.yearOfStudy,
+            updated_at: new Date()
+        }).eq('user_id', user.id);
+
+        if (error) {
+            alert("Error updating details: " + error.message);
+            console.error("Error updating details:", error);
+        } else {
+            alert("Details updated successfully!");
+        }
+        setLoading(false);
+    };
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
     return (
-        <div>
+        <form onSubmit={handleSubmit}>
             <h2 className="font-bold text-2xl mb-4">User Details</h2>
-            {editing ? (
-                <form onSubmit={handleSubmit}>
-                    <div className="mb-4">
-                        <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-                            Name
-                        </label>
-                        <input
-                            id="name"
-                            type="text"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm"
-                        />
-                    </div>
-                    {errorMessage && <p className="text-red-500 mb-4">{errorMessage}</p>}
-                    {successMessage && <p className="text-green-500 mb-4">{successMessage}</p>}
-                    <button
-                        type="submit"
-                        className="bg-blue-500 text-white px-4 py-2 rounded-md"
-                    >
-                        Save
-                    </button>
-                    <button
-                        type="button"
-                        onClick={() => setEditing(false)}
-                        className="ml-4 bg-gray-500 text-white px-4 py-2 rounded-md"
-                    >
-                        Cancel
-                    </button>
-                </form>
-            ) : (
-                <div>
-                    <p>Name: {name || "N/A"}</p>
-                    <p>Email: {user.email}</p>
-                    <button
-                        onClick={() => setEditing(true)}
-                        className="mt-4 bg-yellow-500 text-white px-4 py-2 rounded-md"
-                    >
-                        Edit Name
-                    </button>
-                </div>
-            )}
-        </div>
+            <label>
+                Name:
+                <input type="text" name="fullName" value={details.fullName} onChange={handleChange} />
+            </label>
+            <label>
+                Email:
+                <input type="email" name="email" value={details.email} onChange={handleChange} />
+            </label>
+            <label>
+                Phone Number:
+                <input type="text" name="phoneNumber" value={details.phoneNumber} onChange={handleChange} />
+            </label>
+            <label>
+                Institute Name:
+                <input type="text" name="instituteName" value={details.instituteName} onChange={handleChange} />
+            </label>
+            <label>
+                Year of Study:
+                <input type="text" name="yearOfStudy" value={details.yearOfStudy} onChange={handleChange} />
+            </label>
+            <button type="submit" disabled={loading}>
+                Save Changes
+            </button>
+        </form>
     );
 };
 
