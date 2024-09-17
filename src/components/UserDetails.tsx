@@ -8,10 +8,12 @@ const UserDetails = ({ user }: { user: User }) => {
         email: "",
         phoneNumber: "",
         instituteName: "",
-        yearOfStudy: ""
+        yearOfStudy: "",
+        isVerified: false,
+        isEligibleForFreePass: false,
     });
-    const [editMode, setEditMode] = useState(false);
     const [loading, setLoading] = useState(true);
+    const [editingField, setEditingField] = useState<string | null>(null);
 
     useEffect(() => {
         const fetchUserDetails = async () => {
@@ -29,7 +31,9 @@ const UserDetails = ({ user }: { user: User }) => {
                     email: data.email || "",
                     phoneNumber: data.phone_number || "",
                     instituteName: data.institute_name || "",
-                    yearOfStudy: data.year_of_study || ""
+                    yearOfStudy: data.year_of_study || "",
+                    isVerified: data.is_verified || false,
+                    isEligibleForFreePass: data.is_eligible_for_free_pass || false,
                 });
             }
             setLoading(false);
@@ -43,17 +47,14 @@ const UserDetails = ({ user }: { user: User }) => {
         setDetails(prev => ({ ...prev, [name]: value }));
     };
 
-    const handleEdit = () => {
-        setEditMode(true);
+    const handleEdit = (fieldName: string) => {
+        setEditingField(fieldName);
     };
 
     const handleSave = async () => {
         setLoading(true);
         const { error } = await supabase.from('users').update({
-            full_name: details.fullName,
-            phone_number: details.phoneNumber,
-            institute_name: details.instituteName,
-            year_of_study: details.yearOfStudy,
+            [editingField as string]: details[editingField as keyof typeof details],
             updated_at: new Date()
         }).eq('user_id', user.id);
 
@@ -64,36 +65,46 @@ const UserDetails = ({ user }: { user: User }) => {
             alert("Details updated successfully!");
         }
         setLoading(false);
-        setEditMode(false);
+        setEditingField(null);
     };
 
     if (loading) {
         return <div>Loading...</div>;
     }
 
-    return (
-        <div className="space-y-4">
-            <h2 className="font-bold text-2xl mb-4">User Details</h2>
-            <div className="space-y-2">
-                <p>Name: {editMode ? <input type="text" name="fullName" value={details.fullName} onChange={handleChange} /> : details.fullName}</p>
-                <p>Email: {details.email}</p>  {/* Email remains uneditable */}
-                {editMode && (
-                    <>
-                        <p>Phone Number: <input type="text" name="phoneNumber" value={details.phoneNumber} onChange={handleChange} /></p>
-                        <p>Institute Name: <input type="text" name="instituteName" value={details.instituteName} onChange={handleChange} /></p>
-                        <p>Year of Study: <input type="text" name="yearOfStudy" value={details.yearOfStudy} onChange={handleChange} /></p>
-                    </>
+    const renderDetail = (key: string, value: string | boolean) => {
+        const isEmpty = value === "" || value === null;
+        return (
+            <div>
+                <span>{key}: </span>
+                {editingField === key ? (
+                    <input
+                        type="text"
+                        name={key}
+                        value={value.toString()}
+                        onChange={handleChange}
+                        onBlur={handleSave}
+                    />
+                ) : (
+                    <span>
+                        {isEmpty ? "N/A" : value.toString()}
+                        {isEmpty && <button onClick={() => handleEdit(key)}>Edit</button>}
+                    </span>
                 )}
             </div>
-            {editMode ? (
-                <button onClick={handleSave} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                    Save Changes
-                </button>
-            ) : (
-                <button onClick={handleEdit} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                    Update Details
-                </button>
-            )}
+        );
+    };
+
+    return (
+        <div>
+            <h2 className="font-bold text-2xl mb-4">User Details</h2>
+            {Object.entries(details).map(([key, value]) => {
+                if (key !== "email") { // Email should not be editable
+                    return renderDetail(key, value);
+                } else {
+                    return <div>{key}: {value.toString()}</div>; // Just display the email
+                }
+            })}
         </div>
     );
 };
