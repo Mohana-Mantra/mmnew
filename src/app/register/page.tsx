@@ -11,16 +11,21 @@ export default function AuthForm() {
     const [errorMessage, setErrorMessage] = useState("");
     const router = useRouter();
 
+    // Check if user is already logged in
     useEffect(() => {
         const getUser = async () => {
-            const { data: { session } } = await supabase.auth.getSession();
+            const { data: { session }, error } = await supabase.auth.getSession();
+            if (error) {
+                console.error("Error getting session:", error.message);
+            }
             if (session) {
                 router.push("/account");
             }
         };
         getUser();
-    }, []);
+    }, [router]);
 
+    // Handle regular form submit (sign up or login)
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const formData = new FormData(e.target as HTMLFormElement);
@@ -54,7 +59,7 @@ export default function AuthForm() {
             } else {
                 const { user } = data;
 
-                // Null check for user
+                // Insert user details into users table
                 if (user) {
                     const { error: insertError } = await supabase.from('users').insert({
                         user_id: user.id,
@@ -74,16 +79,56 @@ export default function AuthForm() {
         }
     };
 
+    // Google sign-in logic
     const signInWithGoogle = async () => {
         const { error } = await supabase.auth.signInWithOAuth({
             provider: "google",
         });
+
         if (error) {
             setErrorMessage(error.message);
         } else {
-            router.push("/account");
+            // Supabase will redirect to Google and handle the sign-in process.
         }
     };
+
+    // Fetch session after Google sign-in is completed and update the database
+    useEffect(() => {
+        const checkSession = async () => {
+            const { data: { session }, error } = await supabase.auth.getSession();
+            if (error) {
+                console.error("Error fetching session:", error.message);
+                setErrorMessage(error.message);
+            }
+
+            if (session) {
+                const user = session.user;
+                if (user) {
+                    // Upsert user data to users table
+                    const { error: insertError } = await supabase.from('users').upsert({
+                        user_id: user.id,
+                        full_name: user.user_metadata?.full_name || user.email,
+                        email: user.email,
+                        phone_number: null, // This can be updated later by the user
+                        institute_name: null, // This can be updated later by the user
+                        year_of_study: null, // This can be updated later by the user
+                        is_verified: true, // Mark as verified for Google sign-ups
+                        is_eligible_for_free_pass: false, // Default value, can be updated later
+                        created_at: new Date().toISOString(),
+                        updated_at: new Date().toISOString(),
+                    });
+
+                    if (insertError) {
+                        setErrorMessage(insertError.message);
+                    } else {
+                        router.push("/account");
+                    }
+                }
+            }
+        };
+
+        checkSession();
+    }, [router]);
 
     return (
         <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 my-28 shadow-input">
