@@ -84,7 +84,7 @@ const UserDetails = ({ user }: { user: User }) => {
                 </div>
             )}
             <button onClick={() => setEditMode(!editMode)}>
-                {editMode ? 'Save Changes' : 'Edit'}
+                {editMode ? 'Save Changes' : 'Update Details'}
             </button>
             {editMode && <button onClick={handleUpdate}>Update</button>}
         </div>
