@@ -81,7 +81,7 @@ const MyTicket = ({ user }: { user: User }) => {
                     <h2 className="text-2xl font-bold">Mohana Mantra Event Pass</h2>
                     <p>The pass price is ₹500.</p>
                     <button
-                        className="bg-#fecb00 text-black mt-4 p-2 rounded-md"
+                        className="bg-blue-600 hover:bg-blue-700 text-white mt-4 p-2 rounded-md"
                         onClick={handlePayment}
                     >
                         Buy Pass for ₹500
