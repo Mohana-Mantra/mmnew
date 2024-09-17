@@ -3,6 +3,7 @@ import { User } from '@supabase/supabase-js';
 import { supabase } from "@/lib/supabaseClient";
 
 interface UserExtended extends User {
+    user_id?:string;
     full_name?: string; 
     phone_number?: number;
     institute_name?: string;
@@ -73,9 +74,12 @@ const UserDetails = ({ user }: { user: User }) => {
                 </div>
             ) : (
                 <div>
+                    <p>User ID {userData.user_id}</p>
                     <p>Name: {userData.full_name || "N/A"}</p>
                     <p>Email: {userData.email}</p>
                     <p>Phone Number: {userData.phone_number}</p>
+                    <p>Institution: {userData.institute_name}</p>
+                    <p>Year: {userData.year_of_study}</p>
                     
                 </div>
             )}
