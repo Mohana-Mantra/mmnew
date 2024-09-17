@@ -98,7 +98,7 @@ const MyTicket = ({ user }: { user: User }) => {
                     <h2 className="text-2xl font-bold">Mohana Mantra Event Pass</h2>
                     <p>The pass price is ₹{ticketPrice === 0 ? "Free" : ticketPrice}.</p>
                     <button
-                        className="bg-yellow mt-4 p-2 rounded-md"
+                        className="bg-blue-600 hover:bg-blue-700 text-white mt-4 p-2 rounded-md"
                         onClick={handlePayment}
                     >
                         {ticketPrice === 0 ? "Get Free Pass" : `Buy Pass for ₹${ticketPrice}`}
