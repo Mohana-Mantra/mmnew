@@ -7,7 +7,7 @@ const InHouse = () => {
                     <h3 className="text-lg">MOHANA MANTRA 2024</h3>
                 </div>
                 <div className="bg-white p-6 rounded-b-lg shadow-lg">
-                    <div className="text-center mb-4">
+                    <div className="text-center mb-4 mt-6">
                         <img
                             src="https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133753/uqwbidsxcrockemrydm2.png"
                             alt="Mohana Mantra 2024"
