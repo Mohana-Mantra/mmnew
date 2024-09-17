@@ -40,7 +40,7 @@ const ProShows = () => {
                     number: 1,
                 });
             }
-        }, 3000);
+        }, 5000);
     }, [day2Img]);
 
     // return (

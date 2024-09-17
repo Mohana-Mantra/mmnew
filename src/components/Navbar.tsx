@@ -1,12 +1,26 @@
 "use client";
+import { supabase } from "@/lib/supabaseClient";
 import { cn } from "@/lib/utils";
+import { User } from "@supabase/supabase-js";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function Navbar() {
     const path = usePathname();
     const [isHamburgerOpen, setHamburgerOpen] = useState(false);
+    const [user, setUser] = useState<User | null>(null);
+
+    useEffect(() => {
+        const getUser = async () => {
+            const { data, error } = await supabase.auth.getSession();
+            console.log(data, error);
+            if (data.session) {
+                setUser(data?.session?.user);
+            }
+        };
+        getUser();
+    }, [user]);
 
     return (
         <>
@@ -37,22 +51,31 @@ function Navbar() {
                     </div>
 
                     <div className="flex items-center h-full gap-4 ml-12">
-                        <Link
-                            href="/register"
-                            className={`border-[2px] border-secondary py-2 px-4 ${
-                                path === "/register" && "text-[#feca00]"
-                            }`}
-                            onClick={() => (window.location.pathname = "/register")}
-                        >
-                            Login
-                        </Link>
+                        {user ? (
+                            <Link
+                                href="/account"
+                                className={`border-[2px] border-secondary py-2 px-4 ${
+                                    path === "/account" && "text-[#feca00]"
+                                }`}
+                            >
+                                Account
+                            </Link>
+                        ) : (
+                            <Link
+                                href="/register"
+                                className={`border-[2px] border-secondary py-2 px-4 ${
+                                    path === "/register" && "text-[#feca00]"
+                                }`}
+                            >
+                                Register
+                            </Link>
+                        )}
 
                         <Link
                             href="/inhouse"
                             className={`bg-secondary text-black px-4 py-2 border-[2px] border-secondary  ${
                                 path === "/login" && "text-[#feca00]"
                             }`}
-                            // onClick={() => window.location.reload()}
                         >
                             Buy Your Pass
                         </Link>
@@ -140,11 +163,11 @@ function Navbar() {
                     Register
                 </Link>
                 <Link
-                    href="/login"
-                    className={` ${path.includes("/login") && "text-yellow-400"}`}
+                    href="/inhouse"
+                    className={` ${path.includes("/inhouse") && "text-yellow-400"}`}
                     onClick={() => setHamburgerOpen(false)}
                 >
-                    Login
+                    Buy Your Pass
                 </Link>
             </section>
         </>
