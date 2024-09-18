@@ -124,8 +124,8 @@ export default function AllEvents({ params }: { params: any }) {
                             monoton.className
                         )}
                     />
-                    <p className=" font-bold text-white text-center mt-2">
-                        All the below events are held on October 4, 5, 6!...
+                    <p className=" font-bold text-white text-center mt-4">
+                    The following events run throughout the three days.
                     </p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 px-4 md:px-20">
