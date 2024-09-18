@@ -14,7 +14,10 @@ export default function AuthForm() {
     // Check if user is already logged in
     useEffect(() => {
         const getUser = async () => {
-            const { data: { session }, error } = await supabase.auth.getSession();
+            const {
+                data: { session },
+                error,
+            } = await supabase.auth.getSession();
             if (error) {
                 console.error("Error getting session:", error.message);
             }
@@ -61,7 +64,7 @@ export default function AuthForm() {
 
                 // Insert user details into users table
                 if (user) {
-                    const { error: insertError } = await supabase.from('users').insert({
+                    const { error: insertError } = await supabase.from("users").insert({
                         user_id: user.id,
                         full_name: `${firstName} ${lastName}`,
                         email: user.email,
@@ -83,6 +86,9 @@ export default function AuthForm() {
     const signInWithGoogle = async () => {
         const { error } = await supabase.auth.signInWithOAuth({
             provider: "google",
+            options: {
+                redirectTo: "https://mohanamantra.com/account",
+            },
         });
 
         if (error) {
@@ -95,20 +101,23 @@ export default function AuthForm() {
     // Fetch session after Google sign-in is completed and update the database
     useEffect(() => {
         const checkSession = async () => {
-            const { data: { session }, error } = await supabase.auth.getSession();
+            const {
+                data: { session },
+                error,
+            } = await supabase.auth.getSession();
             if (error) {
                 console.error("Error fetching session:", error.message);
                 setErrorMessage(error.message);
             }
 
             if (session) {
-                console.log("Session data: ", session);  // Log session data for debugging
+                console.log("Session data: ", session); // Log session data for debugging
                 const user = session.user;
                 if (user) {
-                    console.log("User data: ", user);  // Log user data for debugging
+                    console.log("User data: ", user); // Log user data for debugging
 
                     // Upsert user data to users table
-                    const { error: insertError } = await supabase.from('users').upsert({
+                    const { error: insertError } = await supabase.from("users").upsert({
                         user_id: user.id,
                         full_name: user.user_metadata?.full_name || user.email,
                         email: user.email,
