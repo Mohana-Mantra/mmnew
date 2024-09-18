@@ -51,7 +51,7 @@ const SubEventDetails = ({
                                         width={16}
                                         alt="icon"
                                     />
-                                    <p>Day 1 & 2</p>
+                                    
                                 </div>
                                 <div className="flex items-center h-fit gap-4">
                                     <Image
