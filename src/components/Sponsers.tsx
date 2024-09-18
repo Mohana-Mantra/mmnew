@@ -13,7 +13,7 @@ function Sponsers() {
                 >
                     sponsors
                 </h1>
-                {/* <div className="flex flex-wrap h-fit items-center overflow-hidden w-full px-6 justify-center gap-8">
+                { <div className="flex flex-wrap h-fit items-center overflow-hidden w-full px-6 justify-center gap-8">
                     <div className="relative h-40 rounded-lg aspect-[1080/544]">
                         <Image
                             src="https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133435/sponsers/new/pjpawnhw6hb4ttjswi5x.jpg"
@@ -54,7 +54,7 @@ function Sponsers() {
                             alt="sponsers"
                         />
                     </div>
-                </div> */}
+                </div> }
                 <InfiniteMovingSponsers
                     direction="left"
                     pauseOnHover={false}
