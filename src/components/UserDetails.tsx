@@ -41,6 +41,7 @@ const UserDetails = ({ user }: { user: User }) => {
       if (!data.phone_number || !data.institute_name || !data.year_of_study) {
         setEditMode(true);
       }
+      setSelectedInstitute(data.institute_name || "");
     }
     setLoading(false);
   };
@@ -78,6 +79,8 @@ const UserDetails = ({ user }: { user: User }) => {
     if (error) {
       console.error("Error updating user:", error.message);
     } else {
+      // Re-fetch updated user data after successful update
+      fetchUserDetails();
       setEditMode(false);
     }
     setLoading(false);
@@ -99,25 +102,25 @@ const UserDetails = ({ user }: { user: User }) => {
     <div className="py-16 flex flex-col items-center text-center">
       <h2 className="font-bold text-2xl mb-4">User Details</h2>
       {editMode ? (
-        <div>
-          <div className="mb-4">
-            <label>Phone Number:</label>
+        <div className="w-full max-w-md">
+          <div className="mb-4 text-left">
+            <label className="block text-sm font-medium mb-1">Phone Number:</label>
             <input
               type="text"
               value={userData.phone_number || ""}
               onChange={(e) =>
                 setUserData({ ...userData, phone_number: e.target.value })
               }
-              className="text-black"
+              className="text-black w-full border border-gray-300 p-2 rounded"
             />
           </div>
 
-          <div className="mb-4">
-            <label>Institution:</label>
+          <div className="mb-4 text-left">
+            <label className="block text-sm font-medium mb-1">Institution:</label>
             <select
               value={selectedInstitute || userData.institute_name}
               onChange={(e) => setSelectedInstitute(e.target.value)}
-              className="text-black"
+              className="text-black w-full border border-gray-300 p-2 rounded"
             >
               <option value="">Select your institution</option>
               {institutes.map((institute) => (
@@ -135,13 +138,13 @@ const UserDetails = ({ user }: { user: User }) => {
                 onChange={(e) =>
                   setUserData({ ...userData, institute_name: e.target.value })
                 }
-                className="text-black"
+                className="text-black w-full border border-gray-300 p-2 rounded mt-2"
               />
             )}
           </div>
 
-          <div className="mb-4">
-            <label>Year of Study:</label>
+          <div className="mb-4 text-left">
+            <label className="block text-sm font-medium mb-1">Year of Study:</label>
             <select
               value={userData.year_of_study || ""}
               onChange={(e) =>
@@ -150,7 +153,7 @@ const UserDetails = ({ user }: { user: User }) => {
                   year_of_study: parseInt(e.target.value),
                 })
               }
-              className="text-black"
+              className="text-black w-full border border-gray-300 p-2 rounded"
             >
               <option value="">Select year</option>
               <option value={1}>1</option>
@@ -163,22 +166,34 @@ const UserDetails = ({ user }: { user: User }) => {
 
           <button
             onClick={handleUpdate}
-            className="bg-blue-500 text-white py-2 px-4 rounded"
+            className="bg-blue-500 text-white py-2 px-4 rounded w-full"
           >
             Save Changes
           </button>
         </div>
       ) : (
-        <div>
-          <p>User ID: {userData.user_id}</p>
-          <p>Name: {userData.full_name || "N/A"}</p>
-          <p>Email: {userData.email}</p>
-          <p>Phone Number: {userData.phone_number || "N/A"}</p>
-          <p>Institution: {userData.institute_name || "N/A"}</p>
-          <p>Year: {userData.year_of_study || "N/A"}</p>
+        <div className="w-full max-w-md">
+          <p className="text-left mb-4">
+            <strong>User ID:</strong> {userData.user_id}
+          </p>
+          <p className="text-left mb-4">
+            <strong>Name:</strong> {userData.full_name || "N/A"}
+          </p>
+          <p className="text-left mb-4">
+            <strong>Email:</strong> {userData.email}
+          </p>
+          <p className="text-left mb-4">
+            <strong>Phone Number:</strong> {userData.phone_number || "N/A"}
+          </p>
+          <p className="text-left mb-4">
+            <strong>Institution:</strong> {userData.institute_name || "N/A"}
+          </p>
+          <p className="text-left mb-4">
+            <strong>Year:</strong> {userData.year_of_study || "N/A"}
+          </p>
           <button
             onClick={() => setEditMode(true)}
-            className="bg-blue-500 text-white py-2 px-4 rounded"
+            className="bg-blue-500 text-white py-2 px-4 rounded w-full"
           >
             Update Details
           </button>
