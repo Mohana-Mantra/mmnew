@@ -8,6 +8,7 @@ import UserDetails from "@/components/UserDetails";
 import MyTicket from "@/components/MyTicket";
 import MyPayment from "@/components/MyPayment";
 import CampusAmbassador from "@/components/CampusAmbassador";
+import { IconLoader2 } from "@tabler/icons-react";
 
 export default function Account() {
     const [user, setUser] = useState<null | User>(null);
@@ -32,8 +33,16 @@ export default function Account() {
     };
 
     if (!user) {
-        return <div>Loading...</div>;
+        return (
+            <div className="h-full w-full flex items-center justify-center">
+                <IconLoader2 className="animate-spin h-12 aspect-square" />
+            </div>
+        );
     }
+
+    const changeTab = (tab: 0 | 1 | 2 | 3) => {
+        setActiveTab(tab);
+    };
 
     return (
         <div className="p-4 md:px-16 md:py-24 flex w-full">
@@ -84,7 +93,7 @@ export default function Account() {
             <div className="flex-grow p-4">
                 {activeTab === 0 && <UserDetails user={user} />}
                 {activeTab === 1 && <MyTicket user={user} />}
-                {activeTab === 2 && <MyPayment user={user} />}
+                {activeTab === 2 && <MyPayment user={user} changeTab={changeTab} />}
                 {activeTab === 3 && <CampusAmbassador user={user} />}
             </div>
         </div>

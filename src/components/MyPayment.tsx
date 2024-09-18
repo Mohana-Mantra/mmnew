@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import { User } from "@supabase/supabase-js";
 import { useRouter } from "next/navigation";
+import { IconLoader2 } from "@tabler/icons-react";
 
 interface Payment {
     id: number;
@@ -12,7 +13,13 @@ interface Payment {
     created_at: string;
 }
 
-const MyPayment = ({ user }: { user: User }) => {
+const MyPayment = ({
+    user,
+    changeTab,
+}: {
+    user: User;
+    changeTab: (tab: 0 | 1 | 2 | 3) => void;
+}) => {
     const [payment, setPayment] = useState<Payment | null>(null);
     const [loading, setLoading] = useState(true);
     const [errorMessage, setErrorMessage] = useState("");
@@ -46,14 +53,18 @@ const MyPayment = ({ user }: { user: User }) => {
     }, [user.id]);
 
     if (loading) {
-        return <div>Loading...</div>;
+        return (
+            <div className="h-full w-full flex items-center justify-center">
+                <IconLoader2 className="animate-spin h-12 aspect-square" />
+            </div>
+        );
     }
 
     return (
         <div>
             {payment ? (
                 // If user has purchased the pass, show receipt details
-                <div>
+                <div className="flex flex-col items-center py-16 gap-3 text-center">
                     <h2 className="text-2xl font-bold">Payment Receipt</h2>
                     <p>Thank you for registering for the Mohana Mantra 2K24 event.</p>
                     <p>Amount Paid: ₹{payment.amount}</p>
@@ -62,14 +73,15 @@ const MyPayment = ({ user }: { user: User }) => {
                 </div>
             ) : (
                 // If user has not purchased the pass, prompt them to do so
-                <div>
+                <div className="flex flex-col items-center py-16 gap-3 text-center">
                     <h2 className="text-2xl font-bold">Register for Mohana Mantra 2K24</h2>
                     <p>
-                        You haven&#39;t registered for the Mohana Mantra 2K24 event yet. Purchase the event pass to participate.
+                        You haven&#39;t registered for the Mohana Mantra 2K24 event yet. Purchase
+                        the event pass to participate.
                     </p>
                     <button
                         className="bg-blue-600 hover:bg-blue-700 text-white mt-4 p-2 rounded-md"
-                        onClick={() => router.push("/account/myticket")}
+                        onClick={() => changeTab(1)}
                     >
                         Register
                     </button>

@@ -42,7 +42,6 @@ const images = [
     "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133431/gallery/eg1gcehvfd6cfi0qvwz9.jpg",
     "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133429/gallery/rpxh7tsud776nrhu7v9b.jpg",
     "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133429/gallery/rjda5kh98xoa6sg65jvg.jpg",
-    "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133429/gallery/uexunumgxvxu2avcnyre.jpg",
     "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133429/gallery/bjqh6dmc0tivhvtlpjm2.jpg",
     "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133429/gallery/zjm24mgrf8xzao46ojof.jpg",
 ];

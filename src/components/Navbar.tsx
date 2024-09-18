@@ -6,6 +6,9 @@ import { IconUser, IconUserCircle } from "@tabler/icons-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { Poppins } from "next/font/google";
+
+const poppins = Poppins({ subsets: ["latin"], weight: "500" });
 
 function Navbar() {
     const path = usePathname();
@@ -25,7 +28,12 @@ function Navbar() {
 
     return (
         <>
-            <header className="fixed top-4 inset-0 z-50 hidden md:block w-full h-16  font-sulpher font-bold text-[18px]">
+            <header
+                className={cn(
+                    "fixed top-4 inset-x-0 z-50 hidden md:block w-full h-16 text-sm font-bold text-[18px]",
+                    poppins.className
+                )}
+            >
                 <nav className="w-fit h-full mx-auto flex items-center justify-evenly px-10 py-4 rounded-[45px] bg-[rgba(255,255,255,0.1)] backdrop-blur-[4px] border border-[rgba(255,255,255,0.18)] shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] transition-all duration-500 ease-in-out hover:bg-[rgba(255,255,255,0.2)] hover:backdrop-blur-[6px] hover:shadow-[0_12px_48px_0_rgba(31,38,135,0.5)]">
                     <div className="h-full flex items-center justify-center gap-12">
                         <Link href="/" className={` ${path === "/" && "text-[#feca00]"}`}>

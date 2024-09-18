@@ -28,7 +28,7 @@ const ProShows = () => {
     });
 
     useEffect(() => {
-        setInterval(() => {
+        setTimeout(() => {
             if (day2Img.number === 1) {
                 setDay2Img({
                     image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133752/vnhtfn04zt626e5peiws.png",
@@ -41,7 +41,7 @@ const ProShows = () => {
                 });
             }
         }, 5000);
-    }, [day2Img]);
+    }, [day2Img.number]);
 
     // return (
     //     <div className="Sec">
@@ -83,7 +83,7 @@ const ProShows = () => {
     // );
 
     return (
-        <div className="w-full h-fit">
+        <div className="w-full h-fit pointer-events-none">
             <h1 className={`${monoton.className} text-5xl text-yellow px-12 pt-12`}>PROSHOWS</h1>
             <div className="w-full grid h-auto grid-cols-1 md:grid-cols-2 gap-10 p-10">
                 <div className={`w-full aspect-[1494/1158] relative`}>
@@ -91,10 +91,16 @@ const ProShows = () => {
                         src="https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133751/f7gk77gr3naijfp9rxeg.png"
                         alt="Hardcore"
                         fill
+                        className="object-cover pointer-events-none"
                     />
                 </div>
                 <div className={`w-full aspect-[1494/1158] relative`} id="samlpe">
-                    <Image src={day2Img.image} alt="Hardcore" fill />
+                    <Image
+                        src={day2Img.image}
+                        alt="Hardcore"
+                        fill
+                        className="object-cover pointer-events-none"
+                    />
                 </div>
             </div>
         </div>

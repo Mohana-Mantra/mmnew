@@ -9,7 +9,7 @@ export const KALAKSHETRAEVENTS = [
     {
         event: "Let's Nacho",
         venue: "Indoor Stadium",
-        timings: "10:30 A.M - 12:30 A.M",
+        timings: "10:30 A.M - 12:30 P.M",
         image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726136577/letsnacho_r0rcoo.png",
         day: "Day 1",
         rules: [
@@ -509,7 +509,7 @@ export const TECHNOHOLIC = [
     {
         eventName: "Bridge-o-Mania",
         slug: "bridge-o-mania",
-        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726211768/Bridge-o-mania_bwu01z.jpg",
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726641778/Untitled_design_2_rrqtlz.svg",
         about: "An event where participants construct a bridge using Popsicle sticks, glue. The goal is to build a structure that can hold the maximum load.",
         howToPlay: [
             "Form a team of 1 or 2 participants.",
@@ -530,7 +530,7 @@ export const TECHNOHOLIC = [
     {
         eventName: "Robo War",
         slug: "robo-war",
-        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726211227/roboWar_jfzjh2.svg",
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726641793/ROBO_WAR_1_ah9v0o.svg",
         about: "A robo car competition where participants assemble their robots using Arduino UNO remote control Robo Kits.",
         howToPlay: [
             "Design and build a robot car using the Arduino UNO Robo Kit.",

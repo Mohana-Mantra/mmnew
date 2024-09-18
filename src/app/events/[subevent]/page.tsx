@@ -116,13 +116,18 @@ export default function AllEvents({ params }: { params: any }) {
     if (subevent === "spotevents") {
         return (
             <div className="py-8 px-4 md:px-16 lg:px-40 md:py-32 space-y-6">
-                <GradualSpacing
-                    text={subevent}
-                    className={cn(
-                        "text-center capitalize text-2xl md:text-5xl tracking-tighter text-yellow",
-                        monoton.className
-                    )}
-                />
+                <div>
+                    <GradualSpacing
+                        text={subevent}
+                        className={cn(
+                            "text-center capitalize text-2xl md:text-5xl tracking-tighter text-yellow",
+                            monoton.className
+                        )}
+                    />
+                    <p className=" font-bold text-white text-center mt-2">
+                        All the below events are held on October 4, 5, 6!...
+                    </p>
+                </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 px-4 md:px-20">
                     {SPOTEVENTS.map((event, index) => (
                         <Link

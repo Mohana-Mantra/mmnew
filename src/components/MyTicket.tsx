@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import { User } from "@supabase/supabase-js";
 import { useRouter } from "next/navigation";
+import { IconLoader2 } from "@tabler/icons-react";
 
 interface Payment {
     id: number;
@@ -62,15 +63,13 @@ const MyTicket = ({ user }: { user: User }) => {
 
     const handlePayment = async () => {
         // Simulate a successful payment and insert the record into the payments table
-        const { data, error } = await supabase
-            .from("payments")
-            .insert({
-                user_id: user.id,
-                amount: ticketPrice,
-                payment_status: "completed",
-                transaction_id: `txn_${Date.now()}`, // Simulate a transaction ID
-                created_at: new Date().toISOString(),
-            });
+        const { data, error } = await supabase.from("payments").insert({
+            user_id: user.id,
+            amount: ticketPrice,
+            payment_status: "completed",
+            transaction_id: `txn_${Date.now()}`, // Simulate a transaction ID
+            created_at: new Date().toISOString(),
+        });
 
         if (error) {
             setErrorMessage("Error processing payment.");
@@ -81,21 +80,25 @@ const MyTicket = ({ user }: { user: User }) => {
     };
 
     if (loading) {
-        return <div>Loading...</div>;
+        return (
+            <div className="h-full w-full flex items-center justify-center">
+                <IconLoader2 className="animate-spin h-12 aspect-square" />
+            </div>
+        );
     }
 
     return (
         <div>
             {ticketPurchased ? (
-                <div>
+                <div className="text-center flex flex-col items-center">
                     <h2 className="text-2xl font-bold">Your Mohana Mantra Pass</h2>
                     <p>Congratulations! You have successfully purchased the event pass.</p>
                     <p>Amount Paid: ₹{ticketPrice === 0 ? "Free" : ticketPrice}</p>
                     <p>Transaction ID: {`txn_${Date.now()}`}</p>
                 </div>
             ) : (
-                <div>
-                    <h2 className="text-2xl font-bold">Mohana Mantra Event Pass</h2>
+                <div className="text-center flex flex-col gap-3 items-center py-16">
+                    <h2 className="text-3xl font-bold">Mohana Mantra Event Pass</h2>
                     <p>The pass price is ₹{ticketPrice === 0 ? "Free" : ticketPrice}.</p>
                     <button
                         className="bg-blue-600 hover:bg-blue-700 text-white mt-4 p-2 rounded-md"

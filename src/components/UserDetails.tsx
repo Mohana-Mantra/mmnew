@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { User } from '@supabase/supabase-js';
+import React, { useState, useEffect } from "react";
+import { User } from "@supabase/supabase-js";
 import { supabase } from "@/lib/supabaseClient";
+import { IconLoader2 } from "@tabler/icons-react";
 
 interface UserExtended extends User {
-    user_id?:string;
-    full_name?: string; 
+    user_id?: string;
+    full_name?: string;
     phone_number?: number;
     institute_name?: string;
     year_of_study?: number;
@@ -24,12 +25,12 @@ const UserDetails = ({ user }: { user: User }) => {
     const fetchUserDetails = async () => {
         setLoading(true);
         const { data, error } = await supabase
-            .from('users')
-            .select('*')
-            .eq('email', user.email)
+            .from("users")
+            .select("*")
+            .eq("email", user.email)
             .single();
         if (error) {
-            console.error('Error fetching user details:', error.message);
+            console.error("Error fetching user details:", error.message);
         } else {
             setUserData(data);
         }
@@ -45,12 +46,9 @@ const UserDetails = ({ user }: { user: User }) => {
         };
 
         setLoading(true);
-        const { error } = await supabase
-            .from('users')
-            .update(updates)
-            .match({ email: user.email });
+        const { error } = await supabase.from("users").update(updates).match({ email: user.email });
         if (error) {
-            console.error('Error updating user:', error.message);
+            console.error("Error updating user:", error.message);
         } else {
             setEditMode(false);
         }
@@ -58,7 +56,11 @@ const UserDetails = ({ user }: { user: User }) => {
     };
 
     if (loading) {
-        return <div>Loading...</div>;
+        return (
+            <div className="h-full w-full flex items-center justify-center">
+                <IconLoader2 className="animate-spin h-12 aspect-square" />
+            </div>
+        );
     }
 
     if (!userData) {
@@ -69,9 +71,7 @@ const UserDetails = ({ user }: { user: User }) => {
         <div>
             <h2 className="font-bold text-2xl mb-4">User Details</h2>
             {editMode ? (
-                <div>
-                    {/* Render inputs for each field with pre-filled values */}
-                </div>
+                <div>{/* Render inputs for each field with pre-filled values */}</div>
             ) : (
                 <div>
                     <p>User ID {userData.user_id}</p>
@@ -80,11 +80,10 @@ const UserDetails = ({ user }: { user: User }) => {
                     <p>Phone Number: {userData.phone_number}</p>
                     <p>Institution: {userData.institute_name}</p>
                     <p>Year: {userData.year_of_study}</p>
-                    
                 </div>
             )}
             <button onClick={() => setEditMode(!editMode)}>
-                {editMode ? 'Save Changes' : 'Update Details'}
+                {editMode ? "Save Changes" : "Update Details"}
             </button>
             {editMode && <button onClick={handleUpdate}>Update</button>}
         </div>

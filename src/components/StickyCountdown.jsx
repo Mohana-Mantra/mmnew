@@ -32,6 +32,10 @@ const StickyCountdown = () => {
         });
     }, []);
 
+    if (count.days === 0 && count.hours === 0 && count.minutes === 0 && count.seconds === 0) {
+        return null;
+    }
+
     return (
         <div className="fixed bottom-2 left-2 z-50 bg-white/35 pointer-events-none backdrop-blur-3xl flex flex-col items-cente rounded-lg p-3">
             <div className="flex gap-4 h-fit items-center">
