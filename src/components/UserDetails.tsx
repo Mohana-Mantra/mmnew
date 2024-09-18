@@ -79,11 +79,12 @@ const UserDetails = ({ user }: { user: User }) => {
         <div className="py-16 flex flex-col items-center text-center">
             <h2 className="font-bold text-2xl mb-4">User Details</h2>
             {editMode ? (
-                <div>
+                <div className="w-full max-w-md">
                     <div className="mb-4">
-                        <label>Phone Number:</label>
+                        <label className="block text-left mb-1">Phone Number:</label>
                         <input
                             type="text"
+                            className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:border-indigo-500 text-black"
                             value={userData.phone_number || ""}
                             onChange={(e) =>
                                 setUserData({ ...userData, phone_number: e.target.value })
@@ -91,9 +92,10 @@ const UserDetails = ({ user }: { user: User }) => {
                         />
                     </div>
                     <div className="mb-4">
-                        <label>Institution:</label>
+                        <label className="block text-left mb-1">Institution:</label>
                         <input
                             type="text"
+                            className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:border-indigo-500 text-black"
                             value={userData.institute_name || ""}
                             onChange={(e) =>
                                 setUserData({ ...userData, institute_name: e.target.value })
@@ -101,9 +103,10 @@ const UserDetails = ({ user }: { user: User }) => {
                         />
                     </div>
                     <div className="mb-4">
-                        <label>Year of Study:</label>
+                        <label className="block text-left mb-1">Year of Study:</label>
                         <input
                             type="number"
+                            className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:border-indigo-500 text-black"
                             value={userData.year_of_study || ""}
                             onChange={(e) =>
                                 setUserData({
@@ -113,17 +116,27 @@ const UserDetails = ({ user }: { user: User }) => {
                             }
                         />
                     </div>
-                    <button onClick={handleUpdate}>Save Changes</button>
+                    <button
+                        onClick={handleUpdate}
+                        className="w-full bg-indigo-500 text-white p-2 rounded hover:bg-indigo-600 transition"
+                    >
+                        Save Changes
+                    </button>
                 </div>
             ) : (
-                <div>
-                    <p>User ID: {userData.user_id}</p>
-                    <p>Name: {userData.full_name || "N/A"}</p>
-                    <p>Email: {userData.email}</p>
-                    <p>Phone Number: {userData.phone_number || "N/A"}</p>
-                    <p>Institution: {userData.institute_name || "N/A"}</p>
-                    <p>Year: {userData.year_of_study || "N/A"}</p>
-                    <button onClick={() => setEditMode(true)}>Update Details</button>
+                <div className="w-full max-w-md">
+                    <p className="mb-2">User ID: {userData.user_id}</p>
+                    <p className="mb-2">Name: {userData.full_name || "N/A"}</p>
+                    <p className="mb-2">Email: {userData.email}</p>
+                    <p className="mb-2">Phone Number: {userData.phone_number || "N/A"}</p>
+                    <p className="mb-2">Institution: {userData.institute_name || "N/A"}</p>
+                    <p className="mb-2">Year: {userData.year_of_study || "N/A"}</p>
+                    <button
+                        onClick={() => setEditMode(true)}
+                        className="w-full bg-indigo-500 text-white p-2 rounded hover:bg-indigo-600 transition"
+                    >
+                        Update Details
+                    </button>
                 </div>
             )}
         </div>
