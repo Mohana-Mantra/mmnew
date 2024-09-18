@@ -168,13 +168,13 @@ function Navbar() {
                 >
                     Register
                 </Link>
-                <Link
+                {/*<Link
                     href="/inhouse"
                     className={` ${path.includes("/inhouse") && "text-yellow-400"}`}
                     onClick={() => setHamburgerOpen(false)}
                 >
                     Buy Your Pass
-                </Link>
+                </Link>*/}
             </section>
         </>
     );
