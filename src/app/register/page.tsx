@@ -184,13 +184,13 @@ export default function AuthForm() {
 
             <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
 
-            <button
+          { /* <button
                 className="relative group/btn flex space-x-2 items-center px-4 w-full text-black rounded-md h-10 font-bold justify-center shadow-input bg-yellow"
                 onClick={signInWithGoogle}
             >
                 <IconBrandGoogle className="h-5 aspect-square" />
                 <span>{isLogin ? "Login" : "Sign Up"} with Google</span>
-            </button>
+            </button>*/}
 
             <p
                 className="text-center mt-6 text-sm p-2 rounded-md bg-gray-100 dark:bg-gray-800"
