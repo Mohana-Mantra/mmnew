@@ -138,12 +138,12 @@ function Contact() {
             <div className="text-center mt-10">
                 <h2 className="text-white text-2xl">Contact us on WhatsApp</h2>
                 <a
-                    href="https://wa.me/1234567890" // Replace with your WhatsApp number
+                    href="https://wa.me/+919281089404" // Replace with your WhatsApp number
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-green-500 text-xl"
                 >
-                    +1 234 567 890
+                    +91 92810 89404
                 </a>
             </div>
         </div>
