@@ -14,7 +14,7 @@ export default function Events() {
         },
         {
             title: "Workshops & Tech",
-            video: "https://res.cloudinary.com/dbjy9s3cz/video/upload/v1726133794/ughoruxqykzlwzcvjqwq.mp4",
+            video: "https://res.cloudinary.com/dbjy9s3cz/video/upload/v1726655934/WORKSHOPS_tech_2_fezndb.mp4",
             link: "/events/workshops",
         },
         {
