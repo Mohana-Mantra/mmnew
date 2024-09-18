@@ -71,14 +71,14 @@ function Navbar() {
                             </Link>
                         )}
 
-                        <Link
+                      {/*  <Link
                             href="/inhouse"
                             className={`bg-secondary text-black px-4 py-2 border-[2px] border-secondary  ${
                                 path === "/login" && "text-[#feca00]"
                             }`}
                         >
                             Buy Your Pass
-                        </Link>
+                        </Link>*/}
 
                         {user && (
                             <Link href="/account">
