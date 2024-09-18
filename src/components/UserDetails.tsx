@@ -68,7 +68,7 @@ const UserDetails = ({ user }: { user: User }) => {
     }
 
     return (
-        <div>
+        <div className=" py-16 flex flex-col itcems-center text-center">
             <h2 className="font-bold text-2xl mb-4">User Details</h2>
             {editMode ? (
                 <div>{/* Render inputs for each field with pre-filled values */}</div>
