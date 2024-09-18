@@ -55,7 +55,7 @@ function Sponsers() {
                         />
                     </div>
                 </div> }
-                <InfiniteMovingSponsers
+               {/*} <InfiniteMovingSponsers
                     direction="left"
                     pauseOnHover={false}
                     speed="slow"
@@ -86,7 +86,7 @@ function Sponsers() {
                             width: 490,
                         },
                     ]}
-                />
+                />*/}
             </div>
             <div className="bg-slate-900 py-20 space-y-10 md:space-y-16">
                 <h1
