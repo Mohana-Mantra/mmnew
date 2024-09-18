@@ -6,7 +6,7 @@ import { IconLoader2 } from "@tabler/icons-react";
 interface UserExtended extends User {
     user_id?: string;
     full_name?: string;
-    phone_number?: number;
+    phone_number?: number | string;
     institute_name?: string;
     year_of_study?: number;
     is_verified?: boolean;
@@ -29,10 +29,15 @@ const UserDetails = ({ user }: { user: User }) => {
             .select("*")
             .eq("email", user.email)
             .single();
+
         if (error) {
             console.error("Error fetching user details:", error.message);
         } else {
             setUserData(data);
+            // Check if any fields are null, trigger edit mode if true
+            if (!data.phone_number || !data.institute_name || !data.year_of_study) {
+                setEditMode(true);
+            }
         }
         setLoading(false);
     };
@@ -41,12 +46,15 @@ const UserDetails = ({ user }: { user: User }) => {
         if (!userData) return;
 
         const updates = {
-            ...userData,
-            updated_at: new Date(),
+            phone_number: userData.phone_number || null,
+            institute_name: userData.institute_name || null,
+            year_of_study: userData.year_of_study || null,
+            updated_at: new Date().toISOString(),
         };
 
         setLoading(true);
         const { error } = await supabase.from("users").update(updates).match({ email: user.email });
+
         if (error) {
             console.error("Error updating user:", error.message);
         } else {
@@ -68,24 +76,56 @@ const UserDetails = ({ user }: { user: User }) => {
     }
 
     return (
-        <div className=" py-16 flex flex-col itcems-center text-center">
+        <div className="py-16 flex flex-col items-center text-center">
             <h2 className="font-bold text-2xl mb-4">User Details</h2>
             {editMode ? (
-                <div>{/* Render inputs for each field with pre-filled values */}</div>
+                <div>
+                    <div className="mb-4">
+                        <label>Phone Number:</label>
+                        <input
+                            type="text"
+                            value={userData.phone_number || ""}
+                            onChange={(e) =>
+                                setUserData({ ...userData, phone_number: e.target.value })
+                            }
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <label>Institution:</label>
+                        <input
+                            type="text"
+                            value={userData.institute_name || ""}
+                            onChange={(e) =>
+                                setUserData({ ...userData, institute_name: e.target.value })
+                            }
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <label>Year of Study:</label>
+                        <input
+                            type="number"
+                            value={userData.year_of_study || ""}
+                            onChange={(e) =>
+                                setUserData({
+                                    ...userData,
+                                    year_of_study: parseInt(e.target.value),
+                                })
+                            }
+                        />
+                    </div>
+                    <button onClick={handleUpdate}>Save Changes</button>
+                </div>
             ) : (
                 <div>
-                    <p>User ID {userData.user_id}</p>
+                    <p>User ID: {userData.user_id}</p>
                     <p>Name: {userData.full_name || "N/A"}</p>
                     <p>Email: {userData.email}</p>
-                    <p>Phone Number: {userData.phone_number}</p>
-                    <p>Institution: {userData.institute_name}</p>
-                    <p>Year: {userData.year_of_study}</p>
+                    <p>Phone Number: {userData.phone_number || "N/A"}</p>
+                    <p>Institution: {userData.institute_name || "N/A"}</p>
+                    <p>Year: {userData.year_of_study || "N/A"}</p>
+                    <button onClick={() => setEditMode(true)}>Update Details</button>
                 </div>
             )}
-            <button onClick={() => setEditMode(!editMode)}>
-                {editMode ? "Save Changes" : "Update Details"}
-            </button>
-            {editMode && <button onClick={handleUpdate}>Update</button>}
         </div>
     );
 };
