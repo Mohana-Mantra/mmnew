@@ -12,32 +12,21 @@ import { IconLoader2 } from "@tabler/icons-react";
 
 export default function Account() {
     const [user, setUser] = useState<null | User>(null);
-    const [isVerified, setIsVerified] = useState(false);
     const [activeTab, setActiveTab] = useState(0);
     const router = useRouter();
     const tabInParam = useSearchParams().get("tab");
 
     useEffect(() => {
-        const checkVerification = async () => {
+        const getUser = async () => {
             const { data } = await supabase.auth.getSession();
             if (data.session) {
-                const { user } = data.session;
-                setUser(user);
-
-                // Check if email is confirmed
-                if (user.email_confirmed_at) {
-                    setIsVerified(true); // User has verified their email
-                } else {
-                    setIsVerified(false); // User hasn't verified their email
-                }
+                setUser(data.session.user);
             } else {
                 router.push("/register"); // Redirect to register if no user is logged in
             }
         };
+        getUser();
 
-        checkVerification();
-
-        // Check for active tab in URL
         switch (tabInParam) {
             case "user-details":
                 setActiveTab(0);
@@ -55,57 +44,17 @@ export default function Account() {
                 router.push("/account?tab=user-details");
                 break;
         }
-    }, [router, tabInParam]);
+    }, [router]);
 
     const handleLogout = async () => {
         await supabase.auth.signOut();
         router.push("/register"); // Redirect to register after logout
     };
 
-    const resendVerificationEmail = async () => {
-        try {
-            // Log the user out and prompt them to log in again to trigger the verification email
-            await supabase.auth.signOut();
-            alert("Verification email has been resent. Please check your inbox.");
-            router.push("/register"); // Redirect user to login/register page
-        } catch (error) {
-            console.error("Error resending verification email:", error);
-            alert("There was an error resending the email. Please try again later.");
-        }
-    };
-
-    // Periodically check if the user is verified
-    useEffect(() => {
-        if (user && !isVerified) {
-            const interval = setInterval(async () => {
-                const { data } = await supabase.auth.getUser();
-                if (data?.user?.email_confirmed_at) {
-                    setIsVerified(true); // Update once verified
-                }
-            }, 5000); // Check every 5 seconds
-
-            return () => clearInterval(interval); // Clear the interval when component unmounts
-        }
-    }, [user, isVerified]);
-
     if (!user) {
         return (
             <div className="h-full w-full flex items-center justify-center">
                 <IconLoader2 className="animate-spin h-12 aspect-square" />
-            </div>
-        );
-    }
-
-    if (!isVerified) {
-        return (
-            <div className="h-full w-full flex flex-col items-center justify-center text-center space-y-4">
-                <p>Please verify your email to access your account.</p>
-                <button
-                    className="px-4 py-2 bg-blue-500 text-white rounded-md"
-                    onClick={resendVerificationEmail}
-                >
-                    Resend Verification Email
-                </button>
             </div>
         );
     }
