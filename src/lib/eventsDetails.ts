@@ -587,7 +587,7 @@ export const TECHNOHOLIC = [
         timing: "10:00 AM - 04:00 PM",
     },
     {
-        eventName: "Care-a-thon",
+        eventName: "HACKATHON (Care-a-thon)",
         slug: "care-a-thon",
         image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726733439/care_a_thon_wsbqjz.svg",
         about: "Develop an Mobile Application or Website based on given test cases related to medical application.",
