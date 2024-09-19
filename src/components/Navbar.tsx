@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Poppins } from "next/font/google";
 
-const poppins = Poppins({ subsets: ["latin"], weight: "500" });
+export const poppins = Poppins({ subsets: ["latin"], weight: "500" });
 
 function Navbar() {
     const path = usePathname();
@@ -71,7 +71,7 @@ function Navbar() {
                             </Link>
                         )}
 
-                      {/*  <Link
+                        {/*  <Link
                             href="/inhouse"
                             className={`bg-secondary text-black px-4 py-2 border-[2px] border-secondary  ${
                                 path === "/login" && "text-[#feca00]"

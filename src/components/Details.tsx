@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import WordRotate from "./ui/WordRotate";
 import { LampContainer } from "./ui/lamp";
+import { cn } from "@/lib/utils";
+import { poppins } from "./Navbar";
 
 function Details() {
     return (
@@ -91,7 +93,10 @@ function Details() {
                             duration: 0.8,
                             ease: "easeInOut",
                         }}
-                        className="bg-white/10 backdrop-blur-3xl flex flex-col gap-8 py-8 px-14 rounded-xl font-anybody"
+                        className={cn(
+                            "bg-white/10 backdrop-blur-3xl flex flex-col gap-8 py-8 px-14 rounded-xl",
+                            poppins.className
+                        )}
                     >
                         <Image
                             src="https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133751/hdqlplouvuwkmtsrjt6e.png"

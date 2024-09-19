@@ -348,7 +348,7 @@ export const SPOTEVENTS = [
     {
         eventName: "TELEMATCH",
         slug: "telematch",
-        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726211734/telemath_jqhxmu.jpg",
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726733024/tele-match_ndl0va.svg",
         about: "Telematch is a popular format for team building activities designed to promote teamwork, communication, and collaboration.",
         howToPlay:
             "Players race to the finish line while balancing a task. Includes events like Adventure Run, Human Wheelbarrow Race, Tug of War, etc.",
@@ -368,7 +368,7 @@ export const SPOTEVENTS = [
     {
         eventName: "DIGITAL EVENTS",
         slug: "digital-events",
-        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726211736/digital-events_itpeuh.jpg",
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726732947/DIGITAL_EVENTS_a5grwl.svg",
         about: "Participants engage in virtual activities and competitions, often hosted online.",
         howToPlay: "Participants compete in modes like CLASSIC or BERMUDA in squads of four.",
         rules: ["Four people per game.", "No APK apps allowed."],
@@ -384,7 +384,7 @@ export const SPOTEVENTS = [
     {
         eventName: "BOX CRICKET",
         slug: "box-cricket",
-        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726211735/boxcircket_wkx9fz.jpg",
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726732902/gully_cricket_wdfcrs.svg",
         about: "A modified version of cricket played in a smaller, enclosed space.",
         howToPlay:
             "Batsmen must keep one foot within the crease while batting. Hitting the ceiling results in no runs or dismissal.",
@@ -393,7 +393,7 @@ export const SPOTEVENTS = [
     {
         eventName: "RING TOSS",
         slug: "ring-toss",
-        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726211733/ringtoss_zwyu9f.jpg",
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726732791/ring_toss_ldf7tp.png",
         about: "Players aim to throw rings onto targets to win rewards.",
         howToPlay:
             "Players take turns tossing rings at the target. Points are awarded for successful tosses.",
@@ -569,7 +569,7 @@ export const TECHNOHOLIC = [
     {
         eventName: "Code Sprint",
         slug: "code-sprint",
-        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726137034/code-sprint_bsftgr.jpg",
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726733599/Code_Sprint_orcywo.png",
         about: "Participants will solve coding puzzles and generate functional code for the given outputs in second round.",
         howToPlay: [
             "Round 1: Solve 10 coding puzzles within a 1-hour time limit.",
@@ -589,7 +589,7 @@ export const TECHNOHOLIC = [
     {
         eventName: "Care-a-thon",
         slug: "care-a-thon",
-        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726212908/1575c155-790f-437a-9e8d-41a3adb15f91.png",
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726733439/care_a_thon_wsbqjz.svg",
         about: "Develop an Mobile Application or Website based on given test cases related to medical application.",
         rules_and_regulations: [
             "Teams must consist of 2-5 members.",
@@ -607,7 +607,7 @@ export const TECHNOHOLIC = [
     {
         eventName: "3-D Design Modelling and Development Competition",
         slug: "3d-design-modelling-competition",
-        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726137040/3d-compettition_uxzqxo.jpg",
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726733293/3_u3zndy.svg",
         about: "Participants have to design, develop a 3-D printed model using mentioned software and 3-D Printers.",
         howToPlay: [
             "Day 1: A demo class on morning and participate have to design given 2-D model using SolidWorks, Catia and PROE softwares.",
@@ -625,7 +625,7 @@ export const TECHNOHOLIC = [
     {
         eventName: "Quizonomics",
         slug: "quizonomics",
-        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726137036/quiz_txkjmg.jpg",
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726733087/Quizonomics_1_v9k1wz.svg",
         about: "A quiz competition focusing on General Economics and simple mathematics.",
         howToPlay: [
             "Round 1: Answer 50 questions on General Economics and simple mathematics.",
@@ -640,7 +640,7 @@ export const TECHNOHOLIC = [
     {
         eventName: "Tech Exhibition",
         slug: "tech-exhibition",
-        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726137037/techTalk_jf4pvz.jpg",
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726733247/Tech_exhibition_p1qdj7.png",
         about: "Students have to present their innovative product design prototypes.",
         howToPlay: ["Exhibit the project and engage with visitors."],
         rules: [
@@ -654,7 +654,7 @@ export const TECHNOHOLIC = [
     {
         eventName: "Spell Quest",
         slug: "spell-quest",
-        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726213121/spell_wxgxkj.jpg",
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726733339/spell_quest_zlx6au.svg",
         about: "A competition designed to test participants spoken skills. The event consists of two challenging rounds with the winner being recognized for their mastery of the English language.",
         howToPlay: [
             "Round 1: Pronounce and spell a given word correctly.",
