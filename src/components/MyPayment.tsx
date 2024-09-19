@@ -9,7 +9,7 @@ interface Payment {
     user_id: string;
     amount: number;
     payment_status: string;
-    transaction_id: string;
+    payment_id: string;
     created_at: string;
 }
 
@@ -68,7 +68,7 @@ const MyPayment = ({
                     <h2 className="text-2xl font-bold">Payment Receipt</h2>
                     <p>Thank you for registering for the Mohana Mantra 2K24 event.</p>
                     <p>Amount Paid: ₹{payment.amount}</p>
-                    <p>Payment ID: {payment.transaction_id}</p>
+                    <p>Payment ID: {payment.payment_id}</p>
                     <p>Payment Date: {new Date(payment.created_at).toLocaleString()}</p>
                 </div>
             ) : (
