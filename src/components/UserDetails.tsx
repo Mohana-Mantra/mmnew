@@ -25,26 +25,50 @@ const UserDetails = ({ user }: { user: User }) => {
     fetchInstitutes();
   }, [user]);
 
-  // Fetch user details
-  const fetchUserDetails = async () => {
-    setLoading(true);
-    const { data, error } = await supabase
-      .from("users")
-      .select("*")
-      .eq("email", user.email)
+// Fetch user details
+const fetchUserDetails = async () => {
+  setLoading(true);
+  const { data, error } = await supabase
+    .from("users")
+    .select("*")
+    .eq("email", user.email)
+    .single();
+
+  if (error) {
+    console.error("Error fetching user details:", error.message);
+  } else {
+    setUserData(data);
+
+    // Check if user's institute is listed
+    const { data: institute, error: instituteError } = await supabase
+      .from("institutes")
+      .select("name, is_listed")
+      .eq("name", data.institute_name)
+      .eq("is_listed", true)
       .single();
 
-    if (error) {
-      console.error("Error fetching user details:", error.message);
-    } else {
-      setUserData(data);
-      if (!data.phone_number || !data.institute_name || !data.year_of_study) {
-        setEditMode(true);
+    if (!instituteError && institute) {
+      // If institute is listed, update is_eligible_for_free_pass
+      const { error: updateError } = await supabase
+        .from("users")
+        .update({ is_eligible_for_free_pass: true })
+        .eq("email", user.email);
+
+      if (updateError) {
+        console.error("Error updating eligibility:", updateError.message);
+      } else {
+        data.is_eligible_for_free_pass = true;
+        setUserData(data);
       }
-      setSelectedInstitute(data.institute_name || "");
     }
-    setLoading(false);
-  };
+
+    if (!data.phone_number || !data.institute_name || !data.year_of_study) {
+      setEditMode(true);
+    }
+    setSelectedInstitute(data.institute_name || "");
+  }
+  setLoading(false);
+};
 
   // Fetch institutes from the database
   const fetchInstitutes = async () => {
