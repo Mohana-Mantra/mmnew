@@ -62,9 +62,13 @@ export default function Account() {
 
     if (!user) {
         return (
-            <div className="h-full w-full flex items-center justify-center">
-                <IconLoader2 className="animate-spin h-12 aspect-square" />
+            <div className="h-screen flex items-center justify-center">
+                <div className="text-center">
+                    <p>Registration successful! A verification email has been sent to your inbox. Please verify your email to log in.</p>
+                    <IconLoader2 className="animate-spin h-12 aspect-square" />
+                </div>
             </div>
+
         );
     }
 
@@ -73,10 +77,10 @@ export default function Account() {
             tab === 0
                 ? "user-details"
                 : tab === 1
-                ? "my-ticket"
-                : tab === 2
-                ? "my-payment"
-                : "campus-ambassador";
+                    ? "my-ticket"
+                    : tab === 2
+                        ? "my-payment"
+                        : "campus-ambassador";
         router.push(`/account?tab=${param}`);
         setActiveTab(tab);
     };
