@@ -40,24 +40,52 @@ const UserDetails = ({ user }: { user: User }) => {
       setUserData(data);
 
       // Check if user's institute is listed
-      const { data: institute, error: instituteError } = await supabase
-        .from("institutes")
-        .select("name, is_listed")
-        .eq("name", data.institute_name)
-        .eq("is_listed", true)
-        .single();
+      if (data.institute_name && data.institute_name !== "Other") {
+        const { data: institute, error: instituteError } = await supabase
+          .from("institutes")
+          .select("name, is_listed")
+          .eq("name", data.institute_name)
+          .eq("is_listed", true)
+          .single();
 
-      if (!instituteError && institute) {
-        // If institute is listed, update is_eligible_for_free_pass
+        if (!instituteError && institute) {
+          // If institute is listed, update is_eligible_for_free_pass
+          const { error: updateError } = await supabase
+            .from("users")
+            .update({ is_eligible_for_free_pass: true })
+            .eq("email", user.email);
+
+          if (updateError) {
+            console.error("Error updating eligibility:", updateError.message);
+          } else {
+            data.is_eligible_for_free_pass = true;
+            setUserData(data);
+          }
+        } else {
+          // Set eligibility to false if the institute doesn't match
+          const { error: updateError } = await supabase
+            .from("users")
+            .update({ is_eligible_for_free_pass: false })
+            .eq("email", user.email);
+
+          if (updateError) {
+            console.error("Error updating eligibility:", updateError.message);
+          } else {
+            data.is_eligible_for_free_pass = false;
+            setUserData(data);
+          }
+        }
+      } else {
+        // If the institute is "Other", set is_eligible_for_free_pass to false
         const { error: updateError } = await supabase
           .from("users")
-          .update({ is_eligible_for_free_pass: true })
+          .update({ is_eligible_for_free_pass: false })
           .eq("email", user.email);
 
         if (updateError) {
           console.error("Error updating eligibility:", updateError.message);
         } else {
-          data.is_eligible_for_free_pass = true;
+          data.is_eligible_for_free_pass = false;
           setUserData(data);
         }
       }
@@ -86,20 +114,46 @@ const UserDetails = ({ user }: { user: User }) => {
 
   const handleUpdate = async () => {
     if (!userData) return;
-
-    const updates = {
+  
+    const updates: {
+      phone_number: string | number | null;
+      institute_name: string | null;
+      year_of_study: number | null;
+      updated_at: string;
+      is_eligible_for_free_pass?: boolean;
+    } = {
       phone_number: userData.phone_number || null,
       institute_name: selectedInstitute || userData.institute_name || null,
       year_of_study: userData.year_of_study || null,
       updated_at: new Date().toISOString(),
     };
-
+  
     setLoading(true);
+  
+    // Check if the selected institute is "Other"
+    if (selectedInstitute === "Other") {
+      updates.is_eligible_for_free_pass = false;
+    } else {
+      // Check if the selected institute is listed
+      const { data: institute, error: instituteError } = await supabase
+        .from("institutes")
+        .select("name")
+        .eq("name", selectedInstitute)
+        .eq("is_listed", true)
+        .single();
+  
+      if (instituteError || !institute) {
+        updates.is_eligible_for_free_pass = false;
+      } else {
+        updates.is_eligible_for_free_pass = true;
+      }
+    }
+  
     const { error } = await supabase
       .from("users")
       .update(updates)
       .eq("email", user.email);
-
+  
     if (error) {
       console.error("Error updating user:", error.message);
     } else {
@@ -109,6 +163,7 @@ const UserDetails = ({ user }: { user: User }) => {
     }
     setLoading(false);
   };
+  
 
   if (loading) {
     return (
