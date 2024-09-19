@@ -112,7 +112,7 @@ export default function AllEvents({ params }: { params: any }) {
             </div>
         );
     }
-
+//spots events list
     if (subevent === "spotevents") {
         return (
             <div className="py-8 px-4 md:px-16 lg:px-40 md:py-32 space-y-6">
