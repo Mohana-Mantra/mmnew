@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { User } from "@supabase/supabase-js";
 import { cn } from "@/lib/utils";
 import UserDetails from "@/components/UserDetails";
@@ -14,6 +14,7 @@ export default function Account() {
     const [user, setUser] = useState<null | User>(null);
     const [activeTab, setActiveTab] = useState(0);
     const router = useRouter();
+    const tabInParam = useSearchParams().get("tab");
 
     useEffect(() => {
         const getUser = async () => {
@@ -25,6 +26,24 @@ export default function Account() {
             }
         };
         getUser();
+
+        switch (tabInParam) {
+            case "user-details":
+                setActiveTab(0);
+                break;
+            case "my-ticket":
+                setActiveTab(1);
+                break;
+            case "my-payment":
+                setActiveTab(2);
+                break;
+            case "campus-ambassador":
+                setActiveTab(3);
+                break;
+            default:
+                router.push("/account?tab=user-details");
+                break;
+        }
     }, [router]);
 
     const handleLogout = async () => {
@@ -41,6 +60,15 @@ export default function Account() {
     }
 
     const changeTab = (tab: 0 | 1 | 2 | 3) => {
+        const param =
+            tab === 0
+                ? "user-details"
+                : tab === 1
+                ? "my-ticket"
+                : tab === 2
+                ? "my-payment"
+                : "campus-ambassador";
+        router.push(`/account?tab=${param}`);
         setActiveTab(tab);
     };
 
@@ -52,7 +80,7 @@ export default function Account() {
                         "px-4 py-2 text-white hover:bg-gray-700 rounded-md",
                         activeTab === 0 ? "bg-gray-700" : ""
                     )}
-                    onClick={() => setActiveTab(0)}
+                    onClick={() => changeTab(0)}
                 >
                     User Details
                 </button>
@@ -61,7 +89,7 @@ export default function Account() {
                         "px-4 py-2 text-white hover:bg-gray-700 rounded-md",
                         activeTab === 1 ? "bg-gray-700" : ""
                     )}
-                    onClick={() => setActiveTab(1)}
+                    onClick={() => changeTab(1)}
                 >
                     My Ticket
                 </button>
@@ -70,7 +98,7 @@ export default function Account() {
                         "px-4 py-2 text-white hover:bg-gray-700 rounded-md",
                         activeTab === 2 ? "bg-gray-700" : ""
                     )}
-                    onClick={() => setActiveTab(2)}
+                    onClick={() => changeTab(2)}
                 >
                     My Payment
                 </button>
@@ -79,7 +107,7 @@ export default function Account() {
                         "px-4 py-2 text-white hover:bg-gray-700 rounded-md",
                         activeTab === 3 ? "bg-gray-700" : ""
                     )}
-                    onClick={() => setActiveTab(3)}
+                    onClick={() => changeTab(3)}
                 >
                     Campus Ambassador
                 </button>
