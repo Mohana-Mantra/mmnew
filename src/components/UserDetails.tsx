@@ -38,6 +38,30 @@ const UserDetails = ({ user }: { user: User }) => {
       console.error("Error fetching user details:", error.message);
     } else {
       setUserData(data);
+
+      // Check if user's institute is listed
+      const { data: institute, error: instituteError } = await supabase
+        .from("institutes")
+        .select("name, is_listed")
+        .eq("name", data.institute_name)
+        .eq("is_listed", true)
+        .single();
+
+      if (!instituteError && institute) {
+        // If institute is listed, update is_eligible_for_free_pass
+        const { error: updateError } = await supabase
+          .from("users")
+          .update({ is_eligible_for_free_pass: true })
+          .eq("email", user.email);
+
+        if (updateError) {
+          console.error("Error updating eligibility:", updateError.message);
+        } else {
+          data.is_eligible_for_free_pass = true;
+          setUserData(data);
+        }
+      }
+
       if (!data.phone_number || !data.institute_name || !data.year_of_study) {
         setEditMode(true);
       }
