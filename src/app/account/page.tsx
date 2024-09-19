@@ -13,6 +13,7 @@ import { IconLoader2 } from "@tabler/icons-react";
 export default function Account() {
     const [user, setUser] = useState<null | User>(null);
     const [activeTab, setActiveTab] = useState(0);
+    const [alertMessage, setAlertMessage] = useState<string | null>(null); // State for alert message
     const router = useRouter();
     const tabInParam = useSearchParams().get("tab");
 
@@ -24,14 +25,17 @@ export default function Account() {
             } else {
                 const queryParams = new URLSearchParams(window.location.search);
                 if (queryParams.get("registered") === "true") {
-                    router.push("/register?registered=true"); // Pass the query parameter to the register page
-                } else {
-                    router.push("/register"); // Redirect to register if no user is logged in
+                    // Show the alert message after successful registration
+                    setAlertMessage(
+                        "Registration successful! A verification email has been sent to your inbox. Please verify your email to log in."
+                    );
                 }
+                // Keep the user on the same page but show the alert
             }
         };
         getUser();
 
+        // Switch between different tabs based on the URL parameter
         switch (tabInParam) {
             case "user-details":
                 setActiveTab(0);
@@ -46,10 +50,10 @@ export default function Account() {
                 setActiveTab(3);
                 break;
             default:
-                router.push("/account?tab=user-details");
+                setActiveTab(0); // Default tab to 'user-details'
                 break;
         }
-    }, [router]);
+    }, [router, tabInParam]);
 
     const handleLogout = async () => {
         await supabase.auth.signOut();
@@ -124,6 +128,11 @@ export default function Account() {
                 </button>
             </aside>
             <div className="flex-grow p-4">
+                {alertMessage && ( // Conditionally render the alert message
+                    <div className="p-4 mb-4 text-green-800 bg-green-200 border border-green-300 rounded">
+                        {alertMessage}
+                    </div>
+                )}
                 {activeTab === 0 && <UserDetails user={user} />}
                 {activeTab === 1 && <MyTicket user={user} />}
                 {activeTab === 2 && <MyPayment user={user} changeTab={changeTab} />}
