@@ -9,7 +9,6 @@ import MyTicket from "@/components/MyTicket";
 import MyPayment from "@/components/MyPayment";
 import CampusAmbassador from "@/components/CampusAmbassador";
 import { IconLoader2 } from "@tabler/icons-react";
-
 export default function Account() {
     const [user, setUser] = useState<null | User>(null);
     const [activeTab, setActiveTab] = useState(0);
@@ -82,7 +81,15 @@ export default function Account() {
     };
 
     return (
-        <div className="p-4 md:px-16 md:py-24 flex w-full">
+        <div className="p-4 md:px-16 md:py-24 flex w-full relative">
+            {/* Centered alert message */}
+            {alertMessage && (
+                <div className="absolute inset-0 flex items-center justify-center z-50">
+                    <div className="p-4 text-lg text-green-800 bg-green-200 border border-green-300 rounded shadow-lg">
+                        {alertMessage}
+                    </div>
+                </div>
+            )}
             <aside className="flex flex-col w-1/6 space-y-4 p-4 md:border-r border-slate-400">
                 <button
                     className={cn(
@@ -128,11 +135,6 @@ export default function Account() {
                 </button>
             </aside>
             <div className="flex-grow p-4">
-                {alertMessage && ( // Conditionally render the alert message
-                    <div className="p-4 mb-4 text-green-800 bg-green-200 border border-green-300 rounded">
-                        {alertMessage}
-                    </div>
-                )}
                 {activeTab === 0 && <UserDetails user={user} />}
                 {activeTab === 1 && <MyTicket user={user} />}
                 {activeTab === 2 && <MyPayment user={user} changeTab={changeTab} />}
