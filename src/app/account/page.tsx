@@ -62,12 +62,16 @@ export default function Account() {
 
     if (!user) {
         return (
-            <div className="h-screen flex items-center justify-center">
+            <div className="h-screen flex items-center justify-center p-4">
                 <div className="text-center flex flex-col items-center">
-                    <p>Registration successful! <br /> A verification email has been sent to your inbox. Please verify your email to log in.</p>
-                    <IconLoader2 className="animate-spin h-12 aspect-square mt-4" />
+                    <p className="text-base sm:text-lg md:text-xl lg:text-2xl">
+                        Registration successful! <br />
+                        A verification email has been sent to your inbox. Please verify your email to log in.
+                    </p>
+                    <IconLoader2 className="animate-spin h-12 w-12 sm:h-16 sm:w-16 lg:h-20 lg:w-20 mt-4" />
                 </div>
             </div>
+
 
 
         );
