@@ -7,6 +7,7 @@ import { IconLoader2 } from "@tabler/icons-react";
 const MyTicket = ({ user }: { user: User }) => {
   const [ticketPurchased, setTicketPurchased] = useState(false);
   const [ticketPrice, setTicketPrice] = useState(500); // Default ticket price
+  const [isEligibleForFreePass, setIsEligibleForFreePass] = useState(false);
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const [transactionId, setTransactionId] = useState<string | null>(null); // Track transaction ID
@@ -27,7 +28,8 @@ const MyTicket = ({ user }: { user: User }) => {
         if (userError) {
           console.error("Error fetching user data:", userError.message);
         } else if (userData?.is_eligible_for_free_pass) {
-          // If the user is eligible, set the ticket price to 0
+          // If the user is eligible, set the ticket price to 0 and disable the payment button
+          setIsEligibleForFreePass(true);
           setTicketPrice(0);
         }
 
@@ -107,8 +109,12 @@ const MyTicket = ({ user }: { user: User }) => {
       ) : (
         <div className="text-center flex flex-col gap-3 items-center py-16">
           <h2 className="text-3xl font-bold">Mohana Mantra Event Pass</h2>
-          <p>The pass price is ₹{ticketPrice === 0 ? "Free" : ticketPrice}.</p>
-          {ticketPrice === 0 ? (
+          {isEligibleForFreePass ? (
+            <p className="text-green-500">You are eligible for a free pass!</p>
+          ) : (
+            <p>The pass price is ₹{ticketPrice}.</p>
+          )}
+          {isEligibleForFreePass ? (
             <button
               className="bg-blue-600 hover:bg-blue-700 text-white mt-4 p-2 rounded-md"
               onClick={handlePaymentSuccess}
@@ -116,7 +122,7 @@ const MyTicket = ({ user }: { user: User }) => {
               Get Free Pass
             </button>
           ) : (
-            <div className="razorpay-embed-btn" data-url="https://pages.razorpay.com/pl_OyuHRL0d2Kenle/view" data-text="Pay Now" data-color="#528FF0" data-size="medium">
+            <div className="razorpay-embed-btn" data-url="https://pages.razorpay.com/pl_OyuHRL0d2Kenle/view" data-text="Buy Your Pass" data-color="#528FF0" data-size="medium">
               {/* Razorpay Payment Script */}
               <script>
                 {`(function(){
