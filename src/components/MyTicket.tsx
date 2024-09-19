@@ -100,13 +100,13 @@ const MyTicket = ({ user }: { user: User }) => {
                 <div className="text-center flex flex-col gap-3 items-center py-16">
                     <h2 className="text-3xl font-bold">Mohana Mantra Event Pass</h2>
                     <p>The pass price is ₹{ticketPrice === 0 ? "Free" : ticketPrice}.</p>
-                    <a href="https://pages.razorpay.com/pl_OyuHRL0d2Kenle/view ">
+           
                         <button
                             className="bg-blue-600 hover:bg-blue-700 text-white mt-4 p-2 rounded-md"
                             onClick={handlePayment}
                         >
                             {ticketPrice === 0 ? "Get Free Pass" : `Buy Pass for ₹${ticketPrice}`}
-                        </button></a>
+                        </button>
                     {errorMessage && <p className="text-red-500 mt-4">{errorMessage}</p>}
                 </div>
             )}
