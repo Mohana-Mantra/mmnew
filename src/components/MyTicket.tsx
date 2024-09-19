@@ -4,6 +4,13 @@ import { User } from "@supabase/supabase-js";
 import { useRouter } from "next/navigation";
 import { IconLoader2 } from "@tabler/icons-react";
 
+// Define the Razorpay payment response type
+interface RazorpayPaymentResponse {
+  razorpay_payment_id: string;
+  razorpay_order_id?: string;
+  razorpay_signature?: string;
+}
+
 const MyTicket = ({ user }: { user: User }) => {
   const [ticketPurchased, setTicketPurchased] = useState(false);
   const [ticketPrice, setTicketPrice] = useState(500); // Default ticket price
@@ -56,13 +63,13 @@ const MyTicket = ({ user }: { user: User }) => {
     fetchPaymentInfo();
   }, [user.id]);
 
-  const handlePaymentSuccess = async () => {
-    const txnId = `txn_${Date.now()}`; // Generate transaction ID
+  const handlePaymentSuccess = async (paymentResponse: RazorpayPaymentResponse) => {
+    const txnId = paymentResponse.razorpay_payment_id; // Use the Razorpay payment ID
     const { data, error } = await supabase.from("payments").insert({
       user_id: user.id,
       amount: ticketPrice,
       payment_status: "completed",
-      transaction_id: txnId, // Use the generated transaction ID
+      transaction_id: txnId, // Use the Razorpay payment ID
       created_at: new Date().toISOString(),
     });
 
@@ -73,6 +80,34 @@ const MyTicket = ({ user }: { user: User }) => {
       setTicketPurchased(true);
       router.push("/account"); // Redirect to the account page
     }
+  };
+
+  const handleRazorpayPayment = async () => {
+    const res = await loadRazorpayScript();
+
+    if (!res) {
+      setErrorMessage("Razorpay SDK failed to load. Are you online?");
+      return;
+    }
+
+    const options = {
+      key: "your_razorpay_key", // Replace with your Razorpay API key
+      amount: ticketPrice * 100, // Convert price to paise (1 INR = 100 paise)
+      currency: "INR",
+      name: "Mohana Mantra",
+      description: "Event Pass",
+      handler: handlePaymentSuccess,
+      prefill: {
+        name: user.user_metadata?.full_name || "Guest",
+        email: user.email,
+      },
+      theme: {
+        color: "#528FF0",
+      },
+    };
+
+    const paymentObject = new (window as any).Razorpay(options);
+    paymentObject.open();
   };
 
   const loadRazorpayScript = () => {
@@ -117,14 +152,17 @@ const MyTicket = ({ user }: { user: User }) => {
           {isEligibleForFreePass ? (
             <button
               className="bg-blue-600 hover:bg-blue-700 text-white mt-4 p-2 rounded-md"
-              onClick={handlePaymentSuccess}
+              
             >
               Get Free Pass
             </button>
           ) : (
-            <div className="razorpay-embed-btn" data-url="https://pages.razorpay.com/pl_OyuHRL0d2Kenle/view" data-text="Buy Your Pass" data-color="#528FF0" data-size="medium">
-              
-            </div>
+            <button
+              className="bg-blue-600 hover:bg-blue-700 text-white mt-4 p-2 rounded-md"
+              onClick={handleRazorpayPayment}
+            >
+              Buy Your Pass
+            </button>
           )}
           {errorMessage && <p className="text-red-500 mt-4">{errorMessage}</p>}
         </div>
