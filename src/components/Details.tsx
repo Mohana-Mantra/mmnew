@@ -19,7 +19,10 @@ function Details() {
                             duration: 0.4,
                             ease: "easeInOut",
                         }}
-                        className="bg-white/10 backdrop-blur-3xl flex flex-col gap-8 py-8 px-14 rounded-xl font-anybody"
+                        className={cn(
+                            "bg-white/10 backdrop-blur-3xl flex flex-col gap-8 py-8 px-14 rounded-xl",
+                            poppins.className
+                        )}
                     >
                         <h1 className="font-bold text-xl">October 2024</h1>
                         <div className="flex items-center justify-around w-full gap-10 relative">
@@ -73,14 +76,17 @@ function Details() {
                             duration: 0.6,
                             ease: "easeInOut",
                         }}
-                        className="bg-white/10 backdrop-blur-3xl flex flex-col gap-8 p-16 rounded-xl"
+                        className={cn(
+                            "bg-white/10 backdrop-blur-3xl flex flex-col gap-8 p-16 rounded-xl",
+                            poppins.className
+                        )}
                     >
                         <WordRotate
                             // words={["MOHANA MANTRA", "1st DAY", "2nd DAY", "3rd DAY"]}
                             words={["KALAKSHETRA", "PROSHOWS", "WORKSHOPS", "TECH", "SPOT EVENTS"]}
-                            className="text-xl md:text-2xl font-bold text-center font-inter"
+                            className="text-xl md:text-2xl font-bold text-center"
                         />
-                        <div className="bg-[#ff4e78] rounded-xl font-anybody text-center w-3/4 mx-auto py-2 hover:scale-110 duration-200 select-none transition-transform ease-in-out">
+                        <div className="bg-[#ff4e78] rounded-xl text-center w-3/4 mx-auto py-2 hover:scale-110 duration-200 select-none transition-transform ease-in-out">
                             EXPERIENCE NOW
                         </div>
                     </motion.div>
@@ -126,7 +132,10 @@ function Details() {
                         duration: 0.4,
                         ease: "easeInOut",
                     }}
-                    className="bg-white/10 backdrop-blur-3xl flex flex-col gap-8 py-8 px-14 rounded-xl font-anybody"
+                    className={cn(
+                        "bg-white/10 backdrop-blur-3xl flex flex-col gap-8 py-8 px-14 rounded-xl",
+                        poppins.className
+                    )}
                 >
                     <h1 className="font-bold text-xl">October 2024</h1>
                     <div className="flex items-center justify-around w-full gap-10 relative">
@@ -180,7 +189,10 @@ function Details() {
                         duration: 0.6,
                         ease: "easeInOut",
                     }}
-                    className="bg-white/10 backdrop-blur-3xl flex flex-col gap-8 p-16 rounded-xl font-inter"
+                    className={cn(
+                        "bg-white/10 backdrop-blur-3xl flex flex-col gap-8 py-8 px-14 rounded-xl",
+                        poppins.className
+                    )}
                 >
                     <WordRotate
                         // words={["MOHANA MANTRA", "1st DAY", "2nd DAY", "3rd DAY"]}
@@ -200,7 +212,10 @@ function Details() {
                         duration: 0.8,
                         ease: "easeInOut",
                     }}
-                    className="bg-white/10 backdrop-blur-3xl flex flex-col gap-8 py-8 px-14 rounded-xl font-anybody"
+                    className={cn(
+                        "bg-white/10 backdrop-blur-3xl flex flex-col gap-8 py-8 px-14 rounded-xl",
+                        poppins.className
+                    )}
                 >
                     <Image
                         src="https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133751/hdqlplouvuwkmtsrjt6e.png"

@@ -1,4 +1,4 @@
-"use client";  // Ensure this line is at the very top
+"use client"; // Ensure this line is at the very top
 
 import { useState, ChangeEvent } from "react";
 
@@ -8,7 +8,7 @@ function Contact() {
     const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
         if (event.target.files) {
             const files = Array.from(event.target.files);
-            setUploadedFiles(prevFiles => [...prevFiles, ...files]);
+            setUploadedFiles((prevFiles) => [...prevFiles, ...files]);
         }
     };
 
@@ -25,7 +25,7 @@ function Contact() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label htmlFor="name" className="text-white">
-                           First Name
+                            First Name
                         </label>
                         <input
                             type="text"
