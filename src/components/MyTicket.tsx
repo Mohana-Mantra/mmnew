@@ -70,16 +70,18 @@ const MyTicket = ({ user }: { user: User }) => {
         } else {
             setTransactionId(txnId); // Save the transaction ID in state
             setTicketPurchased(true);
-            router.push("/account"); // Redirect to the account page or reload the current page
+            router.push("/account"); // Redirect to the account page
         }
     };
 
     const loadRazorpayScript = () => {
-        const script = document.createElement("script");
-        script.defer = true;
-        script.id = "razorpay-embed-btn-js";
-        script.src = "https://cdn.razorpay.com/static/embed_btn/bundle.js";
-        document.body.appendChild(script);
+        return new Promise((resolve) => {
+            const script = document.createElement("script");
+            script.src = "https://checkout.razorpay.com/v1/checkout.js";
+            script.onload = () => resolve(true);
+            script.onerror = () => resolve(false);
+            document.body.appendChild(script);
+        });
     };
 
     useEffect(() => {
