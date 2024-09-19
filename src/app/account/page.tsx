@@ -63,7 +63,7 @@ export default function Account() {
     if (!user) {
         return (
             <div className="h-screen flex items-center justify-center">
-                <div className="text-center h-screen  items-center justify-center">
+                <div className="text-center justify-center">
                     <p>Registration successful! <br /> A verification email has been sent to your inbox. Please verify your email to log in.</p>
                     <IconLoader2 className="animate-spin h-12 aspect-square" />
                 </div>
