@@ -360,7 +360,7 @@ export const SPOTEVENTS = [
     {
         eventName: "LUCKY DRAW",
         slug: "lucky-draw",
-        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726211733/luckydraw_mjioyc.jpg",
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726820549/luck_draw_zl49yv.png",
         about: "A random selection process where participants enter for a chance to win prizes.",
         howToPlay: "Participants fill a coupon; winners are drawn randomly.",
         rules: ["One coupon per participant.", "Only one prize per person."],
@@ -431,7 +431,7 @@ export const SPOTEVENTS = [
     {
         eventName: "FUN GAMES",
         slug: "fun-games",
-        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726211733/fungames_cw6bsc.jpg",
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726822568/fun_games_g7qrge.svg",
         venue: "MNS Pathway",
         about: "Lighthearted games designed to entertain and engage players.",
         howToPlay: "Players follow given statements and directions to play the games correctly.",
@@ -462,7 +462,7 @@ export const WORKSHOPS = [
     {
         eventName: "Life Saver Workshop",
         slug: "life-saver-workshop",
-        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726211767/lifeSaver_gd6um9.jpg",
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726820129/life_saver_workshop_xmrtup.svg",
         about: "A two-day workshop aimed at teaching essential life-saving skills. Participants will practice on a human dummy to gain hands-on experience.",
         resoursePerson: [
             "Dr. Thejo Rao K.M",
@@ -485,7 +485,7 @@ export const TECHNOHOLIC = [
     {
         eventName: "Find Flag Without Lag",
         slug: "find-flag-without-lag",
-        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726137037/findflag_j1b19o.svg",
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726820394/Find_Flag_Without_Lag_1_nqbnxf.svg",
         about: "A team-based competition where participants solve aptitude questions to receive clues. The clues lead them to hidden flags, and the teams must retrieve the flags to qualify for the next round. The event consists of three rounds, with the team having the highest points declared as the winner.",
         howToPlay: [
             "Form teams of 5 participants.",
@@ -549,7 +549,7 @@ export const TECHNOHOLIC = [
     {
         eventName: "Virtual Modelling",
         slug: "virtual-modelling",
-        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726137039/virtual-modelling_jlaeq8.jpg",
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726820453/Virtual_Modelling_vw5dpi.svg",
         about: "A competition where participants narrate a story based on random chits and create a 3D video using AI tools in the second round.",
         howToPlay: [
             "Round 1: Narrate a story based on 5 random chits drawn from a box.",
@@ -668,7 +668,7 @@ export const TECHNOHOLIC = [
     {
         eventName: "Brevity Blitz",
         slug: "brevity-blitz",
-        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726137033/brevity-blitz_fxdp23.jpg",
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726820018/Brevity_Blitz_ozicpc.svg",
         about: "A competition based on reading comprehension and presentation skills under time constraints.",
         howToPlay: [
             "Present the paragraph without gramatical mistakes in front of judges.",

@@ -1,5 +1,9 @@
 import { SPOTEVENTS, TECHNOHOLIC, WORKSHOPS } from "@/lib/eventsDetails";
 import Image from "next/image";
+import { Poppins } from "next/font/google";
+import { IconClock } from "@tabler/icons-react";
+
+const poppins = Poppins({ subsets: ["latin"], weight: "400" });
 
 const SubEventDetails = ({
     params: { subevent, details },
@@ -18,7 +22,7 @@ const SubEventDetails = ({
         return (
             <div className="w-full px-3 md:px-20 lg:px-60 pt-36">
                 <div className="flex gap-10">
-                    <div className="w-1/2 aspect-square relative rounded-xl">
+                    <div className="w-1/2 max-h-[500px] aspect-square relative rounded-xl">
                         <Image
                             src={event.image}
                             fill
@@ -29,38 +33,90 @@ const SubEventDetails = ({
                     <div className="flex w-1/2 flex-col gap-12 justify-center my-6 ">
                         <h1 className="font-sulpher font-bold text-yellow text-3xl md:text-5xl">
                             {event.eventName}
+                            {event.eventName === "TELEMATCH" && (
+                                <ul
+                                    className={`${poppins.className} list-disc pl-16 pt-4 text-base text-white`}
+                                >
+                                    <li>ADVENTURE RUN</li>
+                                    <li>HUMAN WHEELBARROW RACE</li>
+                                    <li>THAG OF WAR</li>
+                                    <li>MUSICAL CHAIR</li>
+                                    <li>LEMON & SPOON</li>
+                                    <li>GUNNY BAG</li>
+                                    <li>BALLON POPPING</li>
+                                    <li>BALLON ATTACK</li>
+                                    <li>CARRY PERSON RUN</li>
+                                    <li>3 LEGGED RACE</li>
+                                    <li>SPOON RELAY</li>
+                                    <li>HANGING SWEET</li>
+                                    <li>WATER BALLON CATCH</li>
+                                </ul>
+                            )}
+                            {event.eventName === "FUN GAMES" && (
+                                <ul
+                                    className={`${poppins.className} list-disc pl-16 pt-4 text-base text-white`}
+                                >
+                                    <li>BUBBLE SHOOTER</li>
+                                    <li>FIND THE CORRECT KEY</li>
+                                    <li>GUESS THE THINGS</li>
+                                    <li>HIT THE TARGET</li>
+                                    <li>BASKET BALL</li>
+                                    <li>PEN & CAP</li>
+                                    <li>SQUEEZE IT</li>
+                                    <li>BALLOON PYRAMID</li>
+                                    <li>OREO BITE</li>
+                                    <li>HAND-EYE COORDINATION GAME</li>
+                                    <li>PULL UP STAND</li>
+                                    <li>SEPARATION ANXIETY</li>
+                                    <li>UNTIE THE KNOT</li>
+                                    <li>JENGA</li>
+                                    <li>HANG OVER</li>
+                                    <li>BOWLING BALL</li>
+                                    <li>SAREE DROPPING</li>
+                                    <li>FACE ILLUSION</li>
+                                    <li>BLINDFOLD BEAUTY</li>
+                                    <li>HAND & LEG HOPSCOTCH</li>
+                                    <li>KNOCK DOWN THE CUPS</li>
+                                    <li>CHOCOLATE CHOPSTICK</li>
+                                    <li>CHANDELIER</li>
+                                    <li>SPOON FROG</li>
+                                    <li>CHOP STACK</li>
+                                    <li>EXTREME CHRISTMAS NUTSTACKER</li>
+                                    <li>STACK ATTACK</li>
+                                </ul>
+                            )}
                         </h1>
                         <div>
                             <h1 className="font-sulpher font-bold text-2xl text-secondary">
                                 About:
                             </h1>
-                            <p className="font-sulpher text-lg">{event.about}</p>
+                            <p className={`${poppins.className} text-sm tracking-wider`}>
+                                {event.about}
+                            </p>
                         </div>
                         <div>
                             <h1 className="font-sulpher font-bold text-2xl text-secondary">
                                 How To Play:
                             </h1>
-                            <p className="font-sulpher text-lg">{event.howToPlay}</p>
+                            <p className={`${poppins.className} text-sm tracking-wider`}>
+                                {event.howToPlay}
+                            </p>
                         </div>
                         <div className="flex justify-between items-center h-fit">
                             <div>
-                                <div className="flex items-center h-fit gap-4">
+                                {/* <div className="flex items-center h-fit gap-4">
                                     <Image
                                         src="https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133425/icons/mqmmcdjyqxydptuic0aq.svg"
                                         height={16}
                                         width={16}
                                         alt="icon"
                                     />
-                                    
-                                </div>
-                                <div className="flex items-center h-fit gap-4">
-                                    <Image
-                                        src="https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133426/icons/fc2lzpiqbj6yjuzxe0gp.svg"
-                                        height={16}
-                                        width={16}
-                                        alt="icon"
-                                    />
-                                    <p>09:00 AM - 04:00 PM</p>
+                                </div> */}
+                                <div className="flex items-center h-fit gap-2">
+                                    <IconClock size={20} className="text-secondary" />
+                                    <p className={`${poppins.className} text-sm`}>
+                                        09:00 AM - 04:00 PM
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -70,7 +126,10 @@ const SubEventDetails = ({
                             </h1>
                             <ol className="list-disc pl-8 text-xl">
                                 {event.rules.map((rule, index) => (
-                                    <li key={index} className="font-sulpher">
+                                    <li
+                                        key={index}
+                                        className={`${poppins.className} text-sm tracking-wider`}
+                                    >
                                         {rule}
                                     </li>
                                 ))}

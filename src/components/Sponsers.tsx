@@ -19,27 +19,47 @@ function Sponsers() {
                     speed="slow"
                     items={[
                         {
-                            image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133434/sponsers/ftz8npac6rvtnnk4njn1.png",
+                            image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726819691/cranes_varsity_rpafvt.svg",
                             height: 200,
                             width: 300,
                         },
                         {
-                            image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133432/sponsers/fbmxx6gj6h5gzureb0gs.png",
+                            image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726819687/racloop_f1djzy.svg",
                             height: 200,
                             width: 300,
                         },
                         {
-                            image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133434/sponsers/y3emwyi3svo2c6hywpie.png",
+                            image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726819672/prakash_arts_ac9oyi.svg",
                             height: 200,
                             width: 300,
                         },
                         {
-                            image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133437/sponsers/fhhbvbfprm47dxjelwed.png",
+                            image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726819662/talking_heads_cpa3cw.svg",
                             height: 200,
                             width: 300,
                         },
                         {
-                            image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726133438/sponsers/vgwhp8urvhl3zdvlw5pl.png",
+                            image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726819658/krushi_advertising_amcqsg.svg",
+                            height: 200,
+                            width: 300,
+                        },
+                        {
+                            image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726819653/GK_education_loans_gfbutq.svg",
+                            height: 200,
+                            width: 300,
+                        },
+                        {
+                            image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726819642/deccan_park_and_suits_dxyvac.svg",
+                            height: 200,
+                            width: 300,
+                        },
+                        {
+                            image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726819629/talentio_moebhx.svg",
+                            height: 200,
+                            width: 300,
+                        },
+                        {
+                            image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726819625/international_campus_connect_arjvgz.svg",
                             height: 200,
                             width: 300,
                         },
