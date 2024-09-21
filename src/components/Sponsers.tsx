@@ -12,7 +12,7 @@ function Sponsers() {
                 <h1
                     className={`text-center text-2xl md:text-[2.8rem] text-yellow ${monoton.className}`}
                 >
-                    Title Sponsors
+                    Title Sponsor
                 </h1>
              
                 <div className="flex justify-center">
