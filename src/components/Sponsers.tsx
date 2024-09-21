@@ -8,17 +8,29 @@ function Sponsers() {
     return (
         <>
             <div className="bg-slate-900 py-20 space-y-10 md:space-y-16">
-            <h1
-                    className={`text-center text-2xl md:text-[2.8rem] text-yellow ${monoton.className}`}
-                >
-                    sponsors
-                </h1>
-                <img src="../public/assets/fs.jpg" alt="" />
+               
                 <h1
                     className={`text-center text-2xl md:text-[2.8rem] text-yellow ${monoton.className}`}
                 >
-                    sponsors
+                    Title Sponsors
                 </h1>
+             
+                <div className="flex justify-center">
+                    <Image
+                        src="../public/assets/fs.jpg" 
+                        alt="Title Sponsor"
+                        width={500} 
+                        height={300}
+                    />
+                </div>
+
+                <h1
+                    className={`text-center text-2xl md:text-[2.8rem] text-yellow ${monoton.className}`}
+                >
+                    Sponsors
+                </h1>
+
+             
                 <InfiniteMovingSponsers
                     direction="left"
                     pauseOnHover={false}
