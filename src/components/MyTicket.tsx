@@ -11,6 +11,16 @@ interface RazorpayPaymentResponse {
   razorpay_signature?: string;
 }
 
+interface UserExtended extends User {
+  user_id?: string;
+  full_name?: string;
+  phone_number?: number | string;
+  institute_name?: string;
+  year_of_study?: number;
+  is_verified?: boolean;
+  is_eligible_for_free_pass?: boolean;
+}
+
 const MyTicket = ({ user }: { user: User }) => {
   const [ticketPurchased, setTicketPurchased] = useState(false);
   const [ticketPrice, setTicketPrice] = useState(500); // Default ticket price
