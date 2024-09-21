@@ -17,7 +17,7 @@ function Sponsers() {
              
                 <div className="flex justify-center">
                     <Image
-                        src="../public/assets/fs.jpg" 
+                        src="https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726906649/fs_y2fjh2.jpg" 
                         alt="Title Sponsor"
                         width={500} 
                         height={300}
