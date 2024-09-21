@@ -152,7 +152,11 @@ const MyTicket = ({ user }: { user: User }) => {
           {isEligibleForFreePass ? (
             <button
               className="bg-blue-600 hover:bg-blue-700 text-white mt-4 p-2 rounded-md"
-              
+              onClick={() => {
+                // Mark the ticket as purchased for free users without payment
+                setTicketPurchased(true);
+                router.push("/account"); // Redirect after getting free pass
+              }}
             >
               Get Free Pass
             </button>
