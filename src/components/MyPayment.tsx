@@ -29,19 +29,18 @@ const MyPayment = ({
         const fetchPaymentInfo = async () => {
             setLoading(true);
             try {
-                const { data: payments, error } = await supabase
+                const { data: payment, error } = await supabase
                     .from("payments")
                     .select("*")
                     .eq("user_id", user.id)
-                    .eq("payment_status", "completed")
-                    .limit(1)
+                    .eq("payment_status", "paid")
                     .single();
 
                 if (error) {
                     setErrorMessage("Error fetching payment information.");
                     console.error("Error fetching payments:", error.message);
                 } else {
-                    setPayment(payments); // User has purchased a pass
+                    setPayment(payment);
                 }
             } catch (error) {
                 setErrorMessage("An unexpected error occurred.");
@@ -76,8 +75,8 @@ const MyPayment = ({
                 <div className="flex flex-col items-center py-16 gap-3 text-center">
                     <h2 className="text-2xl font-bold">Register for Mohana Mantra 2K24</h2>
                     <p>
-                        You haven&#39;t registered for the Mohana Mantra 2K24 event yet. Purchase
-                        the event pass to participate.
+                        You haven&#39;t registered for the Mohana Mantra 2K24 event yet.
+                        Purchase the event pass to participate.
                     </p>
                     <button
                         className="bg-blue-600 hover:bg-blue-700 text-white mt-4 p-2 rounded-md"
