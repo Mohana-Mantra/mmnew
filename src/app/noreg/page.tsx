@@ -21,82 +21,11 @@ const UserDetails = ({ user }: { user: User }) => {
   const [selectedInstitute, setSelectedInstitute] = useState<string>("");
 
   useEffect(() => {
-    fetchUserDetails();
+    
     fetchInstitutes();
   }, [user]);
 
-  // Fetch user details
-  const fetchUserDetails = async () => {
-    setLoading(true);
-    const { data, error } = await supabase
-      .from("users")
-      .select("*")
-      .eq("email", user.email)
-      .single();
-
-    if (error) {
-      console.error("Error fetching user details:", error.message);
-    } else {
-      setUserData(data);
-
-      // Check if user's institute is listed
-      if (data.institute_name && data.institute_name !== "Other") {
-        const { data: institute, error: instituteError } = await supabase
-          .from("institutes")
-          .select("name, is_listed")
-          .eq("name", data.institute_name)
-          .eq("is_listed", true)
-          .single();
-
-        if (!instituteError && institute) {
-          // If institute is listed, update is_eligible_for_free_pass
-          const { error: updateError } = await supabase
-            .from("users")
-            .update({ is_eligible_for_free_pass: true })
-            .eq("email", user.email);
-
-          if (updateError) {
-            console.error("Error updating eligibility:", updateError.message);
-          } else {
-            data.is_eligible_for_free_pass = true;
-            setUserData(data);
-          }
-        } else {
-          // Set eligibility to false if the institute doesn't match
-          const { error: updateError } = await supabase
-            .from("users")
-            .update({ is_eligible_for_free_pass: false })
-            .eq("email", user.email);
-
-          if (updateError) {
-            console.error("Error updating eligibility:", updateError.message);
-          } else {
-            data.is_eligible_for_free_pass = false;
-            setUserData(data);
-          }
-        }
-      } else {
-        // If the institute is "Other", set is_eligible_for_free_pass to false
-        const { error: updateError } = await supabase
-          .from("users")
-          .update({ is_eligible_for_free_pass: false })
-          .eq("email", user.email);
-
-        if (updateError) {
-          console.error("Error updating eligibility:", updateError.message);
-        } else {
-          data.is_eligible_for_free_pass = false;
-          setUserData(data);
-        }
-      }
-
-      if (!data.phone_number || !data.institute_name || !data.year_of_study) {
-        setEditMode(true);
-      }
-      setSelectedInstitute(data.institute_name || "");
-    }
-    setLoading(false);
-  };
+  
 
   // Fetch institutes from the database
   const fetchInstitutes = async () => {
@@ -158,7 +87,7 @@ const UserDetails = ({ user }: { user: User }) => {
       console.error("Error updating user:", error.message);
     } else {
       // Re-fetch updated user data after successful update
-      fetchUserDetails();
+
       setEditMode(false);
     }
     setLoading(false);
