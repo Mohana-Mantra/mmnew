@@ -8,6 +8,12 @@ function Sponsers() {
     return (
         <>
             <div className="bg-slate-900 py-20 space-y-10 md:space-y-16">
+            <h1
+                    className={`text-center text-2xl md:text-[2.8rem] text-yellow ${monoton.className}`}
+                >
+                    sponsors
+                </h1>
+                <img src="../public/assets/fs.jpg" alt="" />
                 <h1
                     className={`text-center text-2xl md:text-[2.8rem] text-yellow ${monoton.className}`}
                 >
