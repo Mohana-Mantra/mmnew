@@ -91,7 +91,7 @@ const MyTicket = ({ user }: { user: User }) => {
     }
 
     const options = {
-      key: "your_razorpay_key", // Replace with your Razorpay API key
+      key: "rzp_live_JXXvFjARDIcDEl", // Replace with your Razorpay API key
       amount: ticketPrice * 5000, // Convert price to paise (1 INR = 100 paise)
       currency: "INR",
       name: "Mohana Mantra",
