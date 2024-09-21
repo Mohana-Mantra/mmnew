@@ -92,7 +92,7 @@ const MyTicket = ({ user }: { user: User }) => {
 
     const options = {
       key: "your_razorpay_key", // Replace with your Razorpay API key
-      amount: ticketPrice * 100, // Convert price to paise (1 INR = 100 paise)
+      amount: ticketPrice * 5000, // Convert price to paise (1 INR = 100 paise)
       currency: "INR",
       name: "Mohana Mantra",
       description: "Event Pass",
@@ -161,7 +161,7 @@ const MyTicket = ({ user }: { user: User }) => {
               className="bg-blue-600 hover:bg-blue-700 text-white mt-4 p-2 rounded-md"
               onClick={handleRazorpayPayment}
             >
-              Buy Your Pass
+              Get Your Pass
             </button>
           )}
           {errorMessage && <p className="text-red-500 mt-4">{errorMessage}</p>}
