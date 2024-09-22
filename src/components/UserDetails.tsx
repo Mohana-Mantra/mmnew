@@ -25,6 +25,7 @@ const UserDetails = ({ user }: { user: User }) => {
     fetchInstitutes();
   }, [user]);
 
+  // Fetch user details
   const fetchUserDetails = async () => {
     setLoading(true);
     const { data, error } = await supabase
@@ -38,6 +39,7 @@ const UserDetails = ({ user }: { user: User }) => {
     } else {
       setUserData(data);
 
+      // Check if user's institute is listed
       if (data.institute_name && data.institute_name !== "Other") {
         const { data: institute, error: instituteError } = await supabase
           .from("institutes")
@@ -47,6 +49,7 @@ const UserDetails = ({ user }: { user: User }) => {
           .single();
 
         if (!instituteError && institute) {
+          // If institute is listed, update is_eligible_for_free_pass
           const { error: updateError } = await supabase
             .from("users")
             .update({ is_eligible_for_free_pass: true })
@@ -59,6 +62,7 @@ const UserDetails = ({ user }: { user: User }) => {
             setUserData(data);
           }
         } else {
+          // Set eligibility to false if the institute doesn't match
           const { error: updateError } = await supabase
             .from("users")
             .update({ is_eligible_for_free_pass: false })
@@ -72,6 +76,7 @@ const UserDetails = ({ user }: { user: User }) => {
           }
         }
       } else {
+        // If the institute is "Other", set is_eligible_for_free_pass to false
         const { error: updateError } = await supabase
           .from("users")
           .update({ is_eligible_for_free_pass: false })
@@ -93,6 +98,7 @@ const UserDetails = ({ user }: { user: User }) => {
     setLoading(false);
   };
 
+  // Fetch institutes from the database
   const fetchInstitutes = async () => {
     const { data, error } = await supabase
       .from("institutes")
@@ -108,7 +114,7 @@ const UserDetails = ({ user }: { user: User }) => {
 
   const handleUpdate = async () => {
     if (!userData) return;
-
+  
     const updates: {
       phone_number: string | number | null;
       institute_name: string | null;
@@ -121,39 +127,43 @@ const UserDetails = ({ user }: { user: User }) => {
       year_of_study: userData.year_of_study || null,
       updated_at: new Date().toISOString(),
     };
-
+  
     setLoading(true);
-
+  
+    // Check if the selected institute is "Other"
     if (selectedInstitute === "Other") {
       updates.is_eligible_for_free_pass = false;
     } else {
+      // Check if the selected institute is listed
       const { data: institute, error: instituteError } = await supabase
         .from("institutes")
         .select("name")
         .eq("name", selectedInstitute)
         .eq("is_listed", true)
         .single();
-
+  
       if (instituteError || !institute) {
         updates.is_eligible_for_free_pass = false;
       } else {
         updates.is_eligible_for_free_pass = true;
       }
     }
-
+  
     const { error } = await supabase
       .from("users")
       .update(updates)
       .eq("email", user.email);
-
+  
     if (error) {
       console.error("Error updating user:", error.message);
     } else {
+      // Re-fetch updated user data after successful update
       fetchUserDetails();
       setEditMode(false);
     }
     setLoading(false);
   };
+  
 
   if (loading) {
     return (
@@ -168,7 +178,7 @@ const UserDetails = ({ user }: { user: User }) => {
   }
 
   return (
-    <div className="py-16 flex flex-col items-center text-center px-4 sm:px-8 lg:px-16">
+    <div className="py-16 flex flex-col items-center text-center">
       <h2 className="font-bold text-2xl mb-4">User Details</h2>
       {editMode ? (
         <div className="w-full max-w-md">
