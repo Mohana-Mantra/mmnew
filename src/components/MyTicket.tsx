@@ -90,7 +90,6 @@ const MyTicket = ({ user }: { user: User }) => {
     } else {
       setTransactionId(txnId); // Save the transaction ID in state
       setTicketPurchased(true);
-      router.push("/account"); // Redirect to the account page
     }
   };
 
@@ -158,24 +157,28 @@ const MyTicket = ({ user }: { user: User }) => {
             You are eligible for a free pass to Mohana Mantra 2K24!
           </p>
           <p className="mt-2">
-            You can collect your pass in Campus by showing your respective Institution ID card.
+            You can collect your pass on campus by showing your Institution ID card.
           </p>
-          <h4 className="text-red-500 font-bold mt-4">Please carry your ID card for Event.</h4>
-
-
+          <h4 className="text-red-500 font-bold mt-4">Please carry your ID card for the Event.</h4>
         </div>
       ) : (
         // User is not eligible for free pass
         <div>
           {ticketPurchased ? (
             <div className="text-center flex flex-col items-center py-16">
-              <h2 className="text-2xl font-bold">Your Mohana Mantra Pass</h2>
-              <p>Congratulations! You have successfully purchased the event pass.</p>
+              <h2 className="text-2xl font-bold">Thanks for Registering!</h2>
+              <p>Congratulations! You have successfully registered for the event.</p>
               <p>Amount Paid: ₹{ticketPrice}</p>
               {transactionId && <p>Payment ID: {transactionId}</p>}
               <p className="mt-2">
-                You can view your payment details in the <strong>MyPayment</strong> section.
+                You can view your payment details in the <strong>My Payment</strong> section.
               </p>
+              <button
+                className="bg-green-600 hover:bg-green-700 text-white mt-4 p-2 rounded-md"
+                onClick={() => router.push("/events")} // Redirect to event selection
+              >
+                Select Interested Events
+              </button>
             </div>
           ) : (
             <div className="text-center flex flex-col gap-3 items-center py-16">
