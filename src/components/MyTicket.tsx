@@ -38,7 +38,7 @@ const MyTicket = ({ user }: { user: User }) => {
         // Fetch the user details to check if they are eligible for a free pass
         const { data: userData, error: userError } = await supabase
           .from("users")
-          .select("is_eligible_for_free_pass")
+          .select("user_id, is_eligible_for_free_pass")
           .eq("email", user.email)
           .single();
 
@@ -55,7 +55,7 @@ const MyTicket = ({ user }: { user: User }) => {
           const { data: payments, error: paymentError } = await supabase
             .from("payments")
             .select("*")
-            .eq("user_id", user.id)
+            .eq("user_id", userData.user_id)
             .eq("payment_status", "paid");
 
           if (paymentError) {
@@ -67,18 +67,36 @@ const MyTicket = ({ user }: { user: User }) => {
         }
       } catch (error) {
         setErrorMessage("An unexpected error occurred.");
+        console.error("Error:", error);
       }
 
       setLoading(false);
     };
 
     fetchPaymentInfo();
-  }, [user.email, user.id]);
+  }, [user.email]);
 
   const handlePaymentSuccess = async (paymentResponse: RazorpayPaymentResponse) => {
     const txnId = paymentResponse.razorpay_payment_id; // Use the Razorpay payment ID
-    const { data, error } = await supabase.from("payments").insert({
-      user_id: user.id,
+
+    // Fetch user_id from users table
+    const { data: userData, error: userError } = await supabase
+      .from("users")
+      .select("user_id")
+      .eq("email", user.email)
+      .single();
+
+    if (userError || !userData) {
+      setErrorMessage("Error fetching user data for payment processing.");
+      console.error("Error fetching user data:", userError?.message);
+      return;
+    }
+
+    const userId = userData.user_id;
+
+    // Insert payment details into payments table
+    const { error } = await supabase.from("payments").insert({
+      user_id: userId,
       amount: ticketPrice,
       payment_status: "paid",
       payment_id: txnId, // Use the Razorpay payment ID
@@ -87,9 +105,11 @@ const MyTicket = ({ user }: { user: User }) => {
 
     if (error) {
       setErrorMessage("Error processing payment.");
+      console.error("Error inserting payment:", error.message);
     } else {
       setTransactionId(txnId); // Save the transaction ID in state
       setTicketPurchased(true);
+      router.push("/account"); // Redirect to the account page
     }
   };
 
@@ -149,50 +169,32 @@ const MyTicket = ({ user }: { user: User }) => {
 
   return (
     <div>
-      {isEligibleForFreePass ? (
-        // User is eligible for free pass
+      {ticketPurchased ? (
         <div className="text-center flex flex-col items-center py-16">
-          <h2 className="text-3xl font-bold">Congratulations!</h2>
-          <p className="text-green-500 mt-4">
-            You are eligible for a free pass to Mohana Mantra 2K24!
-          </p>
+          <h2 className="text-2xl font-bold">Thank You for Registering!</h2>
+          <p>You have successfully registered for the event.</p>
           <p className="mt-2">
-            You can collect your pass on campus by showing your Institution ID card.
+            You can navigate to the <strong>My Payment</strong> tab to see your payment details.
           </p>
-          <h4 className="text-red-500 font-bold mt-4">Please carry your ID card for the Event.</h4>
+          <button
+            className="bg-blue-600 hover:bg-blue-700 text-white mt-4 p-2 rounded-md"
+            onClick={() => router.push("/select-events")} // Adjust the route as needed
+          >
+            Select Interested Events
+          </button>
         </div>
       ) : (
-        // User is not eligible for free pass
-        <div>
-          {ticketPurchased ? (
-            <div className="text-center flex flex-col items-center py-16">
-              <h2 className="text-2xl font-bold">Thanks for Registering!</h2>
-              <p>Congratulations! You have successfully registered for the event.</p>
-              <p>Amount Paid: ₹{ticketPrice}</p>
-              {transactionId && <p>Payment ID: {transactionId}</p>}
-              <p className="mt-2">
-                You can view your payment details in the <strong>My Payment</strong> section.
-              </p>
-              <button
-                className="bg-green-600 hover:bg-green-700 text-white mt-4 p-2 rounded-md"
-                onClick={() => router.push("/events")} // Redirect to event selection
-              >
-                Select Interested Events
-              </button>
-            </div>
-          ) : (
-            <div className="text-center flex flex-col gap-3 items-center py-16">
-              <h2 className="text-3xl font-bold">Mohana Mantra Event Pass</h2>
-              <p>The pass price is ₹{ticketPrice}.</p>
-              <button
-                className="bg-blue-600 hover:bg-blue-700 text-white mt-4 p-2 rounded-md"
-                onClick={handleRazorpayPayment}
-              >
-                Get Your Pass
-              </button>
-              {errorMessage && <p className="text-red-500 mt-4">{errorMessage}</p>}
-            </div>
-          )}
+        // Show payment option if ticket not purchased
+        <div className="text-center flex flex-col gap-3 items-center py-16">
+          <h2 className="text-3xl font-bold">Mohana Mantra Event Pass</h2>
+          <p>The pass price is ₹{ticketPrice}.</p>
+          <button
+            className="bg-blue-600 hover:bg-blue-700 text-white mt-4 p-2 rounded-md"
+            onClick={handleRazorpayPayment}
+          >
+            Get Your Pass
+          </button>
+          {errorMessage && <p className="text-red-500 mt-4">{errorMessage}</p>}
         </div>
       )}
     </div>
