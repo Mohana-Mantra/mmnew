@@ -27,19 +27,20 @@ const MyPayment = ({
         const fetchPaymentInfo = async () => {
             setLoading(true);
             try {
-                const { data: payment, error } = await supabase
-                    .from("payments")
-                    .select("*")
-                    .eq("user_id", user.id) // Fetch payment based on user_id
-                    .eq("payment_status", "paid") // Only select completed payments
-                    .single();
+                // Fetch payment details from Supabase based on user_id
+                const { data: paymentData, error } = await supabase
+                    .from('payments')
+                    .select('*')
+                    .eq('user_id', user.id) // Fetch where user_id matches
+                    .eq('payment_status', 'paid') // Fetch only paid payments
+                    .single(); // Expect a single payment record
 
-                if (error) {
-                    // Handle case where no payment is found
-                    setErrorMessage("No transaction found.");
-                    console.error("Error fetching payments:", error.message);
+                if (error || !paymentData) {
+                    // Handle case where no transaction is found
+                    setErrorMessage("No transaction found for this user.");
+                    console.error("Error fetching payments:", error?.message);
                 } else {
-                    setPayment(payment); // Set the payment data in state
+                    setPayment(paymentData); // Set the payment data in state
                 }
             } catch (error) {
                 setErrorMessage("An unexpected error occurred.");
@@ -65,7 +66,7 @@ const MyPayment = ({
                 // If user has purchased the pass, show receipt details
                 <div className="flex flex-col items-center py-16 gap-3 text-center">
                     <h2 className="text-2xl font-bold">Payment Receipt</h2>
-                    <p>Thank you for registering for the event.</p>
+                    <p>Thank you for registering for the Mohana Mantra 2K24 event.</p>
                     <p>Amount Paid: ₹{payment.amount}</p>
                     <p>Payment ID: {payment.payment_id}</p>
                     <p>Payment Date: {new Date(payment.created_at).toLocaleString()}</p>
@@ -73,7 +74,7 @@ const MyPayment = ({
             ) : (
                 // If no transaction found, prompt the user to register
                 <div className="flex flex-col items-center py-16 gap-3 text-center">
-                    <h2 className="text-2xl font-bold">Register for the Event</h2>
+                    <h2 className="text-2xl font-bold">Register for Mohana Mantra 2K24</h2>
                     <p>No transaction found. Please register for the event.</p>
                     <button
                         className="bg-blue-600 hover:bg-blue-700 text-white mt-4 p-2 rounded-md"
