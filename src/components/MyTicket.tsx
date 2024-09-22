@@ -90,7 +90,7 @@ const MyTicket = ({ user }: { user: User }) => {
     } else {
       setTransactionId(txnId); // Save the transaction ID in state
       setTicketPurchased(true);
-      // No need to redirect immediately, just show the success message
+      router.push("/account"); // Redirect to the account page
     }
   };
 
@@ -161,21 +161,21 @@ const MyTicket = ({ user }: { user: User }) => {
             You can collect your pass in Campus by showing your respective Institution ID card.
           </p>
           <h4 className="text-red-500 font-bold mt-4">Please carry your ID card for Event.</h4>
+
+
         </div>
       ) : (
         // User is not eligible for free pass
         <div>
           {ticketPurchased ? (
             <div className="text-center flex flex-col items-center py-16">
-              <h2 className="text-2xl font-bold">Thanks for Registration!</h2>
-              <p>Thank you for registering for the Mohana Mantra event.</p>
-              <p className="mt-4">You can navigate to the <strong>My Payment</strong> tab to view your payment details.</p>
-              <button
-                className="bg-green-600 hover:bg-green-700 text-white mt-6 py-2 px-4 rounded-md"
-                onClick={() => router.push("/events")} // Navigate to events page
-              >
-                Select Interested Events
-              </button>
+              <h2 className="text-2xl font-bold">Your Mohana Mantra Pass</h2>
+              <p>Congratulations! You have successfully purchased the event pass.</p>
+              <p>Amount Paid: ₹{ticketPrice}</p>
+              {transactionId && <p>Payment ID: {transactionId}</p>}
+              <p className="mt-2">
+                You can view your payment details in the <strong>MyPayment</strong> section.
+              </p>
             </div>
           ) : (
             <div className="text-center flex flex-col gap-3 items-center py-16">
