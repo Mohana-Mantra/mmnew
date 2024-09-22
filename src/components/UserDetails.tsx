@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { User } from "@supabase/supabase-js";
 import { supabase } from "@/lib/supabaseClient";
 import { IconLoader2 } from "@tabler/icons-react";
-import MyPayment from "./MyPayment";
 
 interface UserExtended extends User {
   user_id?: string;
@@ -277,9 +276,7 @@ const UserDetails = ({ user }: { user: User }) => {
           >
             Update Details
           </button>
-          {/* Pass user data to MyPayment */}
-      {userData.user_id && <MyPayment user={user} changeTab={() => {}} />}
-
+          
         </div>
       )}
     </div>
