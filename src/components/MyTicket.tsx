@@ -160,7 +160,7 @@ const MyTicket = ({ user }: { user: User }) => {
           <p className="mt-2">
             You can collect your pass in Campus by showing your respective Institution ID card.
           </p>
-          <h4 className="text-red-500 font-bold">Please carry your ID card for Event.</h4>
+          <h4 className="text-red-500 font-bold mt-4">Please carry your ID card for Event.</h4>
 
 
         </div>
