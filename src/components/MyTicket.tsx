@@ -3,6 +3,7 @@ import { supabase } from "@/lib/supabaseClient";
 import { User } from "@supabase/supabase-js";
 import { useRouter } from "next/navigation";
 import { IconLoader2 } from "@tabler/icons-react";
+import MyPayment from "./MyPayment"; // Import MyPayment component for non-free users
 
 // Define the Razorpay payment response type
 interface RazorpayPaymentResponse {
@@ -24,62 +25,68 @@ interface UserExtended extends User {
 const MyTicket = ({ user }: { user: User }) => {
   const [ticketPurchased, setTicketPurchased] = useState(false);
   const [ticketPrice, setTicketPrice] = useState(500); // Default ticket price
-  const [isEligibleForFreePass, setIsEligibleForFreePass] = useState(false);
+  const [isEligibleForFreePass, setIsEligibleForFreePass] = useState(false); // Free pass eligibility
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const [transactionId, setTransactionId] = useState<string | null>(null); // Track transaction ID
   const router = useRouter();
 
   useEffect(() => {
-    const fetchPaymentInfo = async () => {
+    const fetchUserInfo = async () => {
       setLoading(true);
 
       try {
-        // Fetch the user details to check if they are eligible for a free pass
+        // Fetch user details to check if they are eligible for a free pass
         const { data: userData, error: userError } = await supabase
           .from("users")
           .select("is_eligible_for_free_pass")
           .eq("id", user.id)
           .single();
 
-        if (userError) {
-          console.error("Error fetching user data:", userError.message);
-        } else if (userData?.is_eligible_for_free_pass) {
-          // If the user is eligible, set the ticket price to 0 and disable the payment button
+        if (userError || !userData) {
+          console.error("Error fetching user data:", userError?.message);
+        } else if (userData.is_eligible_for_free_pass) {
+          // If the user is eligible for a free pass
           setIsEligibleForFreePass(true);
           setTicketPrice(0);
+        } else {
+          // If not eligible, proceed to show payment options
+          setIsEligibleForFreePass(false);
         }
 
-        // Fetch the user's payment information
+        // Check if the user has already completed the payment
         const { data: payments, error: paymentError } = await supabase
           .from("payments")
           .select("*")
           .eq("user_id", user.id)
-          .eq("payment_status", "completed");
+          .eq("payment_status", "paid");
 
         if (paymentError) {
           setErrorMessage("Error fetching payment information.");
           console.error("Error fetching payments:", paymentError.message);
         } else if (payments && payments.length > 0) {
-          setTicketPurchased(true); // User has purchased a ticket
+          setTicketPurchased(true); // If a ticket is already purchased
         }
       } catch (error) {
         setErrorMessage("An unexpected error occurred.");
+        console.error("Unexpected error:", error);
       }
 
       setLoading(false);
     };
 
-    fetchPaymentInfo();
+    fetchUserInfo();
   }, [user.id]);
 
   const handlePaymentSuccess = async (paymentResponse: RazorpayPaymentResponse) => {
-    const txnId = paymentResponse.razorpay_payment_id; // Use the Razorpay payment ID
+    const txnId = paymentResponse.razorpay_payment_id; // Razorpay payment ID
+
+    // Insert payment record into Supabase
     const { data, error } = await supabase.from("payments").insert({
       user_id: user.id,
       amount: ticketPrice,
-      payment_status: "completed",
-      transaction_id: txnId, // Use the Razorpay payment ID
+      payment_status: "paid",
+      payment_id: txnId,
       created_at: new Date().toISOString(),
     });
 
@@ -88,7 +95,7 @@ const MyTicket = ({ user }: { user: User }) => {
     } else {
       setTransactionId(txnId); // Save the transaction ID in state
       setTicketPurchased(true);
-      router.push("/account"); // Redirect to the account page
+      router.push("/account"); // Redirect to account page
     }
   };
 
@@ -131,7 +138,7 @@ const MyTicket = ({ user }: { user: User }) => {
   };
 
   useEffect(() => {
-    loadRazorpayScript(); // Load the Razorpay script when the component mounts
+    loadRazorpayScript(); // Load the Razorpay script on component mount
   }, []);
 
   if (loading) {
@@ -144,41 +151,34 @@ const MyTicket = ({ user }: { user: User }) => {
 
   return (
     <div>
-      {ticketPurchased ? (
-        <div className="text-center flex flex-col items-center">
-          <h2 className="text-2xl font-bold">Your Mohana Mantra Pass</h2>
-          <p>Congratulations! You have successfully purchased the event pass.</p>
-          <p>Amount Paid: ₹{ticketPrice === 0 ? "Free" : ticketPrice}</p>
-          {transactionId && <p>Transaction ID: {transactionId}</p>}
+      {isEligibleForFreePass ? (
+        // User is eligible for free pass
+        <div className="text-center flex flex-col items-center py-16">
+          <h2 className="text-2xl font-bold">Mohana Mantra Event Pass</h2>
+          <p className="text-green-500">Congratulations! You are eligible for a free pass!</p>
+          <p>You don’t need to make any payment. Enjoy the event!</p>
         </div>
       ) : (
+        // User is not eligible for a free pass and needs to purchase a ticket
         <div className="text-center flex flex-col gap-3 items-center py-16">
-          <h2 className="text-3xl font-bold">Mohana Mantra Event Pass</h2>
-          {isEligibleForFreePass ? (
-            <p className="text-green-500">You are eligible for a free pass!</p>
+          <h2 className="text-2xl font-bold">Mohana Mantra Event Pass</h2>
+          {ticketPurchased ? (
+            <>
+              <p>Thank you! You have successfully purchased the event pass.</p>
+              <p>Payment was successful. You can view your payment details in the MyPayment section.</p>
+            </>
           ) : (
-            <p>The pass price is ₹{ticketPrice}.</p>
+            <>
+              <p>The pass price is ₹{ticketPrice}.</p>
+              <button
+                className="bg-blue-600 hover:bg-blue-700 text-white mt-4 p-2 rounded-md"
+                onClick={handleRazorpayPayment}
+              >
+                Proceed to Payment
+              </button>
+              {errorMessage && <p className="text-red-500 mt-4">{errorMessage}</p>}
+            </>
           )}
-          {isEligibleForFreePass ? (
-            <button
-              className="bg-blue-600 hover:bg-blue-700 text-white mt-4 p-2 rounded-md"
-              onClick={() => {
-                // Mark the ticket as purchased for free users without payment
-                setTicketPurchased(true);
-                router.push("/account"); // Redirect after getting free pass
-              }}
-            >
-              Get Free Pass
-            </button>
-          ) : (
-            <button
-              className="bg-blue-600 hover:bg-blue-700 text-white mt-4 p-2 rounded-md"
-              onClick={handleRazorpayPayment}
-            >
-              Get Your Pass
-            </button>
-          )}
-          {errorMessage && <p className="text-red-500 mt-4">{errorMessage}</p>}
         </div>
       )}
     </div>
