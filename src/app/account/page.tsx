@@ -100,7 +100,7 @@ export default function Account() {
         <div className="p-4 md:px-16 md:py-24 flex flex-col lg:flex-row w-full">
             <aside className="flex flex-col lg:w-1/6 lg:flex-col space-y-4 p-4 md:border-r border-slate-400">
                 {/* Horizontal Scroll Tabs for Mobile */}
-                <div className="flex lg:flex-col flex-row overflow-x-auto space-x-4 lg:space-x-0 lg:space-y-4">
+                <div className="flex lg:flex-col flex-row overflow-x-auto space-x-4 lg:space-x-0 lg:space-y-4 mt-14">
                     <button
                         className={cn(
                             "px-4 py-2 text-white hover:bg-gray-700 rounded-md",
