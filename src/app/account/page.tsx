@@ -14,6 +14,7 @@ export default function Account() {
     const [user, setUser] = useState<null | User>(null);
     const [activeTab, setActiveTab] = useState(0);
     const [alertMessage, setAlertMessage] = useState<string | null>(null); // State for alert message
+    const [isEligibleForFreePass, setIsEligibleForFreePass] = useState(false); // Track eligibility for free pass
     const router = useRouter();
     const tabInParam = useSearchParams().get("tab");
 
@@ -22,20 +23,28 @@ export default function Account() {
             const { data } = await supabase.auth.getSession();
             if (data.session) {
                 setUser(data.session.user);
+
+                // Fetch eligibility for free pass
+                const { data: userData, error } = await supabase
+                    .from("users")
+                    .select("is_eligible_for_free_pass")
+                    .eq("email", data.session.user.email)
+                    .single();
+                
+                if (userData?.is_eligible_for_free_pass) {
+                    setIsEligibleForFreePass(true);
+                }
             } else {
                 const queryParams = new URLSearchParams(window.location.search);
                 if (queryParams.get("registered") === "true") {
-                    // Show the alert message after successful registration
                     setAlertMessage(
                         "Registration successful! A verification email has been sent to your inbox. Please verify your email to log in."
                     );
                 }
-                // Keep the user on the same page but show the alert
             }
         };
         getUser();
 
-        // Switch between different tabs based on the URL parameter
         switch (tabInParam) {
             case "user-details":
                 setActiveTab(0);
@@ -71,9 +80,6 @@ export default function Account() {
                     <IconLoader2 className="animate-spin h-12 w-12 sm:h-16 sm:w-16 lg:h-20 lg:w-20 mt-4" />
                 </div>
             </div>
-
-
-
         );
     }
 
@@ -91,8 +97,8 @@ export default function Account() {
     };
 
     return (
-        <div className="p-4 md:px-16 md:py-24 flex w-full">
-            <aside className="flex flex-col w-1/6 space-y-4 p-4 md:border-r border-slate-400">
+        <div className="p-4 md:px-16 md:py-24 flex flex-col lg:flex-row w-full">
+            <aside className="flex flex-col lg:w-1/6 space-y-4 p-4 md:border-r border-slate-400">
                 <button
                     className={cn(
                         "px-4 py-2 text-white hover:bg-gray-700 rounded-md",
@@ -111,15 +117,17 @@ export default function Account() {
                 >
                     My Ticket
                 </button>
-                <button
-                    className={cn(
-                        "px-4 py-2 text-white hover:bg-gray-700 rounded-md",
-                        activeTab === 2 ? "bg-gray-700" : ""
-                    )}
-                    onClick={() => changeTab(2)}
-                >
-                    My Payment
-                </button>
+                {!isEligibleForFreePass && ( // Conditionally render the My Payment button
+                    <button
+                        className={cn(
+                            "px-4 py-2 text-white hover:bg-gray-700 rounded-md",
+                            activeTab === 2 ? "bg-gray-700" : ""
+                        )}
+                        onClick={() => changeTab(2)}
+                    >
+                        My Payment
+                    </button>
+                )}
                 <button
                     className={cn(
                         "px-4 py-2 text-white hover:bg-gray-700 rounded-md",
@@ -137,7 +145,7 @@ export default function Account() {
                 </button>
             </aside>
             <div className="flex-grow p-4">
-                {alertMessage && ( // Conditionally render the alert message
+                {alertMessage && (
                     <div className="p-4 mb-4 text-green-800 bg-green-200 border border-green-300 rounded">
                         {alertMessage}
                     </div>
