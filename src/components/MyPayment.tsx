@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
-import { User } from "@supabase/supabase-js";
 import { IconLoader2 } from "@tabler/icons-react";
 
+// Define the structure of the Payment object
 interface Payment {
     id: number;
     user_id: string;
@@ -13,45 +13,50 @@ interface Payment {
 }
 
 const MyPayment = ({
-    user,
-    changeTab,
+    userId, // Receive userId from the parent component (UserDetails.tsx)
+    changeTab, // Function to switch between tabs (e.g., for registration)
 }: {
-    user: User;
+    userId: string;
     changeTab: (tab: 0 | 1 | 2 | 3) => void;
 }) => {
-    const [payment, setPayment] = useState<Payment | null>(null);
-    const [loading, setLoading] = useState(true);
-    const [errorMessage, setErrorMessage] = useState("");
+    const [payment, setPayment] = useState<Payment | null>(null); // Store payment details
+    const [loading, setLoading] = useState(true); // Loading state while fetching data
+    const [errorMessage, setErrorMessage] = useState(""); // Store error message if any
 
     useEffect(() => {
         const fetchPaymentInfo = async () => {
             setLoading(true);
+            console.log("Fetching payment info for user_id:", userId); // Debugging
+
             try {
-                // Fetch payment details from Supabase based on user_id
+                // Fetch payment details for the user from the payments table
                 const { data: paymentData, error } = await supabase
                     .from('payments')
                     .select('*')
-                    .eq('user_id', user.id) // Fetch where user_id matches
-                    .eq('payment_status', 'paid') // Fetch only paid payments
-                    .single(); // Expect a single payment record
+                    .eq('user_id', userId) // Filter by user_id
+                    .eq('payment_status', 'paid') // Only fetch paid payments
+                    .single(); // Expect only a single payment record
 
                 if (error || !paymentData) {
-                    // Handle case where no transaction is found
+                    // If no payment found, show the error message
                     setErrorMessage("No transaction found for this user.");
                     console.error("Error fetching payments:", error?.message);
                 } else {
-                    setPayment(paymentData); // Set the payment data in state
+                    // Set the payment details in state
+                    setPayment(paymentData);
                 }
             } catch (error) {
+                // Handle any unexpected errors
                 setErrorMessage("An unexpected error occurred.");
                 console.error("Unexpected error:", error);
             }
-            setLoading(false);
+            setLoading(false); // Stop the loading spinner
         };
 
-        fetchPaymentInfo();
-    }, [user.id]);
+        fetchPaymentInfo(); // Call the function to fetch payment info
+    }, [userId]);
 
+    // Show a loading spinner while fetching data
     if (loading) {
         return (
             <div className="h-full w-full flex items-center justify-center">
@@ -63,22 +68,22 @@ const MyPayment = ({
     return (
         <div>
             {payment ? (
-                // If user has purchased the pass, show receipt details
+                // Display payment receipt details if a transaction is found
                 <div className="flex flex-col items-center py-16 gap-3 text-center">
                     <h2 className="text-2xl font-bold">Payment Receipt</h2>
                     <p>Thank you for registering for the Mohana Mantra 2K24 event.</p>
-                    <p>Amount Paid: ₹{payment.amount}</p>
-                    <p>Payment ID: {payment.payment_id}</p>
-                    <p>Payment Date: {new Date(payment.created_at).toLocaleString()}</p>
+                    <p><strong>Amount Paid:</strong> ₹{payment.amount}</p>
+                    <p><strong>Payment ID:</strong> {payment.payment_id}</p>
+                    <p><strong>Payment Date:</strong> {new Date(payment.created_at).toLocaleString()}</p>
                 </div>
             ) : (
-                // If no transaction found, prompt the user to register
+                // If no transaction found, show the register button and message
                 <div className="flex flex-col items-center py-16 gap-3 text-center">
                     <h2 className="text-2xl font-bold">Register for Mohana Mantra 2K24</h2>
                     <p>No transaction found. Please register for the event.</p>
                     <button
                         className="bg-blue-600 hover:bg-blue-700 text-white mt-4 p-2 rounded-md"
-                        onClick={() => changeTab(1)} // Redirect to registration tab
+                        onClick={() => changeTab(1)} // Trigger registration tab when clicked
                     >
                         Register Now
                     </button>
