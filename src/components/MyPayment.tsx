@@ -32,18 +32,20 @@ const MyPayment = ({
                 const { data: payment, error } = await supabase
                     .from("payments")
                     .select("*")
-                    .eq("user_id", user.id)
-                    .eq("payment_status", "paid")
-                    .single();
+                    .eq("user_id", user.id) // Ensure you are passing the correct user ID from the users table
+                    .eq("payment_status", "paid") // Fetch only paid payments
+                    .single(); // Get a single record
 
                 if (error) {
+                    // Handle case where there's an error in the query
                     setErrorMessage("Error fetching payment information.");
                     console.error("Error fetching payments:", error.message);
                 } else {
-                    setPayment(payment);
+                    setPayment(payment); // Set the payment data in state
                 }
             } catch (error) {
                 setErrorMessage("An unexpected error occurred.");
+                console.error("Unexpected error:", error);
             }
             setLoading(false);
         };
