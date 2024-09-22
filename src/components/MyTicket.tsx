@@ -169,32 +169,48 @@ const MyTicket = ({ user }: { user: User }) => {
 
   return (
     <div>
-      {ticketPurchased ? (
+      {isEligibleForFreePass ? (
+        // User is eligible for free pass
         <div className="text-center flex flex-col items-center py-16">
-          <h2 className="text-2xl font-bold">Thank You for Registering!</h2>
-          <p>You have successfully registered for the event.</p>
-          <p className="mt-2">
-            You can navigate to the <strong>My Payment</strong> tab to see your payment details.
+          <h2 className="text-3xl font-bold">Congratulations!</h2>
+          <p className="text-green-500 mt-4">
+            You are eligible for a free pass to Mohana Mantra 2K24!
           </p>
-          <button
-            className="bg-blue-600 hover:bg-blue-700 text-white mt-4 p-2 rounded-md"
-            onClick={() => router.push("/select-events")} // Adjust the route as needed
-          >
-            Select Interested Events
-          </button>
+          <p className="mt-2">
+            You can collect your pass in Campus by showing your respective Institution ID card.
+          </p>
+          <h4 className="text-red-500 font-bold mt-4">Please carry your ID card for Event.</h4>
         </div>
       ) : (
-        // Show payment option if ticket not purchased
-        <div className="text-center flex flex-col gap-3 items-center py-16">
-          <h2 className="text-3xl font-bold">Mohana Mantra Event Pass</h2>
-          <p>The pass price is ₹{ticketPrice}.</p>
-          <button
-            className="bg-blue-600 hover:bg-blue-700 text-white mt-4 p-2 rounded-md"
-            onClick={handleRazorpayPayment}
-          >
-            Get Your Pass
-          </button>
-          {errorMessage && <p className="text-red-500 mt-4">{errorMessage}</p>}
+        // User is not eligible for free pass
+        <div>
+          {ticketPurchased ? (
+            <div className="text-center flex flex-col items-center py-16">
+              <h2 className="text-2xl font-bold">Thank You for Registering!</h2>
+              <p className="text-green-500 mt-4">You have successfully registered for the event.</p>
+              <p className="mt-4">
+                You can navigate to the <strong>My Payment</strong> tab to see your payment details.
+              </p>
+              <button
+                className="bg-blue-600 hover:bg-blue-700 text-white mt-4 p-2 rounded-md"
+                onClick={() => router.push("/select-events")} // Adjust the route as needed
+              >
+                Select Interested Events
+              </button>
+            </div>
+          ) : (
+            <div className="text-center flex flex-col gap-3 items-center py-16">
+              <h2 className="text-3xl font-bold">Mohana Mantra Event Pass</h2>
+              <p>The pass price is ₹{ticketPrice}.</p>
+              <button
+                className="bg-blue-600 hover:bg-blue-700 text-white mt-4 p-2 rounded-md"
+                onClick={handleRazorpayPayment}
+              >
+                Get Your Pass
+              </button>
+              {errorMessage && <p className="text-red-500 mt-4">{errorMessage}</p>}
+            </div>
+          )}
         </div>
       )}
     </div>
