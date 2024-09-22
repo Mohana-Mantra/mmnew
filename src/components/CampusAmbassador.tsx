@@ -57,16 +57,19 @@ const CampusAmbassador = ({ user }: { user: User }) => {
 
             {/* Apply Now Button */}
             <div className="mt-8">
-                <button
-                    className="bg-blue-600 hover:bg-blue-700 text-white mt-4 p-2 rounded-md transition duration-300"
-                    onClick={() => {
-                        // You can connect this button to your application form, e.g., redirect or open modal.
-                        alert("Redirecting to Campus Ambassador Application Form");
-                    }}
+                <a
+                    href="https://docs.google.com/forms/d/e/1FAIpQLSf-4P1qjgEyDRmZVGfDUx5gB2sFP2lKrz0qBcQ7nmKNJLLmLQ/viewform?usp=sharing"
+                    target="_blank"
+                    rel="noopener noreferrer"
                 >
-                    Apply Now
-                </button>
+                    <button
+                        className="bg-blue-600 hover:bg-blue-700 text-white mt-4 p-2 rounded-md transition duration-300"
+                    >
+                        Apply Now
+                    </button>
+                </a>
             </div>
+
         </div>
     );
 };
