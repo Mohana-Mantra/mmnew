@@ -158,8 +158,11 @@ const MyTicket = ({ user }: { user: User }) => {
             You are eligible for a free pass to Mohana Mantra 2K24!
           </p>
           <p className="mt-2">
-            Your pass is now active. You can view your event details in your account.
+            You can collect your pass in Campus by showing your respective Institution ID card.
           </p>
+          <h4 className="text-red-500 font-bold">Please carry your ID card for Event.</h4>
+
+
         </div>
       ) : (
         // User is not eligible for free pass
