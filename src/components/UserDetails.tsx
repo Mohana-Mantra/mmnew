@@ -197,7 +197,7 @@ const UserDetails = ({ user }: { user: User }) => {
             />
           </div>
           <div className="mb-4 text-left">
-            <label className="block text-sm font-medium mb-1">Phone Number:</label>
+            <label className="block text-sm font-medium mb-1">Roll No:</label>
             <input
               type="string"
               value={userData.rollno || ""}
