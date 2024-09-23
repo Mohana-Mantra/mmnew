@@ -15,6 +15,12 @@ interface EventCategory {
   category: string;
   events: Event[];
 }
+interface UserData {
+    user_id: string;
+    is_eligible_for_free_pass: boolean;
+    phone_number: string | null;
+    full_name: string | null;
+  }
 interface Payment {
     id: number;
     user_id: string;
