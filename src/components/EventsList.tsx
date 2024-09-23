@@ -15,6 +15,14 @@ interface EventCategory {
   category: string;
   events: Event[];
 }
+interface Payment {
+    id: number;
+    user_id: string;
+    amount: number;
+    payment_status: string;
+    payment_id: string;
+    created_at: string;
+}
 
 export default function EventList({ user }: { user: User }) {
   const [eventsByCategory, setEventsByCategory] = useState<EventCategory[]>([]);
