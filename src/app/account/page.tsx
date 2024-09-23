@@ -9,6 +9,7 @@ import MyTicket from "@/components/MyTicket";
 import MyPayment from "@/components/MyPayment";
 import CampusAmbassador from "@/components/CampusAmbassador";
 import { IconLoader2 } from "@tabler/icons-react";
+import EventsList from "@/components/EventsList";
 
 export default function Account() {
     const [user, setUser] = useState<null | User>(null);
@@ -31,7 +32,7 @@ export default function Account() {
                     .select("is_eligible_for_free_pass")
                     .eq("email", data.session.user.email)
                     .single();
-                
+
                 if (userData?.is_eligible_for_free_pass) {
                     setIsEligibleForFreePass(true);
                 }
@@ -50,11 +51,14 @@ export default function Account() {
             case "my-ticket":
                 setActiveTab(1);
                 break;
-            case "my-payment":
+            case "events-list":
                 setActiveTab(2);
                 break;
-            case "campus-ambassador":
+            case "my-payment":
                 setActiveTab(3);
+                break;
+            case "campus-ambassador":
+                setActiveTab(4);
                 break;
             default:
                 setActiveTab(0);
@@ -76,15 +80,17 @@ export default function Account() {
         return null; // Safeguard in case user is null after loading
     }
 
-    const changeTab = (tab: 0 | 1 | 2 | 3) => {
+    const changeTab = (tab: 0 | 1 | 2 | 3 | 4) => {
         const param =
             tab === 0
                 ? "user-details"
                 : tab === 1
-                    ? "my-ticket"
-                    : tab === 2
-                        ? "my-payment"
-                        : "campus-ambassador";
+                ? "my-ticket"
+                : tab === 2
+                ? "events-list"
+                : tab === 3
+                ? "my-payment"
+                : "campus-ambassador";
         router.push(`/account?tab=${param}`);
         setActiveTab(tab);
     };
@@ -112,13 +118,22 @@ export default function Account() {
                     >
                         My Ticket
                     </button>
+                    <button
+                        className={cn(
+                            "px-4 py-2 text-white hover:bg-gray-700 rounded-md",
+                            activeTab === 2 ? "bg-gray-700" : ""
+                        )}
+                        onClick={() => changeTab(2)}
+                    >
+                        Events List
+                    </button>
                     {!isEligibleForFreePass && (
                         <button
                             className={cn(
                                 "px-4 py-2 text-white hover:bg-gray-700 rounded-md",
-                                activeTab === 2 ? "bg-gray-700" : ""
+                                activeTab === 3 ? "bg-gray-700" : ""
                             )}
-                            onClick={() => changeTab(2)}
+                            onClick={() => changeTab(3)}
                         >
                             My Payment
                         </button>
@@ -126,9 +141,9 @@ export default function Account() {
                     <button
                         className={cn(
                             "px-4 py-2 text-white hover:bg-gray-700 rounded-md",
-                            activeTab === 3 ? "bg-gray-700" : ""
+                            activeTab === 4 ? "bg-gray-700" : ""
                         )}
-                        onClick={() => changeTab(3)}
+                        onClick={() => changeTab(4)}
                     >
                         Campus Ambassador
                     </button>
@@ -148,8 +163,9 @@ export default function Account() {
                 )}
                 {activeTab === 0 && <UserDetails user={user} />}
                 {activeTab === 1 && <MyTicket user={user} />}
-                {activeTab === 2 && <MyPayment user={user} changeTab={changeTab} />}
-                {activeTab === 3 && <CampusAmbassador user={user} />}
+                {activeTab === 2 && <EventsList user={user} />}
+                {activeTab === 3 && <MyPayment user={user} changeTab={changeTab} />}
+                {activeTab === 4 && <CampusAmbassador user={user} />}
             </div>
         </div>
     );
