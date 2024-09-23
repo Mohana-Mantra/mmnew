@@ -179,7 +179,7 @@ const MyTicket = ({ user }: { user: User }) => {
               <p className="mt-4">
                 You can navigate to the <strong>My Payment</strong> tab to see your payment details.
               </p>
-              <a
+             { /*<a
                 href="https://forms.office.com/r/g8xarrDDwh"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -187,7 +187,7 @@ const MyTicket = ({ user }: { user: User }) => {
                 <button className="bg-blue-600 hover:bg-blue-700 text-white mt-4 p-2 rounded-md">
                   Select Interested Events
                 </button>
-              </a>
+              </a>*/}
 
             </div>
           ) : (
