@@ -16,6 +16,20 @@ interface EventCategory {
   events: Event[];
 }
 
+interface UserData {
+  id: string;
+  is_eligible_for_free_pass: boolean;
+}
+
+interface Payment {
+  id: number;
+  user_id: string;
+  amount: number;
+  payment_status: string;
+  payment_id: string;
+  created_at: string;
+}
+
 export default function EventList({ user }: { user: User }) {
   const [eventsByCategory, setEventsByCategory] = useState<EventCategory[]>([]);
   const [selectedEvents, setSelectedEvents] = useState<string[]>([]);
@@ -53,11 +67,15 @@ export default function EventList({ user }: { user: User }) {
           return;
         }
 
+        console.log("User Data:", userData); // Debugging log
         const userId = userData.id;
 
+        // If the user is eligible for a free pass, grant access
         if (userData.is_eligible_for_free_pass) {
+          console.log("User is eligible for a free pass");
           setHasAccess(true);
         } else {
+          // Check if the user has made a successful payment
           const { data: payments, error: paymentError } = await supabase
             .from("payments")
             .select("*")
@@ -71,9 +89,13 @@ export default function EventList({ user }: { user: User }) {
             return;
           }
 
+          console.log("Payments Data:", payments); // Debugging log
+
           if (payments && payments.length > 0) {
+            console.log("User has successfully paid");
             setHasAccess(true);
           } else {
+            console.log("No valid payments found for user");
             setHasAccess(false);
           }
         }
@@ -176,7 +198,6 @@ export default function EventList({ user }: { user: User }) {
     setSuccessMessage("");
 
     try {
-      // Remove old entries for this user
       const { error: deleteError } = await supabase
         .from("user_events")
         .delete()
@@ -187,7 +208,6 @@ export default function EventList({ user }: { user: User }) {
         throw new Error("Error clearing previous selections.");
       }
 
-      // Insert new selections
       const eventEntries = selectedEvents.map((eventName) => ({
         user_id: user.id,
         event_name: eventName,
@@ -265,7 +285,7 @@ export default function EventList({ user }: { user: User }) {
                     type="checkbox"
                     checked={isEventSelected(event.event_name)}
                     onChange={() => handleEventSelection(event.event_name)}
-                    disabled={!canUpdate} // Disable selection if past deadline
+                    disabled={!canUpdate}
                     className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                   />
                   <span className={`text-sm ${!canUpdate ? "text-gray-500" : ""}`}>
@@ -284,11 +304,7 @@ export default function EventList({ user }: { user: User }) {
             className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md mt-4 w-full"
             disabled={isSubmitting}
           >
-            {isSubmitting ? (
-              <IconLoader2 className="animate-spin h-5 w-5 mx-auto" />
-            ) : (
-              "Submit"
-            )}
+            {isSubmitting ? <IconLoader2 className="animate-spin h-5 w-5 mx-auto" /> : "Submit"}
           </button>
         ) : (
           <div className="text-center text-red-500">Event registration is closed after October 1, 2024.</div>
