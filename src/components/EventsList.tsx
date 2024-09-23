@@ -15,19 +15,21 @@ interface EventCategory {
   category: string;
   events: Event[];
 }
+
 interface UserData {
-    user_id: string;
-    is_eligible_for_free_pass: boolean;
-    phone_number: string | null;
-    full_name: string | null;
-  }
+  id: string; // Updated field for user ID
+  is_eligible_for_free_pass: boolean;
+  phone_number: string | null;
+  full_name: string | null;
+}
+
 interface Payment {
-    id: number;
-    user_id: string;
-    amount: number;
-    payment_status: string;
-    payment_id: string;
-    created_at: string;
+  id: number;
+  user_id: string;
+  amount: number;
+  payment_status: string;
+  payment_id: string;
+  created_at: string;
 }
 
 export default function EventList({ user }: { user: User }) {
@@ -58,19 +60,21 @@ export default function EventList({ user }: { user: User }) {
         // Fetch user details
         const { data: userData, error: userError } = await supabase
           .from("users")
-          .select("user_id, is_eligible_for_free_pass")
-          .eq("user_id", user.id) // Use user.id from Supabase Auth
+          .select("id, is_eligible_for_free_pass") // Corrected field name
+          .eq("id", user.id) // Use user.id from Supabase Auth
           .single();
-  
+
         if (userError || !userData) {
           console.error("Error fetching user data:", userError?.message);
           setErrorMessage("Error fetching user data.");
           setIsLoading(false);
           return;
         }
-  
-        const userId = userData.user_id;
-  
+
+        console.log("User Data:", userData); // Debugging
+
+        const userId = userData.id;
+
         // Check if the user is eligible for a free pass
         if (userData.is_eligible_for_free_pass) {
           setHasAccess(true);
@@ -80,22 +84,24 @@ export default function EventList({ user }: { user: User }) {
             .from("payments")
             .select("*")
             .eq("user_id", userId)
-            .eq("payment_status", "paid");
-  
+            .eq("payment_status", "paid"); // Ensure payment status is correct
+
           if (paymentError) {
             console.error("Error fetching payment data:", paymentError.message);
             setErrorMessage("Error fetching payment data.");
             setIsLoading(false);
             return;
           }
-  
+
+          console.log("Payments Data:", payments); // Debugging
+
           if (payments && payments.length > 0) {
             setHasAccess(true);
           } else {
             setHasAccess(false);
           }
         }
-  
+
         setIsLoading(false);
       } catch (error) {
         console.error("An unexpected error occurred:", error);
@@ -103,10 +109,9 @@ export default function EventList({ user }: { user: User }) {
         setIsLoading(false);
       }
     };
-  
+
     checkAccess();
   }, [user.id]);
-  
 
   // Fetch events and user's selected events if the user has access
   useEffect(() => {
