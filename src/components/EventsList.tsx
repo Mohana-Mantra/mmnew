@@ -149,15 +149,18 @@ export default function EventList({ user }: { user: User }) {
         .eq("user_id", user.id);
 
       if (deleteError) {
-        throw new Error("Error clearing previous selections. Please try again.");
+        console.error("Error clearing previous selections:", deleteError.message);
+        throw new Error("Error clearing previous selections.");
       }
 
       // Insert new selections
       const eventEntries = selectedEvents.map((eventName) => ({
-        user_id: user.id,
+        user_id: user.id,  // Ensure correct user ID
         event_name: eventName,
         updated_at: new Date().toISOString(),
       }));
+
+      console.log("Selected events for insertion: ", eventEntries); // Debugging log
 
       if (eventEntries.length === 0) {
         throw new Error("Please select at least one event.");
@@ -166,11 +169,13 @@ export default function EventList({ user }: { user: User }) {
       const { error: insertError } = await supabase.from("user_events").insert(eventEntries);
 
       if (insertError) {
+        console.error("Error saving event selections:", insertError.message);
         throw new Error("Error saving event selections.");
       }
 
       setSuccessMessage("Your event selections have been updated!");
     } catch (error: any) {
+      console.error("Submission error:", error.message); // Debugging log
       setErrorMessage(error.message || "An unexpected error occurred.");
     } finally {
       setIsSubmitting(false);
