@@ -7,6 +7,7 @@ interface UserExtended extends User {
   user_id?: string;
   full_name?: string;
   phone_number?: number | string;
+  rollno?:string;
   institute_name?: string;
   year_of_study?: number;
   is_verified?: boolean;
@@ -90,7 +91,7 @@ const UserDetails = ({ user }: { user: User }) => {
         }
       }
 
-      if (!data.phone_number || !data.institute_name || !data.year_of_study) {
+      if (!data.phone_number || !data.institute_name || !data.rollno || !data.year_of_study) {
         setEditMode(true);
       }
       setSelectedInstitute(data.institute_name || "");
@@ -117,12 +118,14 @@ const UserDetails = ({ user }: { user: User }) => {
   
     const updates: {
       phone_number: string | number | null;
+      rollno:string | null;
       institute_name: string | null;
       year_of_study: number | null;
       updated_at: string;
       is_eligible_for_free_pass?: boolean;
     } = {
       phone_number: userData.phone_number || null,
+      rollno:userData.rollno || null,
       institute_name: selectedInstitute || userData.institute_name || null,
       year_of_study: userData.year_of_study || null,
       updated_at: new Date().toISOString(),
@@ -189,6 +192,17 @@ const UserDetails = ({ user }: { user: User }) => {
               value={userData.phone_number || ""}
               onChange={(e) =>
                 setUserData({ ...userData, phone_number: e.target.value })
+              }
+              className="text-black w-full border border-gray-300 p-2 rounded"
+            />
+          </div>
+          <div className="mb-4 text-left">
+            <label className="block text-sm font-medium mb-1">Phone Number:</label>
+            <input
+              type="string"
+              value={userData.rollno || ""}
+              onChange={(e) =>
+                setUserData({ ...userData, rollno: e.target.value })
               }
               className="text-black w-full border border-gray-300 p-2 rounded"
             />
@@ -263,6 +277,9 @@ const UserDetails = ({ user }: { user: User }) => {
           </p>
           <p className="text-left mb-4">
             <strong>Phone Number:</strong> {userData.phone_number || "N/A"}
+          </p>
+          <p className="text-left mb-4">
+            <strong>Roll no:</strong> {userData.rollno || "N/A"}
           </p>
           <p className="text-left mb-4">
             <strong>Institution:</strong> {userData.institute_name || "N/A"}
