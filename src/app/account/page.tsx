@@ -12,9 +12,10 @@ import { IconLoader2 } from "@tabler/icons-react";
 
 export default function Account() {
     const [user, setUser] = useState<null | User>(null);
+    const [isLoading, setIsLoading] = useState(true);
     const [activeTab, setActiveTab] = useState(0);
-    const [alertMessage, setAlertMessage] = useState<string | null>(null); // State for alert message
-    const [isEligibleForFreePass, setIsEligibleForFreePass] = useState(false); // Track eligibility for free pass
+    const [alertMessage, setAlertMessage] = useState<string | null>(null);
+    const [isEligibleForFreePass, setIsEligibleForFreePass] = useState(false);
     const router = useRouter();
     const tabInParam = useSearchParams().get("tab");
 
@@ -35,13 +36,10 @@ export default function Account() {
                     setIsEligibleForFreePass(true);
                 }
             } else {
-                const queryParams = new URLSearchParams(window.location.search);
-                if (queryParams.get("registered") === "true") {
-                    setAlertMessage(
-                        "Registration successful! A verification email has been sent to your inbox. Please verify your email to log in."
-                    );
-                }
+                // Redirect to login/register page if not authenticated
+                router.push("/register");
             }
+            setIsLoading(false);
         };
         getUser();
 
@@ -59,7 +57,7 @@ export default function Account() {
                 setActiveTab(3);
                 break;
             default:
-                setActiveTab(0); // Default tab to 'user-details'
+                setActiveTab(0);
                 break;
         }
     }, [router, tabInParam]);
@@ -69,18 +67,13 @@ export default function Account() {
         router.push("/register"); // Redirect to register after logout
     };
 
+    // Avoid rendering until we know whether the user is logged in
+    if (isLoading) {
+        return null; // Optionally, display a loading spinner here
+    }
+
     if (!user) {
-        return (
-            <div className="h-screen flex items-center justify-center p-4">
-                <div className="text-center flex flex-col items-center">
-                    <p className="text-base sm:text-lg md:text-xl lg:text-2xl">
-                        Registration successful! <br />
-                        A verification email has been sent to your inbox. Please verify your email to log in.
-                    </p>
-                    <IconLoader2 className="animate-spin h-12 w-12 sm:h-16 sm:w-16 lg:h-20 lg:w-20 mt-4" />
-                </div>
-            </div>
-        );
+        return null; // Safeguard in case user is null after loading
     }
 
     const changeTab = (tab: 0 | 1 | 2 | 3) => {
@@ -119,7 +112,7 @@ export default function Account() {
                     >
                         My Ticket
                     </button>
-                    {!isEligibleForFreePass && ( // Conditionally render the My Payment button
+                    {!isEligibleForFreePass && (
                         <button
                             className={cn(
                                 "px-4 py-2 text-white hover:bg-gray-700 rounded-md",
