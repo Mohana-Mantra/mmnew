@@ -5,6 +5,7 @@ import ProShows from "@/components/ProShow";
 import Sponsers from "@/components/Sponsers";
 
 import "./style.css";
+import StickyCountdown from "@/components/StickyCountdown";
 
 export default function Home() {
     return (
@@ -14,7 +15,7 @@ export default function Home() {
             <ProShows />
             <Gallery />
             <Sponsers />
-            {/* <CountDown /> */}
+            <StickyCountdown />
         </>
     );
 }

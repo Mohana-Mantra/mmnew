@@ -1,4 +1,3 @@
-import StickyCountdown from "@/components/StickyCountdown";
 import type { Metadata } from "next";
 import { Lato } from "next/font/google";
 import Navbar from "../components/Navbar";
@@ -21,7 +20,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     <div className="flex-1 flex-grow" id="main-body">
                         {children}
                     </div>
-                    <StickyCountdown />
                 </main>
             </body>
         </html>
