@@ -11,14 +11,12 @@ interface RazorpayPaymentResponse {
   razorpay_signature?: string;
 }
 
-interface UserExtended extends User {
-  user_id?: string;
-  full_name?: string;
-  phone_number?: number | string;
-  institute_name?: string;
-  year_of_study?: number;
-  is_verified?: boolean;
-  is_eligible_for_free_pass?: boolean;
+// Define a new interface that matches the data from your 'users' table
+interface UserData {
+  user_id: string;
+  is_eligible_for_free_pass: boolean;
+  phone_number: string | null;
+  full_name: string | null;
 }
 
 const MyTicket = ({ user }: { user: User }) => {
@@ -28,6 +26,7 @@ const MyTicket = ({ user }: { user: User }) => {
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const [transactionId, setTransactionId] = useState<string | null>(null); // Track transaction ID
+  const [userDetails, setUserDetails] = useState<UserData | null>(null); // Track user details
   const router = useRouter();
 
   useEffect(() => {
@@ -35,34 +34,37 @@ const MyTicket = ({ user }: { user: User }) => {
       setLoading(true);
 
       try {
-        // Fetch the user details to check if they are eligible for a free pass
+        // Fetch the user details including full_name and phone_number
         const { data: userData, error: userError } = await supabase
           .from("users")
-          .select("user_id, is_eligible_for_free_pass")
+          .select("user_id, is_eligible_for_free_pass, phone_number, full_name")
           .eq("email", user.email)
           .single();
 
         if (userError) {
           console.error("Error fetching user data:", userError.message);
-        } else if (userData?.is_eligible_for_free_pass) {
-          // User is eligible for a free pass
-          setIsEligibleForFreePass(true);
-          setTicketPurchased(true); // Consider ticket purchased for free pass users
         } else {
-          setIsEligibleForFreePass(false);
+          setUserDetails(userData);
+          if (userData?.is_eligible_for_free_pass) {
+            // User is eligible for a free pass
+            setIsEligibleForFreePass(true);
+            setTicketPurchased(true); // Consider ticket purchased for free pass users
+          } else {
+            setIsEligibleForFreePass(false);
 
-          // Fetch the user's payment information
-          const { data: payments, error: paymentError } = await supabase
-            .from("payments")
-            .select("*")
-            .eq("user_id", userData.user_id)
-            .eq("payment_status", "paid");
+            // Fetch the user's payment information
+            const { data: payments, error: paymentError } = await supabase
+              .from("payments")
+              .select("*")
+              .eq("user_id", userData.user_id)
+              .eq("payment_status", "paid");
 
-          if (paymentError) {
-            setErrorMessage("Error fetching payment information.");
-            console.error("Error fetching payments:", paymentError.message);
-          } else if (payments && payments.length > 0) {
-            setTicketPurchased(true); // User has purchased a ticket
+            if (paymentError) {
+              setErrorMessage("Error fetching payment information.");
+              console.error("Error fetching payments:", paymentError.message);
+            } else if (payments && payments.length > 0) {
+              setTicketPurchased(true); // User has purchased a ticket
+            }
           }
         }
       } catch (error) {
@@ -79,24 +81,9 @@ const MyTicket = ({ user }: { user: User }) => {
   const handlePaymentSuccess = async (paymentResponse: RazorpayPaymentResponse) => {
     const txnId = paymentResponse.razorpay_payment_id; // Use the Razorpay payment ID
 
-    // Fetch user_id from users table
-    const { data: userData, error: userError } = await supabase
-      .from("users")
-      .select("user_id")
-      .eq("email", user.email)
-      .single();
-
-    if (userError || !userData) {
-      setErrorMessage("Error fetching user data for payment processing.");
-      console.error("Error fetching user data:", userError?.message);
-      return;
-    }
-
-    const userId = userData.user_id;
-
     // Insert payment details into payments table
     const { error } = await supabase.from("payments").insert({
-      user_id: userId,
+      user_id: userDetails?.user_id,
       amount: ticketPrice,
       payment_status: "paid",
       payment_id: txnId, // Use the Razorpay payment ID
@@ -126,11 +113,12 @@ const MyTicket = ({ user }: { user: User }) => {
       amount: ticketPrice * 100, // Convert price to paise (1 INR = 100 paise)
       currency: "INR",
       name: "Mohana Mantra",
-      description: "Event Pass",
+      description: "MOHANA MANTRA 2K24 (OUT-HOUSE)", // Updated payment title
       handler: handlePaymentSuccess,
       prefill: {
-        name: user.user_metadata?.full_name || "Guest",
+        name: userDetails?.full_name || "Guest", // Use fetched user name
         email: user.email,
+        contact: userDetails?.phone_number || "", // Use the fetched phone number
       },
       theme: {
         color: "#528FF0",
@@ -177,9 +165,9 @@ const MyTicket = ({ user }: { user: User }) => {
             You are eligible for a free pass to Mohana Mantra 2K24!
           </p>
           <p className="mt-2">
-            You can collect your pass in Campus by showing your respective Institution ID card.
+            You can collect your pass on campus by showing your respective institution ID card.
           </p>
-          <h4 className="text-red-500 font-bold mt-4">Please carry your ID card for Event.</h4>
+          <h4 className="text-red-500 font-bold mt-4">Please carry your ID card for the event.</h4>
         </div>
       ) : (
         // User is not eligible for free pass
