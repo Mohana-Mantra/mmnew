@@ -179,12 +179,16 @@ const MyTicket = ({ user }: { user: User }) => {
               <p className="mt-4">
                 You can navigate to the <strong>My Payment</strong> tab to see your payment details.
               </p>
-              <button
-                className="bg-blue-600 hover:bg-blue-700 text-white mt-4 p-2 rounded-md"
-                onClick={() => router.push("/select-events")} // Adjust the route as needed
+              <a
+                href="https://forms.office.com/r/g8xarrDDwh"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                Select Interested Events
-              </button>
+                <button className="bg-blue-600 hover:bg-blue-700 text-white mt-4 p-2 rounded-md">
+                  Select Interested Events
+                </button>
+              </a>
+
             </div>
           ) : (
             <div className="text-center flex flex-col gap-3 items-center py-16">
