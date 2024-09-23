@@ -17,10 +17,8 @@ interface EventCategory {
 }
 
 interface UserData {
-  id: string; // Updated field for user ID
+  id: string;
   is_eligible_for_free_pass: boolean;
-  phone_number: string | null;
-  full_name: string | null;
 }
 
 interface Payment {
@@ -60,8 +58,8 @@ export default function EventList({ user }: { user: User }) {
         // Fetch user details
         const { data: userData, error: userError } = await supabase
           .from("users")
-          .select("id, is_eligible_for_free_pass") // Corrected field name
-          .eq("id", user.id) // Use user.id from Supabase Auth
+          .select("id, is_eligible_for_free_pass")
+          .eq("id", user.id)
           .single();
 
         if (userError || !userData) {
@@ -84,7 +82,7 @@ export default function EventList({ user }: { user: User }) {
             .from("payments")
             .select("*")
             .eq("user_id", userId)
-            .eq("payment_status", "paid"); // Ensure payment status is correct
+            .eq("payment_status", "paid");
 
           if (paymentError) {
             console.error("Error fetching payment data:", paymentError.message);
@@ -187,7 +185,7 @@ export default function EventList({ user }: { user: User }) {
 
       // Insert new selections
       const eventEntries = selectedEvents.map((eventName) => ({
-        user_id: user.id, // Ensure correct user ID
+        user_id: user.id,
         event_name: eventName,
         updated_at: new Date().toISOString(),
       }));
@@ -225,17 +223,17 @@ export default function EventList({ user }: { user: User }) {
     );
   }
 
-  // Show message if user doesn't have access
+  // Show message if user doesn't have access (redirect to MyPayment.tsx)
   if (!hasAccess) {
     return (
       <div className="max-w-2xl mx-auto p-4 text-center">
         <h1 className="text-3xl font-bold mb-4">Register for Events</h1>
         <p className="text-lg">
-          To register for events, please purchase an event pass.
+          To register for events, please purchase an event pass or check your eligibility.
         </p>
         <button
           className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md mt-4"
-          onClick={() => router.push("/account?tab=my-ticket")}
+          onClick={() => router.push("/account?tab=my-ticket")} // Redirect to MyPayment.tsx
         >
           Purchase Event Pass
         </button>
