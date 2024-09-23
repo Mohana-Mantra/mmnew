@@ -23,6 +23,7 @@ export default function EventList({ user }: { user: User }) {
   const [successMessage, setSuccessMessage] = useState("");
   const router = useRouter();
 
+  // Fetch events and user's selected events
   useEffect(() => {
     const fetchEvents = async () => {
       const { data: events, error } = await supabase
@@ -67,6 +68,7 @@ export default function EventList({ user }: { user: User }) {
     fetchUserEvents();
   }, [user.id]);
 
+  // Handle event selection
   const handleEventSelection = (eventName: string) => {
     if (selectedEvents.includes(eventName)) {
       setSelectedEvents(selectedEvents.filter((event) => event !== eventName));
@@ -75,6 +77,7 @@ export default function EventList({ user }: { user: User }) {
     }
   };
 
+  // Handle form submission
   const handleSubmit = async () => {
     setIsSubmitting(true);
     setErrorMessage("");
@@ -88,7 +91,7 @@ export default function EventList({ user }: { user: User }) {
         .eq("user_id", user.id);
 
       if (deleteError) {
-        throw new Error("Error updating events. Please try again.");
+        throw new Error("Error clearing previous selections. Please try again.");
       }
 
       // Insert new selections
@@ -98,7 +101,13 @@ export default function EventList({ user }: { user: User }) {
         updated_at: new Date().toISOString(),
       }));
 
-      const { error: insertError } = await supabase.from("user_events").insert(eventEntries);
+      if (eventEntries.length === 0) {
+        throw new Error("Please select at least one event.");
+      }
+
+      const { error: insertError } = await supabase
+        .from("user_events")
+        .insert(eventEntries);
 
       if (insertError) {
         throw new Error("Error saving event selections.");
@@ -112,6 +121,7 @@ export default function EventList({ user }: { user: User }) {
     }
   };
 
+  // Check if an event is selected
   const isEventSelected = (eventName: string) => selectedEvents.includes(eventName);
 
   return (
