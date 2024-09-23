@@ -61,16 +61,16 @@ export default function EventList({ user }: { user: User }) {
           .select("user_id, is_eligible_for_free_pass")
           .eq("user_id", user.id) // Use user.id from Supabase Auth
           .single();
-
+  
         if (userError || !userData) {
           console.error("Error fetching user data:", userError?.message);
           setErrorMessage("Error fetching user data.");
           setIsLoading(false);
           return;
         }
-
+  
         const userId = userData.user_id;
-
+  
         // Check if the user is eligible for a free pass
         if (userData.is_eligible_for_free_pass) {
           setHasAccess(true);
@@ -81,21 +81,21 @@ export default function EventList({ user }: { user: User }) {
             .select("*")
             .eq("user_id", userId)
             .eq("payment_status", "paid");
-
+  
           if (paymentError) {
             console.error("Error fetching payment data:", paymentError.message);
             setErrorMessage("Error fetching payment data.");
             setIsLoading(false);
             return;
           }
-
+  
           if (payments && payments.length > 0) {
             setHasAccess(true);
           } else {
             setHasAccess(false);
           }
         }
-
+  
         setIsLoading(false);
       } catch (error) {
         console.error("An unexpected error occurred:", error);
@@ -103,9 +103,10 @@ export default function EventList({ user }: { user: User }) {
         setIsLoading(false);
       }
     };
-
+  
     checkAccess();
   }, [user.id]);
+  
 
   // Fetch events and user's selected events if the user has access
   useEffect(() => {
