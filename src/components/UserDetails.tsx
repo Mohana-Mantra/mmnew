@@ -253,8 +253,7 @@ const UserDetails = ({ user }: { user: User }) => {
               <option value={2}>2</option>
               <option value={3}>3</option>
               <option value={4}>4</option>
-              <option value={4}>5</option>
-            
+              <option value={5}>5</option>
               <option value="Other">Other</option>
             </select>
           </div>
