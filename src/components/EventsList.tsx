@@ -25,6 +25,7 @@ export default function EventList({ user }: { user: User }) {
   const [successMessage, setSuccessMessage] = useState("");
   const router = useRouter();
 
+  // Check if the user has access (either by paying or being eligible for a free pass)
   useEffect(() => {
     const checkAccess = async () => {
       try {
@@ -44,11 +45,11 @@ export default function EventList({ user }: { user: User }) {
 
         const userId = userData.user_id;
 
-        // Check if user is eligible for free pass
+        // Check if the user is eligible for a free pass
         if (userData.is_eligible_for_free_pass) {
           setHasAccess(true);
         } else {
-          // Check if user has made a successful payment
+          // Check if the user has made a successful payment
           const { data: payments, error: paymentError } = await supabase
             .from("payments")
             .select("*")
@@ -80,6 +81,7 @@ export default function EventList({ user }: { user: User }) {
     checkAccess();
   }, [user.email]);
 
+  // Fetch events and user-selected events if the user has access
   useEffect(() => {
     if (hasAccess) {
       const fetchEvents = async () => {
@@ -177,6 +179,7 @@ export default function EventList({ user }: { user: User }) {
 
   const isEventSelected = (eventName: string) => selectedEvents.includes(eventName);
 
+  // Show loading indicator while checking access
   if (isLoading) {
     return (
       <div className="h-screen flex items-center justify-center">
@@ -185,6 +188,7 @@ export default function EventList({ user }: { user: User }) {
     );
   }
 
+  // Show message if user doesn't have access
   if (!hasAccess) {
     return (
       <div className="max-w-2xl mx-auto p-4 text-center">
