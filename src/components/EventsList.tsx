@@ -19,56 +19,113 @@ export default function EventList({ user }: { user: User }) {
   const [eventsByCategory, setEventsByCategory] = useState<EventCategory[]>([]);
   const [selectedEvents, setSelectedEvents] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasAccess, setHasAccess] = useState(false); // Whether the user can register for events
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const router = useRouter();
 
-  // Fetch events and user's selected events
   useEffect(() => {
-    const fetchEvents = async () => {
-      const { data: events, error } = await supabase
-        .from("events")
-        .select("id, event_name, category")
-        .order("category", { ascending: true })
-        .order("event_name", { ascending: true });
+    const checkAccess = async () => {
+      try {
+        // Fetch user details
+        const { data: userData, error: userError } = await supabase
+          .from("users")
+          .select("user_id, is_eligible_for_free_pass")
+          .eq("email", user.email)
+          .single();
 
-      if (error) {
-        console.error("Error fetching events:", error.message);
-        return;
-      }
-
-      // Group events by category
-      const groupedEvents = events.reduce((acc: EventCategory[], event: Event) => {
-        let category = acc.find((cat) => cat.category === event.category);
-        if (category) {
-          category.events.push(event);
-        } else {
-          acc.push({ category: event.category, events: [event] });
+        if (userError || !userData) {
+          console.error("Error fetching user data:", userError?.message);
+          setErrorMessage("Error fetching user data.");
+          setIsLoading(false);
+          return;
         }
-        return acc;
-      }, []);
 
-      setEventsByCategory(groupedEvents);
-    };
+        const userId = userData.user_id;
 
-    const fetchUserEvents = async () => {
-      const { data: userEvents, error } = await supabase
-        .from("user_events")
-        .select("event_name")
-        .eq("user_id", user.id);
+        // Check if user is eligible for free pass
+        if (userData.is_eligible_for_free_pass) {
+          setHasAccess(true);
+        } else {
+          // Check if user has made a successful payment
+          const { data: payments, error: paymentError } = await supabase
+            .from("payments")
+            .select("*")
+            .eq("user_id", userId)
+            .eq("payment_status", "paid");
 
-      if (error) {
-        console.error("Error fetching user events:", error.message);
-      } else {
-        setSelectedEvents(userEvents.map((event) => event.event_name));
+          if (paymentError) {
+            console.error("Error fetching payment data:", paymentError.message);
+            setErrorMessage("Error fetching payment data.");
+            setIsLoading(false);
+            return;
+          }
+
+          if (payments && payments.length > 0) {
+            setHasAccess(true);
+          } else {
+            setHasAccess(false);
+          }
+        }
+
+        setIsLoading(false);
+      } catch (error) {
+        console.error("An unexpected error occurred:", error);
+        setErrorMessage("An unexpected error occurred.");
+        setIsLoading(false);
       }
     };
 
-    fetchEvents();
-    fetchUserEvents();
-  }, [user.id]);
+    checkAccess();
+  }, [user.email]);
 
-  // Handle event selection
+  useEffect(() => {
+    if (hasAccess) {
+      const fetchEvents = async () => {
+        const { data: events, error } = await supabase
+          .from("events")
+          .select("id, event_name, category")
+          .order("category", { ascending: true })
+          .order("event_name", { ascending: true });
+
+        if (error) {
+          console.error("Error fetching events:", error.message);
+          return;
+        }
+
+        // Group events by category
+        const groupedEvents = events.reduce((acc: EventCategory[], event: Event) => {
+          let category = acc.find((cat) => cat.category === event.category);
+          if (category) {
+            category.events.push(event);
+          } else {
+            acc.push({ category: event.category, events: [event] });
+          }
+          return acc;
+        }, []);
+
+        setEventsByCategory(groupedEvents);
+      };
+
+      const fetchUserEvents = async () => {
+        const { data: userEvents, error } = await supabase
+          .from("user_events")
+          .select("event_name")
+          .eq("user_id", user.id);
+
+        if (error) {
+          console.error("Error fetching user events:", error.message);
+        } else {
+          setSelectedEvents(userEvents.map((event) => event.event_name));
+        }
+      };
+
+      fetchEvents();
+      fetchUserEvents();
+    }
+  }, [hasAccess, user.id]);
+
   const handleEventSelection = (eventName: string) => {
     if (selectedEvents.includes(eventName)) {
       setSelectedEvents(selectedEvents.filter((event) => event !== eventName));
@@ -77,7 +134,6 @@ export default function EventList({ user }: { user: User }) {
     }
   };
 
-  // Handle form submission
   const handleSubmit = async () => {
     setIsSubmitting(true);
     setErrorMessage("");
@@ -105,9 +161,7 @@ export default function EventList({ user }: { user: User }) {
         throw new Error("Please select at least one event.");
       }
 
-      const { error: insertError } = await supabase
-        .from("user_events")
-        .insert(eventEntries);
+      const { error: insertError } = await supabase.from("user_events").insert(eventEntries);
 
       if (insertError) {
         throw new Error("Error saving event selections.");
@@ -121,8 +175,32 @@ export default function EventList({ user }: { user: User }) {
     }
   };
 
-  // Check if an event is selected
   const isEventSelected = (eventName: string) => selectedEvents.includes(eventName);
+
+  if (isLoading) {
+    return (
+      <div className="h-screen flex items-center justify-center">
+        <IconLoader2 className="animate-spin h-12 w-12" />
+      </div>
+    );
+  }
+
+  if (!hasAccess) {
+    return (
+      <div className="max-w-2xl mx-auto p-4 text-center">
+        <h1 className="text-3xl font-bold mb-4">Register for Events</h1>
+        <p className="text-lg">
+          To register for events, please purchase an event pass.
+        </p>
+        <button
+          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md mt-4"
+          onClick={() => router.push("/account?tab=my-ticket")}
+        >
+          Purchase Event Pass
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-4xl mx-auto p-4">
