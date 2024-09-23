@@ -35,7 +35,7 @@ export default function EventList({ user }: { user: User }) {
   const [selectedEvents, setSelectedEvents] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [hasAccess, setHasAccess] = useState(false);
+  const [hasAccess, setHasAccess] = useState(false); // Whether the user can register for events
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [canUpdate, setCanUpdate] = useState(true);
@@ -45,6 +45,7 @@ export default function EventList({ user }: { user: User }) {
   const updateDeadline = dayjs("2024-10-01");
 
   useEffect(() => {
+    // Check if the user can still update selections
     if (today.isAfter(updateDeadline)) {
       setCanUpdate(false);
     }
@@ -54,6 +55,7 @@ export default function EventList({ user }: { user: User }) {
   useEffect(() => {
     const checkAccess = async () => {
       try {
+        // Fetch user details
         const { data: userData, error: userError } = await supabase
           .from("users")
           .select("id, is_eligible_for_free_pass")
@@ -67,20 +69,20 @@ export default function EventList({ user }: { user: User }) {
           return;
         }
 
-        console.log("User Data:", userData); // Debugging log
+        console.log("Fetched User Data:", userData); // Debugging
+
         const userId = userData.id;
 
-        // If the user is eligible for a free pass, grant access
+        // Check if the user is eligible for a free pass
         if (userData.is_eligible_for_free_pass) {
-          console.log("User is eligible for a free pass");
           setHasAccess(true);
+          console.log("User is eligible for a free pass.");
         } else {
           // Check if the user has made a successful payment
           const { data: payments, error: paymentError } = await supabase
             .from("payments")
             .select("*")
-            .eq("user_id", userId)
-            .eq("payment_status", "paid");
+            .eq("user_id", userId);
 
           if (paymentError) {
             console.error("Error fetching payment data:", paymentError.message);
@@ -89,14 +91,19 @@ export default function EventList({ user }: { user: User }) {
             return;
           }
 
-          console.log("Payments Data:", payments); // Debugging log
+          console.log("Fetched Payments Data:", payments); // Debugging
 
-          if (payments && payments.length > 0) {
-            console.log("User has successfully paid");
+          // Check if any payment has a status of 'paid' (case-insensitive)
+          const hasPaid = payments.some(
+            (payment) => payment.payment_status.toLowerCase() === "paid"
+          );
+
+          if (hasPaid) {
             setHasAccess(true);
+            console.log("User has made a successful payment.");
           } else {
-            console.log("No valid payments found for user");
             setHasAccess(false);
+            console.log("User has not made a successful payment.");
           }
         }
 
@@ -136,7 +143,7 @@ export default function EventList({ user }: { user: User }) {
               { id: 9, event_name: "Voice of MM", category: "Kalakshetra" },
               { id: 10, event_name: "Band Battle", category: "Kalakshetra" },
               { id: 11, event_name: "Ramp Walk", category: "Kalakshetra" },
-              { id: 12, event_name: "Picture perfection", category: "Kalakshetra" },
+              { id: 12, event_name: "Picture Perfection", category: "Kalakshetra" },
               { id: 13, event_name: "Hall of Game", category: "Kalakshetra" },
               { id: 14, event_name: "Chicken Dinner", category: "Kalakshetra" },
               { id: 15, event_name: "Ultimate Battle", category: "Kalakshetra" },
@@ -146,12 +153,12 @@ export default function EventList({ user }: { user: User }) {
             category: "Technoholic & Workshop",
             events: [
               { id: 16, event_name: "Hackathon (3,4,5 Oct)", category: "Technoholic & Workshop" },
-              { id: 17, event_name: "3D- Design, Modeling & Development (4,5 Oct)", category: "Technoholic & Workshop" },
+              { id: 17, event_name: "3D-Design, Modeling & Development (4,5 Oct)", category: "Technoholic & Workshop" },
               { id: 18, event_name: "AR & VR Workshop (4,5 Oct)", category: "Technoholic & Workshop" },
-              { id: 19, event_name: "Tech exhibition (Day-1 Morning)", category: "Technoholic & Workshop" },
-              { id: 20, event_name: "Code sprint (Day-1 Morning)", category: "Technoholic & Workshop" },
+              { id: 19, event_name: "Tech Exhibition (Day-1 Morning)", category: "Technoholic & Workshop" },
+              { id: 20, event_name: "Code Sprint (Day-1 Morning)", category: "Technoholic & Workshop" },
               { id: 21, event_name: "Life Saver Workshop (Day-1 Morning)", category: "Technoholic & Workshop" },
-              { id: 22, event_name: "Workshop on Embedded system & VLSI (Day-1 Morning)", category: "Technoholic & Workshop" },
+              { id: 22, event_name: "Embedded System & VLSI Workshop (Day-1 Morning)", category: "Technoholic & Workshop" },
               { id: 23, event_name: "Quizonomics (Day-1 Afternoon)", category: "Technoholic & Workshop" },
               { id: 24, event_name: "Virtual Modeling (Day-2 Morning)", category: "Technoholic & Workshop" },
               { id: 25, event_name: "Find Flag Without Lag (Day-2 Morning)", category: "Technoholic & Workshop" },
@@ -198,6 +205,7 @@ export default function EventList({ user }: { user: User }) {
     setSuccessMessage("");
 
     try {
+      // Remove old entries for this user
       const { error: deleteError } = await supabase
         .from("user_events")
         .delete()
@@ -208,6 +216,7 @@ export default function EventList({ user }: { user: User }) {
         throw new Error("Error clearing previous selections.");
       }
 
+      // Insert new selections
       const eventEntries = selectedEvents.map((eventName) => ({
         user_id: user.id,
         event_name: eventName,
@@ -218,6 +227,8 @@ export default function EventList({ user }: { user: User }) {
         throw new Error("Please select at least one event.");
       }
 
+      console.log("Selected events for insertion: ", eventEntries); // Debugging log
+
       const { error: insertError } = await supabase.from("user_events").insert(eventEntries);
 
       if (insertError) {
@@ -227,6 +238,7 @@ export default function EventList({ user }: { user: User }) {
 
       setSuccessMessage("Your event selections have been updated!");
     } catch (error: any) {
+      console.error("Submission error:", error.message); // Debugging log
       setErrorMessage(error.message || "An unexpected error occurred.");
     } finally {
       setIsSubmitting(false);
@@ -235,6 +247,7 @@ export default function EventList({ user }: { user: User }) {
 
   const isEventSelected = (eventName: string) => selectedEvents.includes(eventName);
 
+  // Show loading indicator while checking access
   if (isLoading) {
     return (
       <div className="h-screen flex items-center justify-center">
@@ -243,14 +256,17 @@ export default function EventList({ user }: { user: User }) {
     );
   }
 
+  // Show message if user doesn't have access (redirect to MyPayment.tsx)
   if (!hasAccess) {
     return (
       <div className="max-w-2xl mx-auto p-4 text-center">
         <h1 className="text-3xl font-bold mb-4">Register for Events</h1>
-        <p className="text-lg">To register for events, please purchase an event pass.</p>
+        <p className="text-lg">
+          To register for events, please purchase an event pass or check your eligibility.
+        </p>
         <button
           className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md mt-4"
-          onClick={() => router.push("/account?tab=my-ticket")}
+          onClick={() => router.push("/account?tab=my-ticket")} // Redirect to MyPayment.tsx
         >
           Purchase Event Pass
         </button>
@@ -285,7 +301,7 @@ export default function EventList({ user }: { user: User }) {
                     type="checkbox"
                     checked={isEventSelected(event.event_name)}
                     onChange={() => handleEventSelection(event.event_name)}
-                    disabled={!canUpdate}
+                    disabled={!canUpdate} // Disable selection if past deadline
                     className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                   />
                   <span className={`text-sm ${!canUpdate ? "text-gray-500" : ""}`}>
@@ -304,10 +320,16 @@ export default function EventList({ user }: { user: User }) {
             className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md mt-4 w-full"
             disabled={isSubmitting}
           >
-            {isSubmitting ? <IconLoader2 className="animate-spin h-5 w-5 mx-auto" /> : "Submit"}
+            {isSubmitting ? (
+              <IconLoader2 className="animate-spin h-5 w-5 mx-auto" />
+            ) : (
+              "Submit"
+            )}
           </button>
         ) : (
-          <div className="text-center text-red-500">Event registration is closed after October 1, 2024.</div>
+          <div className="text-center text-red-500">
+            Event registration is closed after October 1, 2024.
+          </div>
         )}
       </form>
 
