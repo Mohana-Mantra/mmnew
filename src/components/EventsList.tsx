@@ -3,6 +3,7 @@ import { supabase } from "@/lib/supabaseClient";
 import { User } from "@supabase/supabase-js";
 import { useRouter } from "next/navigation";
 import { IconLoader2 } from "@tabler/icons-react";
+import dayjs from "dayjs";
 
 interface Event {
   id: number;
@@ -23,7 +24,18 @@ export default function EventList({ user }: { user: User }) {
   const [hasAccess, setHasAccess] = useState(false); // Whether the user can register for events
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [canUpdate, setCanUpdate] = useState(true);
   const router = useRouter();
+
+  const today = dayjs();
+  const updateDeadline = dayjs("2024-10-01");
+
+  useEffect(() => {
+    // Check if the user can still update selections
+    if (today.isAfter(updateDeadline)) {
+      setCanUpdate(false);
+    }
+  }, [today]);
 
   // Check if the user has access (either by paying or being eligible for a free pass)
   useEffect(() => {
@@ -33,7 +45,7 @@ export default function EventList({ user }: { user: User }) {
         const { data: userData, error: userError } = await supabase
           .from("users")
           .select("user_id, is_eligible_for_free_pass")
-          .eq("email", user.email)
+          .eq("user_id", user.id) // Use user.id from Supabase Auth
           .single();
 
         if (userError || !userData) {
@@ -79,9 +91,9 @@ export default function EventList({ user }: { user: User }) {
     };
 
     checkAccess();
-  }, [user.email]);
+  }, [user.id]);
 
-  // Fetch events and user-selected events if the user has access
+  // Fetch events and user's selected events if the user has access
   useEffect(() => {
     if (hasAccess) {
       const fetchEvents = async () => {
@@ -155,16 +167,16 @@ export default function EventList({ user }: { user: User }) {
 
       // Insert new selections
       const eventEntries = selectedEvents.map((eventName) => ({
-        user_id: user.id,  // Ensure correct user ID
+        user_id: user.id, // Ensure correct user ID
         event_name: eventName,
         updated_at: new Date().toISOString(),
       }));
 
-      console.log("Selected events for insertion: ", eventEntries); // Debugging log
-
       if (eventEntries.length === 0) {
         throw new Error("Please select at least one event.");
       }
+
+      console.log("Selected events for insertion: ", eventEntries); // Debugging log
 
       const { error: insertError } = await supabase.from("user_events").insert(eventEntries);
 
@@ -238,27 +250,36 @@ export default function EventList({ user }: { user: User }) {
                     type="checkbox"
                     checked={isEventSelected(event.event_name)}
                     onChange={() => handleEventSelection(event.event_name)}
+                    disabled={!canUpdate} // Disable selection if past deadline
                     className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                   />
-                  <span className="text-sm">{event.event_name}</span>
+                  <span className={`text-sm ${!canUpdate ? "text-gray-500" : ""}`}>
+                    {event.event_name}
+                  </span>
                 </label>
               ))}
             </div>
           </div>
         ))}
 
-        <button
-          type="button"
-          onClick={handleSubmit}
-          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md mt-4 w-full"
-          disabled={isSubmitting}
-        >
-          {isSubmitting ? (
-            <IconLoader2 className="animate-spin h-5 w-5 mx-auto" />
-          ) : (
-            "Submit"
-          )}
-        </button>
+        {canUpdate ? (
+          <button
+            type="button"
+            onClick={handleSubmit}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md mt-4 w-full"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? (
+              <IconLoader2 className="animate-spin h-5 w-5 mx-auto" />
+            ) : (
+              "Submit"
+            )}
+          </button>
+        ) : (
+          <div className="text-center text-red-500">
+            Event registration is closed after October 1, 2024.
+          </div>
+        )}
       </form>
 
       <div className="mt-8 text-center">
