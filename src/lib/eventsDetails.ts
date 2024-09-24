@@ -480,13 +480,12 @@ export const WORKSHOPS = [
         date: "October 4-5, 2024",
     },
     {
-        eventName: "VLSI",
-        slug: "life-saver-workshop",
+        eventName: "Workshop on Embedded System & VLSI Design",
+        slug: "Workshop on VLSI",
         image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726820129/life_saver_workshop_xmrtup.svg",
-        about: "A two-day workshop aimed at teaching essential life-saving skills. Participants will practice on a human dummy to gain hands-on experience.",
+        about: "Inside the Tech: A Deep dive into Embedded Systems and VLSI Design",
         resoursePerson: [
-            "Mohsinkhan",
-            "MBBS, MCCM, MBMS (UK)",
+            "Mohsin khan",
             "Cranes Varsity Pvt",
             "Banglore",
         ],
