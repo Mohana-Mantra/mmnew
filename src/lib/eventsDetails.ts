@@ -479,6 +479,24 @@ export const WORKSHOPS = [
         venue: "SH-1",
         date: "October 4-5, 2024",
     },
+    {
+        eventName: "Workshop on Embedded System & VLSI Design",
+        slug: "Workshop on VLSI",
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726820129/life_saver_workshop_xmrtup.svg",
+        about: "Inside the Tech: A Deep dive into Embedded Systems and VLSI Design",
+        resoursePerson: [
+            "Mohsin khan",
+            "Cranes Varsity Pvt",
+            "Banglore",
+        ],
+        rules: [
+            "Attendance for both days is required.",
+            "Active participation in hands-on sessions is mandatory.",
+            "Punctuality is expected from all participants.",
+        ],
+        venue: "Mechanical Seminar Hall",
+        date: "October 4, 2024",
+    },
 ];
 
 export const TECHNOHOLIC = [
