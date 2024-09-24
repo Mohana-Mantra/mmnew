@@ -222,7 +222,7 @@ export default function AllEvents({ params }: { params: any }) {
                             <h3 className="text-white text-2xl text-center font-bold">
                                 {WORKSHOPS[2].eventName}
                             </h3>
-                            <p className="text-white">09:00 AM - 04:00 PM</p>
+                            <p className="text-white">10:00 AM - 01:00 PM</p>
                         </div>
                     </Link>
                 </div>
