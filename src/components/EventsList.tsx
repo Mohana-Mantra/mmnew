@@ -196,18 +196,7 @@ const EventList = ({ user }: { user: User }) => {
       )}
       {errorMessage && <p className="text-red-500 mb-4 text-center">{errorMessage}</p>}
 
-      {!showEventSelection ? (
-        <div className="text-center">
-          {!hasSubmitted && (
-            <button
-              onClick={() => setShowEventSelection(true)}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md"
-            >
-              {selectedEvents.length > 0 ? 'Update Participation' : 'Select Events'}
-            </button>
-          )}
-        </div>
-      ) : (
+      {showEventSelection && (
         <div className="space-y-8">
           {Object.keys(eventsByCategory).map((category) => (
             <div key={category}>
@@ -247,22 +236,18 @@ const EventList = ({ user }: { user: User }) => {
               <li key={event} className="text-gray-700">{event}</li>
             ))}
           </ul>
-          {!showEventSelection && !hasSubmitted && (
-            <button
-              onClick={() => setShowEventSelection(true)}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md"
-            >
-              Update Participation
-            </button>
-          )}
-          {showEventSelection && (
-            <button
-              onClick={handleSubmit}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md"
-            >
-              Save Participation
-            </button>
-          )}
+          <button
+            onClick={() => {
+              if (showEventSelection) {
+                handleSubmit(); // Submit the selected events
+              } else {
+                setShowEventSelection(true); // Open the selection panel to update events
+              }
+            }}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md"
+          >
+            {showEventSelection ? 'Save Participation' : 'Update Participation'}
+          </button>
         </div>
       )}
     </div>
