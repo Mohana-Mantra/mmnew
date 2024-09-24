@@ -448,7 +448,7 @@ export const WORKSHOPS = [
     {
         eventName: "Workshop on Embedded System & VLSI Design",
         slug: "workshop-on-embedded-system-vlsi-design",
-        image: "../public/assets/placeholder.png",
+        image: "../src/public/assets/placeholder.png",
         about: "Inside the Tech: A Deep dive into Embedded Systems and VLSI Design",
         resoursePerson: ["Mohsin Khan A","Domain Expert, Corporate Trainer for Matlab and VLSI ", "Cranes Varsity", "Banglore"],
         rules: [
