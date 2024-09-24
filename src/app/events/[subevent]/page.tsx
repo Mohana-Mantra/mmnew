@@ -112,7 +112,7 @@ export default function AllEvents({ params }: { params: any }) {
             </div>
         );
     }
-//spots events list
+    //spots events list
     if (subevent === "spotevents") {
         return (
             <div className="py-8 px-4 md:px-16 lg:px-40 md:py-32 space-y-6">
@@ -125,7 +125,7 @@ export default function AllEvents({ params }: { params: any }) {
                         )}
                     />
                     <p className=" font-bold text-white text-center mt-4">
-                    The following events run throughout the three days.
+                        The following events run throughout the three days.
                     </p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 px-4 md:px-20">
@@ -202,6 +202,25 @@ export default function AllEvents({ params }: { params: any }) {
                         <div className="flex flex-col items-center gap-2 rounded-lg">
                             <h3 className="text-white text-2xl text-center font-bold">
                                 {WORKSHOPS[1].eventName}
+                            </h3>
+                            <p className="text-white">09:00 AM - 04:00 PM</p>
+                        </div>
+                    </Link>
+                    <Link
+                        href={`/events/workshops/${WORKSHOPS[2].slug}`}
+                        className="space-y-2 rounded-lg  hover:scale-105 transition-transform duration-300 ease-out"
+                    >
+                        <div className="relative aspect-square w-full cursor-pointer">
+                            <Image
+                                src={WORKSHOPS[2].image}
+                                alt={WORKSHOPS[2].eventName}
+                                fill
+                                className="w-full h-64 object-cover rounded-lg"
+                            />
+                        </div>
+                        <div className="flex flex-col items-center gap-2 rounded-lg">
+                            <h3 className="text-white text-2xl text-center font-bold">
+                                {WORKSHOPS[2].eventName}
                             </h3>
                             <p className="text-white">09:00 AM - 04:00 PM</p>
                         </div>
