@@ -30,6 +30,7 @@ const EventList = ({ user }: { user: User }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [userData, setUserData] = useState<UserData | null>(null);
   const [participationId, setParticipationId] = useState<string | null>(null); // Track existing participation
+  const [hasSubmitted, setHasSubmitted] = useState(false); // Track if the user has submitted participation
 
   useEffect(() => {
     const fetchData = async () => {
@@ -104,6 +105,7 @@ const EventList = ({ user }: { user: User }) => {
         } else {
           setSelectedEvents(participationData.selected_events || []);
           setParticipationId(participationData.id); // Store participation ID for updating
+          setHasSubmitted(true); // User has previously submitted participation
         }
       } catch (error) {
         setErrorMessage('An unexpected error occurred.');
@@ -143,6 +145,7 @@ const EventList = ({ user }: { user: User }) => {
         } else {
           setErrorMessage('Participation updated successfully!');
           setShowEventSelection(false); // Hide event selection after updating
+          setHasSubmitted(true); // Mark as submitted
         }
       } else {
         // If no participationId, create a new record
@@ -156,6 +159,7 @@ const EventList = ({ user }: { user: User }) => {
         } else {
           setErrorMessage('Participation submitted successfully!');
           setShowEventSelection(false); // Hide event selection after submission
+          setHasSubmitted(true); // Mark as submitted
         }
       }
     } catch (error) {
@@ -184,17 +188,24 @@ const EventList = ({ user }: { user: User }) => {
 
   return (
     <div className="py-8">
-      <h2 className="text-2xl font-bold mb-4 text-center">Please select the events you would like to participate in</h2>
+      {/* Hide the heading after submission */}
+      {!hasSubmitted && (
+        <h2 className="text-2xl font-bold mb-4 text-center">
+          Please select the events you would like to participate in
+        </h2>
+      )}
       {errorMessage && <p className="text-red-500 mb-4 text-center">{errorMessage}</p>}
 
       {!showEventSelection ? (
         <div className="text-center">
-          <button
-            onClick={() => setShowEventSelection(true)}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md"
-          >
-            {selectedEvents.length > 0 ? 'Update Participation' : 'Select Events'}
-          </button>
+          {!hasSubmitted && (
+            <button
+              onClick={() => setShowEventSelection(true)}
+              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md"
+            >
+              {selectedEvents.length > 0 ? 'Update Participation' : 'Select Events'}
+            </button>
+          )}
         </div>
       ) : (
         <div className="space-y-8">
@@ -236,7 +247,7 @@ const EventList = ({ user }: { user: User }) => {
               <li key={event} className="text-gray-700">{event}</li>
             ))}
           </ul>
-          {!showEventSelection && (
+          {!showEventSelection && !hasSubmitted && (
             <button
               onClick={() => setShowEventSelection(true)}
               className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md"
