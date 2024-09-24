@@ -102,7 +102,6 @@ const EventList = ({ user }: { user: User }) => {
         if (participationError || !participationData) {
           setSelectedEvents([]); // No selections made yet
           setParticipationId(null); // No participation record
-          setHasSubmitted(false); // User has not submitted participation
         } else {
           setSelectedEvents(participationData.selected_events || []);
           setParticipationId(participationData.id); // Store participation ID for updating
@@ -176,23 +175,29 @@ const EventList = ({ user }: { user: User }) => {
     );
   }
 
-  if (!canSelectEvents) {
-    // User is not eligible to select events
+  // Adjusted logic here
+  if (!canSelectEvents && !participationId) {
     return (
       <div className="text-center py-16">
         <h2 className="text-2xl font-bold">Access Denied</h2>
         <p className="mt-4">
           You need to purchase a pass or be eligible for a free pass to select events.
         </p>
+        {/* Show Select Events button when participation list is not available */}
+        <button
+          onClick={() => setShowEventSelection(true)}
+          className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 mt-4 rounded-md"
+        >
+          Select Events
+        </button>
       </div>
     );
   }
 
-  // User is eligible to select events
   return (
     <div className="py-8">
-      {/* Show the heading only if the selection panel is open */}
-      {showEventSelection && (
+      {/* Hide the heading after submission */}
+      {!hasSubmitted && (
         <h2 className="text-2xl font-bold mb-4 text-center">
           Please select the events you would like to participate in
         </h2>
@@ -222,7 +227,9 @@ const EventList = ({ user }: { user: User }) => {
                         />
                       </div>
                     </div>
-                    {event.description && <p className="mt-2 text-gray-700">{event.description}</p>}
+                    {event.description && (
+                      <p className="mt-2 text-gray-700">{event.description}</p>
+                    )}
                   </div>
                 ))}
               </div>
@@ -231,24 +238,14 @@ const EventList = ({ user }: { user: User }) => {
         </div>
       )}
 
-      {!hasSubmitted && !showEventSelection && (
-        // User has not submitted participation yet
-        <div className="text-center">
-          <button
-            onClick={() => setShowEventSelection(true)}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md mt-4"
-          >
-            Select Events
-          </button>
-        </div>
-      )}
-
       {selectedEvents.length > 0 && (
         <div className="mt-8 text-center">
           <h3 className="text-lg font-bold mb-2">Selected Events:</h3>
           <ul className="mb-4">
             {selectedEvents.map((event) => (
-              <li key={event} className="text-gray-700">{event}</li>
+              <li key={event} className="text-gray-700">
+                {event}
+              </li>
             ))}
           </ul>
           <button
