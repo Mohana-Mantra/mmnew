@@ -17,28 +17,8 @@ const Accommodation = ({ user }: { user: User }) => {
                 </p>
             </section>
 
-            {/* Why Users Should Consider It */}
-            <section className="mb-6">
-                <h2 className="text-2xl font-semibold">Why Should You Consider It?</h2>
-                <p className="mt-4 text-lg">
-                    Being a Campus Ambassador for Mohana Mantra offers a unique opportunity to develop your leadership
-                    skills, expand your network, and be part of an exciting cultural event. You will have a chance to represent
-                    one of the most prestigious events in the student community and showcase your skills in event management,
-                    communication, and marketing.
-                </p>
-            </section>
 
-            {/* Perks of Being a Campus Ambassador */}
-            <section className="mb-6">
-                <h2 className="text-2xl font-semibold">Perks and Benefits</h2>
-                <ul className="mt-4 text-lg list-disc list-inside space-y-2">
-                    <li>Exclusive access to Mohana Mantra events and workshops.</li>
-                    <li>Certificate of Recognition as a Campus Ambassador.</li>
-                    <li>Opportunities to network with industry leaders and professionals.</li>
-                    <li>Free event passes and merchandise for top-performing ambassadors.</li>
-                    <li>Skill development in areas like marketing, communication, and event management.</li>
-                </ul>
-            </section>
+
 
             {/* Responsibilities of a Campus Ambassador */}
             <section className="mb-6">
