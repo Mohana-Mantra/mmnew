@@ -184,7 +184,7 @@ const EventList = ({ user }: { user: User }) => {
 
   return (
     <div className="py-8">
-      <h2 className="text-2xl font-bold mb-4 text-center">Select Your Events</h2>
+      <h2 className="text-2xl font-bold mb-4 text-center">Please select the events you would like to participate in</h2>
       {errorMessage && <p className="text-red-500 mb-4 text-center">{errorMessage}</p>}
 
       {!showEventSelection ? (
