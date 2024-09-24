@@ -57,7 +57,7 @@ export default function Account() {
             case "my-payment":
                 setActiveTab(3);
                 break;
-            case "campus-ambassador":
+            case "accommodation":
                 setActiveTab(4);
                 break;
             default:
@@ -90,7 +90,7 @@ export default function Account() {
                 ? "events-list"
                 : tab === 3
                 ? "my-payment"
-                : "campus-ambassador";
+                : "accommodation";
         router.push(`/account?tab=${param}`);
         setActiveTab(tab);
     };
@@ -145,7 +145,7 @@ export default function Account() {
                         )}
                         onClick={() => changeTab(4)}
                     >
-                        Campus Ambassador
+                        Accommodation
                     </button>
                 </div>
                 <button
