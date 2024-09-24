@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 import UserDetails from "@/components/UserDetails";
 import MyTicket from "@/components/MyTicket";
 import MyPayment from "@/components/MyPayment";
-import CampusAmbassador from "@/components/CampusAmbassador";
+import Accommodation from "@/components/Accommodation";
 import { IconLoader2 } from "@tabler/icons-react";
 import EventsList from "@/components/EventsList";
 
@@ -165,7 +165,7 @@ export default function Account() {
                 {activeTab === 1 && <MyTicket user={user} />}
                 {activeTab === 2 && <EventsList user={user} />}
                 {activeTab === 3 && <MyPayment user={user} changeTab={changeTab} />}
-                {activeTab === 4 && <CampusAmbassador user={user} />}
+                {activeTab === 4 && <Accommodation user={user} />}
             </div>
         </div>
     );

@@ -1,7 +1,7 @@
 import React from "react";
 import { User } from "@supabase/supabase-js";
 
-const CampusAmbassador = ({ user }: { user: User }) => {
+const Accommodation = ({ user }: { user: User }) => {
     return (
         <div className="max-w-3xl mx-auto p-6">
             <h1 className="text-3xl font-bold mb-6">Join the Mohana Mantra Campus Ambassador Program</h1>
@@ -74,4 +74,4 @@ const CampusAmbassador = ({ user }: { user: User }) => {
     );
 };
 
-export default CampusAmbassador;
+export default Accommodation;
