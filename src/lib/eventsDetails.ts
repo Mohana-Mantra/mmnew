@@ -485,7 +485,7 @@ export const WORKSHOPS = [
         slug: "workshop-on-embedded-system-vlsi-design",
         image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726820129/life_saver_workshop_xmrtup.svg",
         about: "Inside the Tech: A Deep dive into Embedded Systems and VLSI Design",
-        resoursePerson: ["Mohsin khan", "Cranes Varsity Pvt", "Banglore"],
+        resoursePerson: ["Mohsin Khan A","Domain Expert, Corporate Trainer for Matlab and VLSI ", "Cranes Varsity w", "Banglore"],
         rules: [
             "Attendance for both days is required.",
             "Active participation in hands-on sessions is mandatory.",
