@@ -55,7 +55,7 @@ export const KALAKSHETRAEVENTS = [
             "Participants must be present backstage at least 30 minutes before the event starts.",
         ],
         description:
-            "Ramp walk is a part of fashion show where models walk along a long, raised runway to show case clothing and accessories.  As they walk, they display different outfits, striking poses to highlight the design and style. The goal is to present fashion in a visually appealing way and capture the audiences attention.",
+            "Ramp walk is a part of fashion show where models walk along a long, raised runway to show case clothing and accessories.  As they walk, they display different outfits, striking pose to highlight the design and style. The goal is to present fashion in a visually appealing way and capture the audiences attention.",
     },
     {
         event: "Picture Perfect (Photography Contest)",
@@ -160,23 +160,6 @@ export const KALAKSHETRAEVENTS = [
             "Push up challenge is a fitness and funny event. This event is helps you to test your strength and endurance. It’s a great way to challenge yourself, improve your upper body strength.",
     },
     {
-        event: "Whisper Challenge",
-        venue: "Room no - 4103",
-        timings: "11:00 A.M",
-        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726136585/whisperchallange_sogzqf.png",
-        day: "Day 1,2",
-        rules: [
-            "Two players form a team; one wears noise-canceling headphones while the other whispers a phrase.",
-            "The player with headphones must guess the whispered phrase by reading lips.",
-            "Each team has 5 phrases to guess, with a time limit of 30 seconds per phrase.",
-            "Points are awarded for each correct guess, with the team accumulating the most points winning.",
-            "Offensive or inappropriate phrases are not allowed.",
-            "Teams should maintain a fun and light-hearted spirit throughout the game.",
-        ],
-        description:
-            "The Whisper Challenge is a hilarious game where players try to guess phrases while wearing noise-canceling headphones. One person whispers a phrase, and the other has to read their lips and guess what they’re saying. The results are often funny misinterpretations and lots of laughter. It's a great way to break the ice and have fun with friends.",
-    },
-    {
         event: "Band Battle",
         venue: "Indoor Stadium",
         timings: "03:00 P.M - 04:00 P.M",
@@ -259,7 +242,7 @@ export const KALAKSHETRAEVENTS = [
             "Offensive or inappropriate content will lead to disqualification.",
         ],
         description:
-            "The Short Film Showcase is a vibrant event dedicated to celebrating the creativity and storytelling prowess of filmmakers through the art of short films.",
+            "The Short Film Showcase is a vibrant event dedicated to celebrating the creativity and storytelling prowess of filmmakers through the art of short films. The Short Film runtime should not exceed 20 minutes.",
     },
     {
         event: "Ultimate Battle - Sitcom",
@@ -324,23 +307,6 @@ export const KALAKSHETRAEVENTS = [
         ],
         description:
             "Stand-Up Talkies is a dynamic event that blends the sharp wit of stand-up comedy with engaging discussions on topics that matter. This event is designed for comedy lovers who appreciate humor with a twist of insight, where comedians not only deliver their funniest material but also engage in lively, thought-provoking conversations.",
-    },
-    {
-        event: "Turbo Tracks Challenge (F1 race in mini track)",
-        venue: "Beside G-Block",
-        timings: "10:30 A.M",
-        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726136583/turbotracks_z85vq9.svg",
-        day: "Day 1,2",
-        rules: [
-            "Participants race two mini cars on a specially designed off-road track.",
-            "Each race has a time limit of 2 minutes.",
-            "The car that completes the track in the shortest time without derailing wins.",
-            "Participants are allowed three attempts to complete the race.",
-            "No external modifications to the cars are permitted.",
-            "Respectful conduct and fair play are mandatory.",
-        ],
-        description:
-            "Turbo tracks challenge is mini car race(toy car) track. The turbo track challenge is an entertaining event. In this event there is a set like off roads. In that off road there is two mini cars. In that off road the two mini cars are raced.",
     },
 ];
 
