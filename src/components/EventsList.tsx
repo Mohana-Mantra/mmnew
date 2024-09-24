@@ -29,7 +29,7 @@ const EventList = ({ user }: { user: User }) => {
   const [showEventSelection, setShowEventSelection] = useState(false); // Toggle event selection list
   const [errorMessage, setErrorMessage] = useState('');
   const [userData, setUserData] = useState<UserData | null>(null);
-  const [participationId, setParticipationId] = useState<string | null>(null); // To track if the user has existing participation
+  const [participationId, setParticipationId] = useState<string | null>(null); // Track existing participation
 
   useEffect(() => {
     const fetchData = async () => {
@@ -129,7 +129,6 @@ const EventList = ({ user }: { user: User }) => {
     }
 
     try {
-      // Update participation data (upsert ensures only one record per user)
       if (participationId) {
         // If participationId exists, update the record
         const { error } = await supabase
@@ -137,12 +136,13 @@ const EventList = ({ user }: { user: User }) => {
           .update({
             selected_events: selectedEvents, // Store the updated selected events
           })
-          .eq('id', participationId); // Ensure we're updating the existing participation
+          .eq('id', participationId);
 
         if (error) {
           setErrorMessage('Error updating participation.');
         } else {
           setErrorMessage('Participation updated successfully!');
+          setShowEventSelection(false); // Hide event selection after updating
         }
       } else {
         // If no participationId, create a new record
@@ -155,6 +155,7 @@ const EventList = ({ user }: { user: User }) => {
           setErrorMessage('Error submitting participation.');
         } else {
           setErrorMessage('Participation submitted successfully!');
+          setShowEventSelection(false); // Hide event selection after submission
         }
       }
     } catch (error) {
@@ -235,12 +236,22 @@ const EventList = ({ user }: { user: User }) => {
               <li key={event} className="text-gray-700">{event}</li>
             ))}
           </ul>
-          <button
-            onClick={handleSubmit}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md"
-          >
-            {selectedEvents.length > 0 ? 'Update Participation' : 'Submit Participation'}
-          </button>
+          {!showEventSelection && (
+            <button
+              onClick={() => setShowEventSelection(true)}
+              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md"
+            >
+              Update Participation
+            </button>
+          )}
+          {showEventSelection && (
+            <button
+              onClick={handleSubmit}
+              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md"
+            >
+              Save Participation
+            </button>
+          )}
         </div>
       )}
     </div>
