@@ -37,7 +37,7 @@ const StickyCountdown = () => {
     }
 
     return (
-        <div className="fixed bottom-2 left-2 z-50 bg-white/35 pointer-events-none backdrop-blur-3xl flex flex-col items-cente rounded-lg p-3">
+        <div className="hidden md:flex fixed bottom-2 left-2 z-50 bg-white/35 pointer-events-none backdrop-blur-3xl flex-col items-cente rounded-lg p-3">
             <div className="flex gap-4 h-fit items-center">
                 <div className="flex flex-col items-center">
                     <h1 className="bg-white text-primary font-bold text-center rounded-lg text-xl p-3">

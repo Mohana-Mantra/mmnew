@@ -6,6 +6,7 @@ import Sponsers from "@/components/Sponsers";
 
 import "./style.css";
 import StickyCountdown from "@/components/StickyCountdown";
+import Hackathon from "@/components/Hackathon";
 
 export default function Home() {
     return (
@@ -16,6 +17,7 @@ export default function Home() {
             <Gallery />
             <Sponsers />
             <StickyCountdown />
+            <Hackathon />
         </>
     );
 }
