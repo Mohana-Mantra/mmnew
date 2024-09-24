@@ -15,9 +15,9 @@ interface UserData {
   is_eligible_for_free_pass: boolean;
 }
 
-interface Payment {
+interface Participation {
   user_id: string;
-  payment_status: string;
+  selected_events: string[];
 }
 
 const EventList = ({ user }: { user: User }) => {
@@ -29,6 +29,7 @@ const EventList = ({ user }: { user: User }) => {
   const [showEventSelection, setShowEventSelection] = useState(false); // Toggle event selection list
   const [errorMessage, setErrorMessage] = useState('');
   const [userData, setUserData] = useState<UserData | null>(null);
+  const [participationId, setParticipationId] = useState<string | null>(null); // To track if the user has existing participation
 
   useEffect(() => {
     const fetchData = async () => {
@@ -93,14 +94,16 @@ const EventList = ({ user }: { user: User }) => {
         // Fetch user's existing participation data
         const { data: participationData, error: participationError } = await supabase
           .from('participations')
-          .select('selected_events')
+          .select('id, selected_events')
           .eq('user_id', userData.user_id)
           .single();
 
         if (participationError || !participationData) {
           setSelectedEvents([]); // No selections made yet
+          setParticipationId(null); // No participation record
         } else {
           setSelectedEvents(participationData.selected_events || []);
+          setParticipationId(participationData.id); // Store participation ID for updating
         }
       } catch (error) {
         setErrorMessage('An unexpected error occurred.');
@@ -126,18 +129,33 @@ const EventList = ({ user }: { user: User }) => {
     }
 
     try {
-      // Insert or update participation
-      const { error } = await supabase
-        .from('participations')
-        .upsert({
+      // Update participation data (upsert ensures only one record per user)
+      if (participationId) {
+        // If participationId exists, update the record
+        const { error } = await supabase
+          .from('participations')
+          .update({
+            selected_events: selectedEvents, // Store the updated selected events
+          })
+          .eq('id', participationId); // Ensure we're updating the existing participation
+
+        if (error) {
+          setErrorMessage('Error updating participation.');
+        } else {
+          setErrorMessage('Participation updated successfully!');
+        }
+      } else {
+        // If no participationId, create a new record
+        const { error } = await supabase.from('participations').insert({
           user_id: userData.user_id,
-          selected_events: selectedEvents, // Store the selected events in the array
+          selected_events: selectedEvents,
         });
 
-      if (error) {
-        setErrorMessage('Error submitting participation.');
-      } else {
-        setErrorMessage('Participation updated successfully!');
+        if (error) {
+          setErrorMessage('Error submitting participation.');
+        } else {
+          setErrorMessage('Participation submitted successfully!');
+        }
       }
     } catch (error) {
       setErrorMessage('An unexpected error occurred.');
