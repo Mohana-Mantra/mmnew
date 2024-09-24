@@ -153,6 +153,7 @@ const SubEventDetails = ({
         }
         if (workShopEvent) {
             const index = WORKSHOPS.findIndex((event) => event.slug === details);
+            const eventD = WORKSHOPS[index];
 
             return (
                 <div className="w-full px-3 md:px-20 lg:px-60 pt-36">
@@ -219,46 +220,44 @@ const SubEventDetails = ({
                             </div>
                         </div>
                     )}
-                    {index === 1 && (
+                    {(index === 1 || index === 2) && (
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                             <div className="w-full aspect-square relative rounded-xl">
                                 <Image
-                                    src={WORKSHOPS[1].image}
+                                    src={eventD.image}
                                     fill
-                                    alt={WORKSHOPS[1].slug}
+                                    alt={eventD.slug}
                                     className="object-cover rounded-xl"
                                 />
                             </div>
                             <div className="flex w-full flex-col gap-12 justify-center my-6 ">
                                 <h1 className="font-sulpher font-bold text-yellow text-3xl md:text-5xl">
-                                    {WORKSHOPS[1].eventName}
+                                    {eventD.eventName}
                                 </h1>
                                 <div>
                                     <h1 className="font-sulpher font-bold text-xl text-secondary">
                                         About:
                                     </h1>
-                                    <p className="font-sulpher">{WORKSHOPS[1].about}</p>
+                                    <p className="font-sulpher">{eventD.about}</p>
                                 </div>
-                                {WORKSHOPS[1].resoursePerson && (
+                                {eventD.resoursePerson && (
                                     <div>
                                         <h1 className="font-sulpher font-bold text-xl text-secondary">
                                             Resourse Person:
                                         </h1>
                                         <span className="font-sulpher">
-                                            <h1 className="text-xl">
-                                                {WORKSHOPS[1].resoursePerson[0]}
-                                            </h1>
+                                            <h1 className="text-xl">{eventD.resoursePerson[0]}</h1>
                                             <p className="text-sm font-light tracking-wide">
-                                                {WORKSHOPS[1].resoursePerson[1]}
+                                                {eventD.resoursePerson[1]}
                                             </p>
                                             <p className="text-sm font-light tracking-wide">
-                                                {WORKSHOPS[1].resoursePerson[2]}
+                                                {eventD.resoursePerson[2]}
                                             </p>
                                             <p className="text-sm font-light tracking-wide">
-                                                {WORKSHOPS[1].resoursePerson[3]}
+                                                {eventD.resoursePerson[3]}
                                             </p>
                                             <p className="text-sm font-light tracking-wide">
-                                                {WORKSHOPS[1].resoursePerson[4]}
+                                                {eventD.resoursePerson[4]}
                                             </p>
                                         </span>
                                     </div>
@@ -272,7 +271,7 @@ const SubEventDetails = ({
                                                 width={16}
                                                 alt="icon"
                                             />
-                                            <p>{WORKSHOPS[1].venue}</p>
+                                            <p>{eventD.venue}</p>
                                         </div>
                                         <div className="flex items-center h-fit gap-4">
                                             <Image
@@ -290,7 +289,7 @@ const SubEventDetails = ({
                                         Rules:
                                     </h1>
                                     <ol className="list-disc pl-8">
-                                        {workShopEvent.rules.map((rule, index) => (
+                                        {eventD.rules.map((rule, index) => (
                                             <li key={index} className="font-sulpher">
                                                 {rule}
                                             </li>
