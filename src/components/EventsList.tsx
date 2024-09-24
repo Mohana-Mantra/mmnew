@@ -26,6 +26,7 @@ const EventList = ({ user }: { user: User }) => {
   const [selectedEvents, setSelectedEvents] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
   const [canSelectEvents, setCanSelectEvents] = useState(false);
+  const [showEventSelection, setShowEventSelection] = useState(false); // Toggle event selection list
   const [errorMessage, setErrorMessage] = useState('');
   const [userData, setUserData] = useState<UserData | null>(null);
 
@@ -166,34 +167,48 @@ const EventList = ({ user }: { user: User }) => {
     <div className="py-8">
       <h2 className="text-2xl font-bold mb-4 text-center">Select Your Events</h2>
       {errorMessage && <p className="text-red-500 mb-4 text-center">{errorMessage}</p>}
-      <div className="space-y-8">
-        {Object.keys(eventsByCategory).map((category) => (
-          <div key={category}>
-            <h3 className="text-xl font-semibold mb-2">{category}</h3>
-            <div className="space-y-4">
-              {eventsByCategory[category].map((event) => (
-                <div key={event.name} className="border rounded-md p-4">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <h4 className="text-lg font-medium">{event.name}</h4>
-                      <p className="text-sm text-gray-500">Day {event.day}</p>
+
+      {!showEventSelection ? (
+        <div className="text-center">
+          <button
+            onClick={() => setShowEventSelection(true)}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md"
+          >
+            {selectedEvents.length > 0 ? 'Update Participation' : 'Select Events'}
+          </button>
+        </div>
+      ) : (
+        <div className="space-y-8">
+          {Object.keys(eventsByCategory).map((category) => (
+            <div key={category}>
+              <h3 className="text-xl font-semibold text-center mb-2">{category}</h3>
+              <hr className="mb-4" />
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {eventsByCategory[category].map((event) => (
+                  <div key={event.name} className="border rounded-md p-4">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h4 className="text-lg font-medium">{event.name}</h4>
+                        <p className="text-sm text-gray-500">Day {event.day}</p>
+                      </div>
+                      <div>
+                        <input
+                          type="checkbox"
+                          checked={selectedEvents.includes(event.name)}
+                          onChange={() => handleEventSelection(event.name)}
+                          className="h-5 w-5 text-blue-600"
+                        />
+                      </div>
                     </div>
-                    <div>
-                      <input
-                        type="checkbox"
-                        checked={selectedEvents.includes(event.name)}
-                        onChange={() => handleEventSelection(event.name)}
-                        className="h-5 w-5 text-blue-600"
-                      />
-                    </div>
+                    {event.description && <p className="mt-2 text-gray-700">{event.description}</p>}
                   </div>
-                  {event.description && <p className="mt-2 text-gray-700">{event.description}</p>}
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
+
       {selectedEvents.length > 0 && (
         <div className="mt-8 text-center">
           <h3 className="text-lg font-bold mb-2">Selected Events:</h3>
@@ -206,7 +221,7 @@ const EventList = ({ user }: { user: User }) => {
             onClick={handleSubmit}
             className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md"
           >
-            Update Participation
+            {selectedEvents.length > 0 ? 'Update Participation' : 'Submit Participation'}
           </button>
         </div>
       )}
