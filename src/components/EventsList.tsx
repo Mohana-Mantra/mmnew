@@ -1,172 +1,187 @@
-import React, { useEffect, useState } from "react";
-import { supabase } from "@/lib/supabaseClient";
-import { User } from "@supabase/supabase-js";
-import { useRouter } from "next/navigation";
-import { IconLoader2 } from "@tabler/icons-react";
+import React, { useEffect, useState } from 'react';
+import { supabase } from '@/lib/supabaseClient';
+import { User } from '@supabase/supabase-js';
+import { IconLoader2 } from '@tabler/icons-react';
 
 interface Event {
-  id: number;
-  event_name: string;
+  id: string;
+  name: string;
   category: string;
+  description?: string;
+  day: number;
 }
 
-interface EventCategory {
-  category: string;
-  events: Event[];
+interface UserData {
+  user_id: string;
+  is_eligible_for_free_pass: boolean;
 }
 
-export default function EventList({ user }: { user: User }) {
-  const [eventsByCategory, setEventsByCategory] = useState<EventCategory[]>([]);
+interface Payment {
+  user_id: string;
+  payment_status: string;
+}
+
+const EventList = ({ user }: { user: User }) => {
+  const [events, setEvents] = useState<Event[]>([]);
   const [selectedEvents, setSelectedEvents] = useState<string[]>([]);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
-  const router = useRouter();
+  const [loading, setLoading] = useState(true);
+  const [canSelectEvents, setCanSelectEvents] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [userData, setUserData] = useState<UserData | null>(null);
 
   useEffect(() => {
-    const fetchEvents = async () => {
-      const { data: events, error } = await supabase
-        .from("events")
-        .select("id, event_name, category")
-        .order("category", { ascending: true })
-        .order("event_name", { ascending: true });
+    const checkEligibility = async () => {
+      setLoading(true);
+      try {
+        // Fetch user data from the users table
+        const { data: userData, error: userError } = await supabase
+          .from('users')
+          .select('user_id, is_eligible_for_free_pass')
+          .eq('email', user.email)
+          .single();
 
-      if (error) {
-        console.error("Error fetching events:", error.message);
-        return;
-      }
-
-      // Group events by category
-      const groupedEvents = events.reduce((acc: EventCategory[], event: Event) => {
-        let category = acc.find((cat) => cat.category === event.category);
-        if (category) {
-          category.events.push(event);
-        } else {
-          acc.push({ category: event.category, events: [event] });
+        if (userError || !userData) {
+          setErrorMessage('Error fetching user data.');
+          console.error('Error fetching user data:', userError?.message);
+          setLoading(false);
+          return;
         }
-        return acc;
-      }, []);
 
-      setEventsByCategory(groupedEvents);
-    };
+        setUserData(userData);
 
-    const fetchUserEvents = async () => {
-      const { data: userEvents, error } = await supabase
-        .from("user_events")
-        .select("event_name")
-        .eq("user_id", user.id);
+        // Check if the user is eligible for a free pass
+        if (userData.is_eligible_for_free_pass) {
+          setCanSelectEvents(true);
+        } else {
+          // Check if the user has made a payment with status "paid"
+          const { data: paymentData, error: paymentError } = await supabase
+            .from('payments')
+            .select('payment_status')
+            .eq('user_id', userData.user_id)
+            .eq('payment_status', 'paid')
+            .single();
 
-      if (error) {
-        console.error("Error fetching user events:", error.message);
-      } else {
-        setSelectedEvents(userEvents.map((event) => event.event_name));
+          if (paymentError || !paymentData) {
+            setCanSelectEvents(false);
+          } else {
+            setCanSelectEvents(true);
+          }
+        }
+
+        // Fetch all events from the events table
+        const { data: eventsData, error: eventsError } = await supabase
+          .from('events')
+          .select('*')
+          .order('day', { ascending: true });
+
+        if (eventsError) {
+          setErrorMessage('Error fetching events.');
+          console.error('Error fetching events:', eventsError.message);
+        } else {
+          setEvents(eventsData as Event[]);
+        }
+      } catch (error) {
+        setErrorMessage('An unexpected error occurred.');
+        console.error('Unexpected error:', error);
       }
+      setLoading(false);
     };
 
-    fetchEvents();
-    fetchUserEvents();
-  }, [user.id]);
+    checkEligibility();
+  }, [user.email]);
 
-  const handleEventSelection = (eventName: string) => {
-    if (selectedEvents.includes(eventName)) {
-      setSelectedEvents(selectedEvents.filter((event) => event !== eventName));
+  const handleEventSelection = (eventId: string) => {
+    if (selectedEvents.includes(eventId)) {
+      setSelectedEvents(selectedEvents.filter((id) => id !== eventId));
     } else {
-      setSelectedEvents([...selectedEvents, eventName]);
+      setSelectedEvents([...selectedEvents, eventId]);
     }
   };
 
   const handleSubmit = async () => {
-    setIsSubmitting(true);
-    setErrorMessage("");
-    setSuccessMessage("");
+    if (!userData) {
+      setErrorMessage('User data not available.');
+      return;
+    }
 
     try {
-      // Remove old entries for this user
-      const { error: deleteError } = await supabase
-        .from("user_events")
-        .delete()
-        .eq("user_id", user.id);
-
-      if (deleteError) {
-        throw new Error("Error updating events. Please try again.");
-      }
-
-      // Insert new selections
-      const eventEntries = selectedEvents.map((eventName) => ({
-        user_id: user.id,
-        event_name: eventName,
-        updated_at: new Date().toISOString(),
+      // Insert participation records into the participations table
+      const participations = selectedEvents.map((eventId) => ({
+        user_id: userData.user_id,
+        event_id: eventId,
       }));
 
-      const { error: insertError } = await supabase.from("user_events").insert(eventEntries);
+      const { error } = await supabase.from('participations').insert(participations);
 
-      if (insertError) {
-        throw new Error("Error saving event selections.");
+      if (error) {
+        setErrorMessage('Error submitting participation.');
+        console.error('Error submitting participation:', error.message);
+      } else {
+        setErrorMessage('Participation submitted successfully!');
+        setSelectedEvents([]); // Reset selection after successful submission
       }
-
-      setSuccessMessage("Your event selections have been updated!");
-    } catch (error: any) {
-      setErrorMessage(error.message || "An unexpected error occurred.");
-    } finally {
-      setIsSubmitting(false);
+    } catch (error) {
+      setErrorMessage('An unexpected error occurred.');
+      console.error('Unexpected error:', error);
     }
   };
 
-  const isEventSelected = (eventName: string) => selectedEvents.includes(eventName);
+  if (loading) {
+    return (
+      <div className="h-full w-full flex items-center justify-center">
+        <IconLoader2 className="animate-spin h-12 w-12" />
+      </div>
+    );
+  }
+
+  if (!canSelectEvents) {
+    return (
+      <div className="text-center py-16">
+        <h2 className="text-2xl font-bold">Access Denied</h2>
+        <p className="mt-4">
+          You need to purchase a pass or be eligible for a free pass to select events.
+        </p>
+      </div>
+    );
+  }
 
   return (
-    <div className="max-w-4xl mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4 text-center">Register for Events</h1>
-
-      {errorMessage && (
-        <div className="p-4 mb-4 text-red-800 bg-red-200 border border-red-300 rounded">
-          {errorMessage}
-        </div>
-      )}
-
-      {successMessage && (
-        <div className="p-4 mb-4 text-green-800 bg-green-200 border border-green-300 rounded">
-          {successMessage}
-        </div>
-      )}
-
-      <form onSubmit={(e) => e.preventDefault()}>
-        {eventsByCategory.map((category) => (
-          <div key={category.category} className="mb-6">
-            <h2 className="text-xl font-semibold mb-2">{category.category}</h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-              {category.events.map((event) => (
-                <label key={event.id} className="flex items-center space-x-2">
-                  <input
-                    type="checkbox"
-                    checked={isEventSelected(event.event_name)}
-                    onChange={() => handleEventSelection(event.event_name)}
-                    className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                  />
-                  <span className="text-sm">{event.event_name}</span>
-                </label>
-              ))}
+    <div className="py-8">
+      <h2 className="text-2xl font-bold mb-4 text-center">Select Your Events</h2>
+      {errorMessage && <p className="text-red-500 mb-4 text-center">{errorMessage}</p>}
+      <div className="flex flex-col space-y-6">
+        {events.map((event) => (
+          <div key={event.id} className="border rounded-md p-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="text-xl font-semibold">{event.name}</h3>
+                <p className="text-sm text-gray-500">{event.category} - Day {event.day}</p>
+              </div>
+              <div>
+                <input
+                  type="checkbox"
+                  checked={selectedEvents.includes(event.id)}
+                  onChange={() => handleEventSelection(event.id)}
+                  className="h-5 w-5 text-blue-600"
+                />
+              </div>
             </div>
+            {event.description && <p className="mt-2 text-gray-700">{event.description}</p>}
           </div>
         ))}
-
-        <button
-          type="button"
-          onClick={handleSubmit}
-          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md mt-4 w-full"
-          disabled={isSubmitting}
-        >
-          {isSubmitting ? (
-            <IconLoader2 className="animate-spin h-5 w-5 mx-auto" />
-          ) : (
-            "Submit"
-          )}
-        </button>
-      </form>
-
-      <div className="mt-8 text-center">
-        <p>You can update your selections until October 1, 2024.</p>
       </div>
+      {selectedEvents.length > 0 && (
+        <div className="mt-8 text-center">
+          <button
+            onClick={handleSubmit}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md"
+          >
+            Submit Participation
+          </button>
+        </div>
+      )}
     </div>
   );
-}
+};
+
+export default EventList;
