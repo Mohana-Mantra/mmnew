@@ -188,13 +188,14 @@ const MyTicket = ({ user }: { user: User }) => {
               <p className="mt-4">
                 You can navigate to the <strong>My Payment</strong> tab to see your payment details.
               </p>
-        
-                <button className="bg-blue-600 hover:bg-blue-700 text-white mt-4 p-2 rounded-md"
-                onClick={() => changeTab(1)} // Redirect to registration tab
-                >
+             <a
+                href="https://mohanamantra.com/account?tab=events-list"
+                rel="noopener noreferrer"
+              >
+                <button className="bg-blue-600 hover:bg-blue-700 text-white mt-4 p-2 rounded-md">
                   Select Interested Events
                 </button>
-            
+              </a>
 
             </div>
           ) : (
