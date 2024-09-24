@@ -190,7 +190,7 @@ const MyTicket = ({ user }: { user: User }) => {
               </p>
              <a
                 href="https://mohanamantra.com/account?tab=events-list"
-                rel="noopener noreferrer"
+                
               >
                 <button className="bg-blue-600 hover:bg-blue-700 text-white mt-4 p-2 rounded-md">
                   Select Interested Events
