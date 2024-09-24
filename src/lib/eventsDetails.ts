@@ -439,7 +439,6 @@ export const WORKSHOPS = [
             "Medical Superintendent",
         ],
         rules: [
-            "Attendance for both days is required.",
             "Active participation in hands-on sessions is mandatory.",
             "Punctuality is expected from all participants.",
         ],
@@ -453,8 +452,7 @@ export const WORKSHOPS = [
         about: "Inside the Tech: A Deep dive into Embedded Systems and VLSI Design",
         resoursePerson: ["Mohsin Khan A","Domain Expert, Corporate Trainer for Matlab and VLSI ", "Cranes Varsity", "Banglore"],
         rules: [
-            "Attendance for both days is required.",
-            "Active participation in hands-on sessions is mandatory.",
+            "Active participation in sessions is mandatory.",
             "Punctuality is expected from all participants.",
         ],
         venue: "Mechanical Seminar Hall",
