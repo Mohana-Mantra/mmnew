@@ -479,6 +479,25 @@ export const WORKSHOPS = [
         venue: "SH-1",
         date: "October 4-5, 2024",
     },
+    {
+        eventName: "VLSI",
+        slug: "life-saver-workshop",
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726820129/life_saver_workshop_xmrtup.svg",
+        about: "A two-day workshop aimed at teaching essential life-saving skills. Participants will practice on a human dummy to gain hands-on experience.",
+        resoursePerson: [
+            "Mohsinkhan",
+            "MBBS, MCCM, MBMS (UK)",
+            "Cranes Varsity Pvt",
+            "Banglore",
+        ],
+        rules: [
+            "Attendance for both days is required.",
+            "Active participation in hands-on sessions is mandatory.",
+            "Punctuality is expected from all participants.",
+        ],
+        venue: "Mechanical Seminar Hall",
+        date: "October 4, 2024",
+    },
 ];
 
 export const TECHNOHOLIC = [
