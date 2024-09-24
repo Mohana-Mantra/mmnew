@@ -4,7 +4,6 @@ import { User } from '@supabase/supabase-js';
 import { IconLoader2 } from '@tabler/icons-react';
 
 interface Event {
-  id: string;
   name: string;
   category: string;
   description?: string;
@@ -23,6 +22,7 @@ interface Payment {
 
 const EventList = ({ user }: { user: User }) => {
   const [events, setEvents] = useState<Event[]>([]);
+  const [eventsByCategory, setEventsByCategory] = useState<{ [category: string]: Event[] }>({});
   const [selectedEvents, setSelectedEvents] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
   const [canSelectEvents, setCanSelectEvents] = useState(false);
@@ -30,10 +30,10 @@ const EventList = ({ user }: { user: User }) => {
   const [userData, setUserData] = useState<UserData | null>(null);
 
   useEffect(() => {
-    const checkEligibility = async () => {
+    const fetchData = async () => {
       setLoading(true);
       try {
-        // Fetch user data from the users table
+        // Fetch user data
         const { data: userData, error: userError } = await supabase
           .from('users')
           .select('user_id, is_eligible_for_free_pass')
@@ -42,14 +42,13 @@ const EventList = ({ user }: { user: User }) => {
 
         if (userError || !userData) {
           setErrorMessage('Error fetching user data.');
-          console.error('Error fetching user data:', userError?.message);
           setLoading(false);
           return;
         }
 
         setUserData(userData);
 
-        // Check if the user is eligible for a free pass
+        // Check eligibility
         if (userData.is_eligible_for_free_pass) {
           setCanSelectEvents(true);
         } else {
@@ -68,7 +67,7 @@ const EventList = ({ user }: { user: User }) => {
           }
         }
 
-        // Fetch all events from the events table
+        // Fetch all events
         const { data: eventsData, error: eventsError } = await supabase
           .from('events')
           .select('*')
@@ -76,25 +75,46 @@ const EventList = ({ user }: { user: User }) => {
 
         if (eventsError) {
           setErrorMessage('Error fetching events.');
-          console.error('Error fetching events:', eventsError.message);
         } else {
-          setEvents(eventsData as Event[]);
+          setEvents(eventsData);
+
+          // Group events by category
+          const groupedEvents: { [category: string]: Event[] } = {};
+          eventsData.forEach((event: Event) => {
+            if (!groupedEvents[event.category]) {
+              groupedEvents[event.category] = [];
+            }
+            groupedEvents[event.category].push(event);
+          });
+          setEventsByCategory(groupedEvents);
+        }
+
+        // Fetch user's existing participation data
+        const { data: participationData, error: participationError } = await supabase
+          .from('participations')
+          .select('selected_events')
+          .eq('user_id', userData.user_id)
+          .single();
+
+        if (participationError || !participationData) {
+          setSelectedEvents([]); // No selections made yet
+        } else {
+          setSelectedEvents(participationData.selected_events || []);
         }
       } catch (error) {
         setErrorMessage('An unexpected error occurred.');
-        console.error('Unexpected error:', error);
       }
       setLoading(false);
     };
 
-    checkEligibility();
+    fetchData();
   }, [user.email]);
 
-  const handleEventSelection = (eventId: string) => {
-    if (selectedEvents.includes(eventId)) {
-      setSelectedEvents(selectedEvents.filter((id) => id !== eventId));
+  const handleEventSelection = (eventName: string) => {
+    if (selectedEvents.includes(eventName)) {
+      setSelectedEvents(selectedEvents.filter((name) => name !== eventName));
     } else {
-      setSelectedEvents([...selectedEvents, eventId]);
+      setSelectedEvents([...selectedEvents, eventName]);
     }
   };
 
@@ -105,24 +125,21 @@ const EventList = ({ user }: { user: User }) => {
     }
 
     try {
-      // Insert participation records into the participations table
-      const participations = selectedEvents.map((eventId) => ({
-        user_id: userData.user_id,
-        event_id: eventId,
-      }));
-
-      const { error } = await supabase.from('participations').insert(participations);
+      // Insert or update participation
+      const { error } = await supabase
+        .from('participations')
+        .upsert({
+          user_id: userData.user_id,
+          selected_events: selectedEvents, // Store the selected events in the array
+        });
 
       if (error) {
         setErrorMessage('Error submitting participation.');
-        console.error('Error submitting participation:', error.message);
       } else {
-        setErrorMessage('Participation submitted successfully!');
-        setSelectedEvents([]); // Reset selection after successful submission
+        setErrorMessage('Participation updated successfully!');
       }
     } catch (error) {
       setErrorMessage('An unexpected error occurred.');
-      console.error('Unexpected error:', error);
     }
   };
 
@@ -149,34 +166,47 @@ const EventList = ({ user }: { user: User }) => {
     <div className="py-8">
       <h2 className="text-2xl font-bold mb-4 text-center">Select Your Events</h2>
       {errorMessage && <p className="text-red-500 mb-4 text-center">{errorMessage}</p>}
-      <div className="flex flex-col space-y-6">
-        {events.map((event) => (
-          <div key={event.id} className="border rounded-md p-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <h3 className="text-xl font-semibold">{event.name}</h3>
-                <p className="text-sm text-gray-500">{event.category} - Day {event.day}</p>
-              </div>
-              <div>
-                <input
-                  type="checkbox"
-                  checked={selectedEvents.includes(event.id)}
-                  onChange={() => handleEventSelection(event.id)}
-                  className="h-5 w-5 text-blue-600"
-                />
-              </div>
+      <div className="space-y-8">
+        {Object.keys(eventsByCategory).map((category) => (
+          <div key={category}>
+            <h3 className="text-xl font-semibold mb-2">{category}</h3>
+            <div className="space-y-4">
+              {eventsByCategory[category].map((event) => (
+                <div key={event.name} className="border rounded-md p-4">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h4 className="text-lg font-medium">{event.name}</h4>
+                      <p className="text-sm text-gray-500">Day {event.day}</p>
+                    </div>
+                    <div>
+                      <input
+                        type="checkbox"
+                        checked={selectedEvents.includes(event.name)}
+                        onChange={() => handleEventSelection(event.name)}
+                        className="h-5 w-5 text-blue-600"
+                      />
+                    </div>
+                  </div>
+                  {event.description && <p className="mt-2 text-gray-700">{event.description}</p>}
+                </div>
+              ))}
             </div>
-            {event.description && <p className="mt-2 text-gray-700">{event.description}</p>}
           </div>
         ))}
       </div>
       {selectedEvents.length > 0 && (
         <div className="mt-8 text-center">
+          <h3 className="text-lg font-bold mb-2">Selected Events:</h3>
+          <ul className="mb-4">
+            {selectedEvents.map((event) => (
+              <li key={event} className="text-gray-700">{event}</li>
+            ))}
+          </ul>
           <button
             onClick={handleSubmit}
             className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md"
           >
-            Submit Participation
+            Update Participation
           </button>
         </div>
       )}
