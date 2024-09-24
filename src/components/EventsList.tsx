@@ -130,6 +130,11 @@ const EventList = ({ user }: { user: User }) => {
       return;
     }
 
+    if (!canSelectEvents) {
+      setErrorMessage('You need to purchase a pass or be eligible for a free pass to submit participation.');
+      return;
+    }
+
     try {
       if (participationId) {
         // If participationId exists, update the record
@@ -175,25 +180,6 @@ const EventList = ({ user }: { user: User }) => {
     );
   }
 
-  // Adjusted logic here
-  if (!canSelectEvents && !participationId) {
-    return (
-      <div className="text-center py-16">
-        <h2 className="text-2xl font-bold">Access Denied</h2>
-        <p className="mt-4">
-          You need to purchase a pass or be eligible for a free pass to select events.
-        </p>
-        {/* Show Select Events button when participation list is not available */}
-        <button
-          onClick={() => setShowEventSelection(true)}
-          className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 mt-4 rounded-md"
-        >
-          Select Events
-        </button>
-      </div>
-    );
-  }
-
   return (
     <div className="py-8">
       {/* Hide the heading after submission */}
@@ -203,6 +189,31 @@ const EventList = ({ user }: { user: User }) => {
         </h2>
       )}
       {errorMessage && <p className="text-red-500 mb-4 text-center">{errorMessage}</p>}
+
+      {!showEventSelection && selectedEvents.length === 0 && (
+        <div className="text-center">
+          {canSelectEvents ? (
+            <button
+              onClick={() => setShowEventSelection(true)}
+              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md"
+            >
+              Select Events
+            </button>
+          ) : (
+            <>
+              <p className="mt-4">
+                You need to purchase a pass or be eligible for a free pass to select events.
+              </p>
+              <button
+                onClick={() => setShowEventSelection(true)}
+                className="bg-blue-600 hover:bg-blue-700 text-white mt-4 px-6 py-2 rounded-md"
+              >
+                Select Events
+              </button>
+            </>
+          )}
+        </div>
+      )}
 
       {showEventSelection && (
         <div className="space-y-8">
@@ -227,9 +238,7 @@ const EventList = ({ user }: { user: User }) => {
                         />
                       </div>
                     </div>
-                    {event.description && (
-                      <p className="mt-2 text-gray-700">{event.description}</p>
-                    )}
+                    {event.description && <p className="mt-2 text-gray-700">{event.description}</p>}
                   </div>
                 ))}
               </div>
@@ -243,9 +252,7 @@ const EventList = ({ user }: { user: User }) => {
           <h3 className="text-lg font-bold mb-2">Selected Events:</h3>
           <ul className="mb-4">
             {selectedEvents.map((event) => (
-              <li key={event} className="text-gray-700">
-                {event}
-              </li>
+              <li key={event} className="text-gray-700">{event}</li>
             ))}
           </ul>
           <button
