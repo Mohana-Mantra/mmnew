@@ -116,7 +116,7 @@ const MyPayment = ({
 
                     {errorMessage && <p className="text-red-500 mt-4">{errorMessage}</p>}
 
-                    <p>Any Issue occur please Contact us on WhatsApp
+                    <p>Any Issue occur please Contact us on WhatsApp 
                     <a
                         href="https://wa.me/+919281089404" // Replace with your WhatsApp number
                         target="_blank"
