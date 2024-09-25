@@ -6,20 +6,21 @@ import { IconLoader2 } from "@tabler/icons-react";
 interface UserExtended extends User {
   user_id?: string;
   full_name?: string;
-  phone_number?: number | string;
-  rollno?:string;
+  phone_number?: string;
+  rollno?: string;
   institute_name?: string;
-  year_of_study?: number;
+  year_of_study?: number | string;
   is_verified?: boolean;
   is_eligible_for_free_pass?: boolean;
 }
 
-const UserDetails = ({ user }: { user: User }) => {
+const UserDetails = ({ user, setIsUserDetailsComplete }: { user: User; setIsUserDetailsComplete: (value: boolean) => void }) => {
   const [userData, setUserData] = useState<UserExtended | null>(null);
   const [editMode, setEditMode] = useState(false);
   const [loading, setLoading] = useState(false);
   const [institutes, setInstitutes] = useState<any[]>([]);
   const [selectedInstitute, setSelectedInstitute] = useState<string>("");
+  const [validationErrors, setValidationErrors] = useState<string[]>([]);
 
   useEffect(() => {
     fetchUserDetails();
@@ -91,8 +92,21 @@ const UserDetails = ({ user }: { user: User }) => {
         }
       }
 
-      if (!data.phone_number || !data.institute_name || !data.rollno || !data.year_of_study) {
+      // Check if all required fields are filled
+      if (
+        !data.phone_number ||
+        !data.institute_name ||
+        !data.rollno ||
+        !data.year_of_study ||
+        data.phone_number === "N/A" ||
+        data.institute_name === "N/A" ||
+        data.rollno === "N/A" ||
+        data.year_of_study === "N/A"
+      ) {
         setEditMode(true);
+        setIsUserDetailsComplete(false); // Notify parent that details are incomplete
+      } else {
+        setIsUserDetailsComplete(true); // Notify parent that details are complete
       }
       setSelectedInstitute(data.institute_name || "");
     }
@@ -113,26 +127,57 @@ const UserDetails = ({ user }: { user: User }) => {
     }
   };
 
+  const validateForm = () => {
+    const errors: string[] = [];
+    if (!userData?.phone_number) {
+      errors.push("Phone number is required.");
+    }
+    if (!selectedInstitute) {
+      errors.push("Institution is required.");
+    }
+    if (selectedInstitute === "Other" && !userData?.institute_name) {
+      errors.push("Institution name is required.");
+    }
+    if (!userData?.rollno) {
+      errors.push("Roll number is required.");
+    }
+    if (!userData?.year_of_study) {
+      errors.push("Year of study is required.");
+    }
+    setValidationErrors(errors);
+    return errors.length === 0;
+  };
+
   const handleUpdate = async () => {
     if (!userData) return;
-  
+
+    if (!validateForm()) {
+      return;
+    }
+
     const updates: {
-      phone_number: string | number | null;
-      rollno:string | null;
+      phone_number: string | null;
+      rollno: string | null;
       institute_name: string | null;
       year_of_study: number | null;
       updated_at: string;
       is_eligible_for_free_pass?: boolean;
     } = {
       phone_number: userData.phone_number || null,
-      rollno:userData.rollno || null,
-      institute_name: selectedInstitute || userData.institute_name || null,
-      year_of_study: userData.year_of_study || null,
+      rollno: userData.rollno || null,
+      institute_name:
+        selectedInstitute !== "Other"
+          ? selectedInstitute
+          : userData.institute_name || null,
+      year_of_study:
+        userData.year_of_study && userData.year_of_study !== "Other"
+          ? Number(userData.year_of_study)
+          : null,
       updated_at: new Date().toISOString(),
     };
-  
+
     setLoading(true);
-  
+
     // Check if the selected institute is "Other"
     if (selectedInstitute === "Other") {
       updates.is_eligible_for_free_pass = false;
@@ -144,29 +189,28 @@ const UserDetails = ({ user }: { user: User }) => {
         .eq("name", selectedInstitute)
         .eq("is_listed", true)
         .single();
-  
+
       if (instituteError || !institute) {
         updates.is_eligible_for_free_pass = false;
       } else {
         updates.is_eligible_for_free_pass = true;
       }
     }
-  
+
     const { error } = await supabase
       .from("users")
       .update(updates)
       .eq("email", user.email);
-  
+
     if (error) {
       console.error("Error updating user:", error.message);
     } else {
       // Re-fetch updated user data after successful update
-      fetchUserDetails();
+      await fetchUserDetails();
       setEditMode(false);
     }
     setLoading(false);
   };
-  
 
   if (loading) {
     return (
@@ -185,8 +229,19 @@ const UserDetails = ({ user }: { user: User }) => {
       <h2 className="font-bold text-2xl mb-4">User Details</h2>
       {editMode ? (
         <div className="w-full max-w-md">
+          {validationErrors.length > 0 && (
+            <div className="mb-4 text-left">
+              {validationErrors.map((error, index) => (
+                <p key={index} className="text-red-500">
+                  {error}
+                </p>
+              ))}
+            </div>
+          )}
           <div className="mb-4 text-left">
-            <label className="block text-sm font-medium mb-1">Phone Number:</label>
+            <label className="block text-sm font-medium mb-1">
+              Phone Number:
+            </label>
             <input
               type="text"
               value={userData.phone_number || ""}
@@ -199,7 +254,7 @@ const UserDetails = ({ user }: { user: User }) => {
           <div className="mb-4 text-left">
             <label className="block text-sm font-medium mb-1">Roll No:</label>
             <input
-              type="string"
+              type="text"
               value={userData.rollno || ""}
               onChange={(e) =>
                 setUserData({ ...userData, rollno: e.target.value })
@@ -237,13 +292,15 @@ const UserDetails = ({ user }: { user: User }) => {
           </div>
 
           <div className="mb-4 text-left">
-            <label className="block text-sm font-medium mb-1">Year of Study:</label>
+            <label className="block text-sm font-medium mb-1">
+              Year of Study:
+            </label>
             <select
               value={userData.year_of_study || ""}
               onChange={(e) =>
                 setUserData({
                   ...userData,
-                  year_of_study: parseInt(e.target.value),
+                  year_of_study: e.target.value,
                 })
               }
               className="text-black w-full border border-gray-300 p-2 rounded"
@@ -256,11 +313,26 @@ const UserDetails = ({ user }: { user: User }) => {
               <option value={5}>5</option>
               <option value="Other">Other</option>
             </select>
+            {userData.year_of_study === "Other" && (
+              <input
+                type="text"
+                placeholder="Enter your year of study"
+                value={userData.year_of_study || ""}
+                onChange={(e) =>
+                  setUserData({
+                    ...userData,
+                    year_of_study: e.target.value,
+                  })
+                }
+                className="text-black w-full border border-gray-300 p-2 rounded mt-2"
+              />
+            )}
           </div>
 
           <button
             onClick={handleUpdate}
             className="bg-blue-500 text-white py-2 px-4 rounded w-full"
+            disabled={loading}
           >
             Save Changes
           </button>
@@ -280,7 +352,7 @@ const UserDetails = ({ user }: { user: User }) => {
             <strong>Phone Number:</strong> {userData.phone_number || "N/A"}
           </p>
           <p className="text-left mb-4">
-            <strong>Roll no:</strong> {userData.rollno || "N/A"}
+            <strong>Roll No:</strong> {userData.rollno || "N/A"}
           </p>
           <p className="text-left mb-4">
             <strong>Institution:</strong> {userData.institute_name || "N/A"}
@@ -294,7 +366,6 @@ const UserDetails = ({ user }: { user: User }) => {
           >
             Update Details
           </button>
-          
         </div>
       )}
     </div>
