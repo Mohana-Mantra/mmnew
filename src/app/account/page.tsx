@@ -135,7 +135,7 @@ export default function Account() {
                             )}
                             onClick={() => changeTab(3)}
                         >
-                            My Payment
+                           My Receipt
                         </button>
                     )}
                     <button
