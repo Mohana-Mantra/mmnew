@@ -115,6 +115,16 @@ const MyPayment = ({
                     </button>
 
                     {errorMessage && <p className="text-red-500 mt-4">{errorMessage}</p>}
+
+                    <p>Any Issue occur please Contact us on WhatsApp
+                    <a
+                        href="https://wa.me/+919281089404" // Replace with your WhatsApp number
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-green-500 text-xl"
+                    >
+                        +91 92810 89404
+                    </a></p>
                 </div>
             )}
         </div>
