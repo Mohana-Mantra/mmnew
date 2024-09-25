@@ -123,7 +123,7 @@ const MyPayment = ({
                         rel="noopener noreferrer"
                         className="text-green-500 text-xl"
                     >
-                        +91 92810 89404
+                         +91 92810 89404
                     </a></p>
                 </div>
             )}
