@@ -360,7 +360,7 @@ export const SPOTEVENTS = [
     {
         eventName: "ESCAPE THE ROOM",
         slug: "escape-the-room",
-        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726211737/escaperoom_uzbj67.jpg",
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1727341795/es_etem44.jpg",
         about: "An immersive, live-action game where participants must solve puzzles to escape within a time limit.",
         howToPlay:
             "Participants must follow a correct path through a maze, with only one person allowed in the maze at a time.",
@@ -369,7 +369,7 @@ export const SPOTEVENTS = [
     {
         eventName: "TREASURE HUNT",
         slug: "treasure-hunt",
-        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726137002/treasure_x69otv.jpg",
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1727341795/th_rajv7d.jpg",
         about: "Participants solve riddles and clues to find hidden treasures.",
         howToPlay:
             "Teams solve aptitude questions to find clues leading to treasures. The process repeats with different clues in multiple rounds.",
@@ -432,7 +432,7 @@ export const WORKSHOPS = [
     {
         eventName: "Workshop on Embedded System & VLSI Design",
         slug: "workshop-on-embedded-system-vlsi-design",
-        image: "../src/public/assets/placeholder.png",
+        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1727341580/workshops/vqmkftlhgpzasalc7amf.jpg",
         about: "Inside the Tech: A Deep dive into Embedded Systems and VLSI Design",
         resoursePerson: ["Mohsin Khan A","Domain Expert, Corporate Trainer for Matlab and VLSI ", "Cranes Varsity", "Banglore"],
         rules: [
