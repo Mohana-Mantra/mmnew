@@ -61,7 +61,7 @@ export const KALAKSHETRAEVENTS = [
         event: "Picture Perfect (Photography Contest)",
         venue: "Room no - 4102",
         timings: "10:30 A.M - 12:00 P.M",
-        image: "https://res.cloudinary.com/dbjy9s3cz/video/upload/v1727342010/Picture_perfection_1_mmgafk.mp4",
+        video: "https://res.cloudinary.com/dbjy9s3cz/video/upload/v1727342010/Picture_perfection_1_mmgafk.mp4",
         day: "Day 1",
         rules: [
             " Participant can submit photographs through google forms.",
