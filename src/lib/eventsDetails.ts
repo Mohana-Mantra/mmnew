@@ -1,5 +1,5 @@
 import bandBattle from "../../public/assets/kalakshetra/bandbattle.svg";
-
+import picturePerfect from "../../public/assets/kalakshetra/pictureperfect.svg";
 import pushUp from "../../public/assets/kalakshetra/pushupchallenge.svg";
 import shortFilm from "../../public/assets/kalakshetra/shortfilm.svg";
 import sitCom from "../../public/assets/kalakshetra/sitcom.svg";
@@ -61,7 +61,7 @@ export const KALAKSHETRAEVENTS = [
         event: "Picture Perfect (Photography Contest)",
         venue: "Room no - 4102",
         timings: "10:30 A.M - 12:00 P.M",
-        video: "https://res.cloudinary.com/dbjy9s3cz/video/upload/v1727342010/Picture_perfection_1_mmgafk.mp4",
+        image: picturePerfect.src,
         day: "Day 1",
         rules: [
             " Participant can submit photographs through google forms.",
