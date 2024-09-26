@@ -177,23 +177,7 @@ export const KALAKSHETRAEVENTS = [
         description:
             "Band Battle is a competition where different musical bands play their best songs using various instruments. It is best chance to show their skills and creativity.",
     },
-    {
-        event: "Hand DIY T-shirts",
-        venue: "G-Block Pathway",
-        timings: "10:30 A.M",
-        image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726136573/handdiytshirt_d4btpq.png",
-        day: "Day 1,2",
-        rules: [
-            "Participants create personalized T-shirts using paint, markers, and other craft supplies.",
-            "Each participant can bring their own T-shirt or use one provided by the organizers.",
-            "Friends can add handprints, messages, and drawings on the T-shirts.",
-            "All decorations must be completed within 1 hour.",
-            "Use of any offensive or inappropriate content is not permitted.",
-            "Participants must clean up their workspace after completing their designs.",
-        ],
-        description:
-            "Hand Diy T shirts is a custom-made, personalized T-shirts is decorated using various hand-crafted techniques. By this t-shirts you can make the memories. Your friends can print their hands on the T-shirts by the colours and they can write anything about you on the t-shirt. This is one of the best memory for you.",
-    },
+
     {
         event: "Period Pain Simulator",
         venue: "G-Block Main Entrance",
