@@ -10,7 +10,7 @@ const Accommodation = ({ user }: { user: User }) => {
             <section className="mb-6">
                 <h2 className="text-2xl font-semibold">Room Rent Details</h2>
                 <p className="mt-4 text-lg">
-                    Accommodation Facility: ₹300 for room rent, and a refundable caution deposit of ₹200 is required.
+                    Accommodation Facility: ₹300 for room rent per day, and a refundable caution deposit of ₹200 is required.
                 </p>
                 <p className="mt-4 text-lg">
                     Separate rooms are provided for boys and girls. Please note that food is not included in the accommodation fee.
