@@ -20,7 +20,12 @@ interface UserData {
     full_name: string | null;
 }
 
-const MyTicket = ({ user }: { user: User }) => {
+const MyTicket = ({     user,
+    changeTab,
+}: {
+    user: User;
+    changeTab: (tab: 0 | 1 | 2 | 3 | 4) => void;
+}) =>  {
     const [ticketPurchased, setTicketPurchased] = useState(false);
     const [ticketPrice, setTicketPrice] = useState(500); // Default ticket price
     const [isEligibleForFreePass, setIsEligibleForFreePass] = useState(false);
@@ -172,15 +177,14 @@ const MyTicket = ({ user }: { user: User }) => {
                     <h4 className="text-red-500 font-bold mt-4">
                         Please carry your ID card for the event.
                     </h4>
-                    <a
-                        href="https://forms.office.com/r/g8xarrDDwh"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        <button className="bg-blue-600 hover:bg-blue-700 text-white mt-4 p-2 rounded-md">
+                  
+                        <button 
+                            className="bg-blue-600 hover:bg-blue-700 text-white mt-4 p-2 rounded-md"
+                            onClick={() => changeTab(2)}
+                            >
                             Select Interested Events
                         </button>
-                    </a>
+    
                 </div>
             ) : (
                 // User is not eligible for free pass
