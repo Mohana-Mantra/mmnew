@@ -213,7 +213,7 @@ export default function Account() {
             setIsUserDetailsComplete={setIsUserDetailsComplete}
           />
         )}
-        {activeTab === 1 && <MyTicket user={user} />}
+        {activeTab === 1 && <MyTicket user={user} changeTab={changeTab} />}
         {activeTab === 2 && <EventsList user={user} />}
         {activeTab === 3 && (
           <MyPayment user={user} changeTab={changeTab} />
