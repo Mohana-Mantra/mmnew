@@ -62,12 +62,12 @@ export default function AuthForm() {
             } else {
                 const { user } = data;
 
+                // Insert user details into users table
                 if (user) {
                     const { error: insertError } = await supabase.from("users").insert({
-                        user_id: user.id, // Supabase user_id
+                        user_id: user.id,
                         full_name: `${firstName} ${lastName}`,
                         email: user.email,
-                        // custom_user_id will be generated automatically by the trigger
                     });
 
                     if (insertError) {
@@ -75,8 +75,9 @@ export default function AuthForm() {
                     } else {
                         router.push("/account");
                     }
+                } else {
+                    setErrorMessage("User is null after sign-up.");
                 }
-
             }
         }
     };
@@ -183,7 +184,7 @@ export default function AuthForm() {
 
             <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
 
-            { /* <button
+          { /* <button
                 className="relative group/btn flex space-x-2 items-center px-4 w-full text-black rounded-md h-10 font-bold justify-center shadow-input bg-yellow"
                 onClick={signInWithGoogle}
             >
