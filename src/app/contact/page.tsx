@@ -22,7 +22,7 @@ function Contact() {
                     encType="multipart/form-data"
                     className="max-w-4xl mx-auto w-full p-4 md:px-20 space-y-4 text-black">
 
-                    <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
+                   
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <label htmlFor="name" className="text-white">
