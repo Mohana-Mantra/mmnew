@@ -179,7 +179,7 @@ export default function AuthForm() {
                     <Label htmlFor="password">Password</Label>
                     <Input id="password" name="password" placeholder="••••••••" type="password" />
                 </LabelInputContainer>
-
+*/}
                 <button
                     className="bg-yellow mt-6 relative group/btn from-white to-neutral-600 block w-full text-black rounded-md h-10 font-bold"
                     type="submit"
@@ -187,7 +187,7 @@ export default function AuthForm() {
                     {isLogin ? "Login" : "Register"} &rarr;
                 </button>
 
-                {errorMessage && <p className="text-red-500 mt-4">{errorMessage}</p>}*/}
+                {errorMessage && <p className="text-red-500 mt-4">{errorMessage}</p>}
             </form>
 
             <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
