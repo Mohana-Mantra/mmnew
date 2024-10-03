@@ -90,11 +90,7 @@ function Sponsers() {
                             height: 200,
                             width: 300,
                         },
-                        {
-                            image: l15.src,
-                            height: 200,
-                            width: 300,
-                        },
+              
                         {
                             image: l16.src,
                             height: 200,
