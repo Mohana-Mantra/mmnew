@@ -149,15 +149,17 @@ export default function AuthForm() {
             <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200">
                 {isLogin ? "Login to Mohana Mantra" : "Register for Mohana Mantra"}
             </h2>
-            <div className="text-center my-4 ">
-                    <h1 className="text-red-500">Registrations for Mohana Mantra 2k24 have been closed.</h1>
-                    <p className="text-white-500">
-                        However, don&#39;t worry! You still have a chance to experience the fest. 
-                        <br /><br />You can get your Mohana Mantra Pass on campus as a spot registration.
-                    </p>
-                </div>
-            {/*<form className="my-8" onSubmit={handleSubmit}>
+
+            <form className="my-8" onSubmit={handleSubmit}>
                 {!isLogin && (
+                                <div className="text-center my-4 ">
+                                <h1 className="text-red-500">Registrations for Mohana Mantra 2k24 have been closed.</h1>
+                                <p className="text-white-500">
+                                    However, don&#39;t worry! You still have a chance to experience the fest. 
+                                    <br /><br />You can get your Mohana Mantra Pass on campus as a spot registration.
+                                </p>
+                            </div>)}
+                            {/*
                     <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
                         <LabelInputContainer>
                             <Label htmlFor="firstname">First name</Label>
@@ -185,12 +187,12 @@ export default function AuthForm() {
                     {isLogin ? "Login" : "Register"} &rarr;
                 </button>
 
-                {errorMessage && <p className="text-red-500 mt-4">{errorMessage}</p>}
+                {errorMessage && <p className="text-red-500 mt-4">{errorMessage}</p>}*/}
             </form>
 
             <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
 
-          <button
+         {/*} <button
                 className="relative group/btn flex space-x-2 items-center px-4 w-full text-black rounded-md h-10 font-bold justify-center shadow-input bg-yellow"
                 onClick={signInWithGoogle}
             >
