@@ -83,7 +83,7 @@ function Sponsers() {
                             width: 300,
                         },
                         {
-                            image: "l14",
+                            image: l14.src,
                             height: 200,
                             width: 300,
                         },
