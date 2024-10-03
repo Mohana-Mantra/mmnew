@@ -152,24 +152,18 @@ export default function AuthForm() {
 
             <form className="my-8" onSubmit={handleSubmit}>
                 {!isLogin && (
-                                <div className="text-center my-4 ">
-                                <h1 className="text-red-500">Registrations for Mohana Mantra 2k24 have been closed.</h1>
-                                <p className="text-white-500">
-                                    However, don&#39;t worry! You still have a chance to experience the fest. 
-                                    <br /><br />You can get your Mohana Mantra Pass on campus as a spot registration.
-                                </p>
-                            </div>)}
-                            {/*
-                    <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
-                        <LabelInputContainer>
-                            <Label htmlFor="firstname">First name</Label>
-                            <Input id="firstname" name="firstname" placeholder="Tony" type="text" />
-                        </LabelInputContainer>
-                        <LabelInputContainer>
-                            <Label htmlFor="lastname">Last name</Label>
-                            <Input id="lastname" name="lastname" placeholder="Stark" type="text" />
-                        </LabelInputContainer>
-                    </div>
+
+
+                <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
+                    <LabelInputContainer>
+                        <Label htmlFor="firstname">First name</Label>
+                        <Input id="firstname" name="firstname" placeholder="Tony" type="text" />
+                    </LabelInputContainer>
+                    <LabelInputContainer>
+                        <Label htmlFor="lastname">Last name</Label>
+                        <Input id="lastname" name="lastname" placeholder="Stark" type="text" />
+                    </LabelInputContainer>
+                </div>
                 )}
                 <LabelInputContainer className="mb-4">
                     <Label htmlFor="email">Email Address</Label>
@@ -179,7 +173,7 @@ export default function AuthForm() {
                     <Label htmlFor="password">Password</Label>
                     <Input id="password" name="password" placeholder="••••••••" type="password" />
                 </LabelInputContainer>
-*/}
+
                 <button
                     className="bg-yellow mt-6 relative group/btn from-white to-neutral-600 block w-full text-black rounded-md h-10 font-bold"
                     type="submit"
@@ -192,7 +186,7 @@ export default function AuthForm() {
 
             <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
 
-         {/*} <button
+            {/*} <button
                 className="relative group/btn flex space-x-2 items-center px-4 w-full text-black rounded-md h-10 font-bold justify-center shadow-input bg-yellow"
                 onClick={signInWithGoogle}
             >

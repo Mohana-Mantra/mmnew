@@ -68,7 +68,7 @@ export default function Events() {
                     })}
                 </section>
             </div>
-            <Hackathon />
+           {/* <Hackathon />*/}
         </>
     );
 }
