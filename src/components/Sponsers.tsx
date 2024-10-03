@@ -1,6 +1,7 @@
 import { Monoton } from "next/font/google";
 import Image from "next/image";
 import { InfiniteMovingSponsers } from "./ui/moving-cards";
+import l14 from "../../public/assets/14.png";
 
 const monoton = Monoton({ subsets: ["latin"], weight: "400" });
 
@@ -78,6 +79,11 @@ function Sponsers() {
                         },
                         {
                             image: "https://res.cloudinary.com/dbjy9s3cz/image/upload/v1726819625/international_campus_connect_arjvgz.svg",
+                            height: 200,
+                            width: 300,
+                        },
+                        {
+                            image: "l14",
                             height: 200,
                             width: 300,
                         },
