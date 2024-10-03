@@ -151,8 +151,8 @@ export default function AuthForm() {
             </h2>
             <div className="text-center my-4 text-red-500">
                     <h1>Registrations for Mohana Mantra 2k24 have been closed.</h1>
-                    <p>
-                        However, don`&#39;`t worry! You still have a chance to experience the fest. 
+                    <p className="text-center my-4 text-white-500">
+                        However, don&#39;t worry! You still have a chance to experience the fest. 
                         You can get your Mohana Mantra Pass on campus as a spot registration.
                     </p>
                 </div>
