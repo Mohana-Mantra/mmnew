@@ -16,8 +16,8 @@ export default function Home() {
             <ProShows />
             <Gallery />
             <Sponsers />
-            <StickyCountdown />
-            <Hackathon />
+           {/* <StickyCountdown />
+            <Hackathon />*/}
         </>
     );
 }
