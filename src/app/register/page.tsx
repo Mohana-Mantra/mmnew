@@ -4,10 +4,11 @@ import { Label } from "../../components/ui/label";
 import { Input } from "../../components/ui/input";
 import { supabase } from "@/lib/supabaseClient";
 import { useRouter } from "next/navigation";
-import { IconBrandGoogle } from "@tabler/icons-react";
+// import { IconBrandGoogle } from "@tabler/icons-react"; // Commented out if Google sign-in is disabled
 
 export default function AuthForm() {
-    const [isLogin, setIsLogin] = useState(true); // Default to login only
+    // Set isLogin to true by default
+    const [isLogin, setIsLogin] = useState(true);
     const [errorMessage, setErrorMessage] = useState("");
     const router = useRouter();
 
@@ -28,7 +29,7 @@ export default function AuthForm() {
         getUser();
     }, [router]);
 
-    // Handle login submit
+    // Handle form submit (login only)
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const formData = new FormData(e.target as HTMLFormElement);
@@ -50,30 +51,22 @@ export default function AuthForm() {
                 Login to Mohana Mantra
             </h2>
 
-            {/* Registration Closed Message */}
-            {!isLogin && (
-                <div className="text-center my-4 text-red-500">
-                    <h1>Registrations for Mohana Mantra 2k24 have been closed.</h1>
-                    <p>
-                        However, don't worry! You still have a chance to experience the fest. 
-                        You can get your Mohana Mantra Pass on campus as a spot registration.
-                    </p>
-                </div>
-            )}
+            <p className="mt-4 text-center">
+                Registrations for Mohana Mantra 2k24 have been closed. However, don't worry—you still have a chance to experience the fest. You can get your Mohana Mantra Pass on campus as spot registration.
+            </p>
 
-            {/* Login Form */}
             <form className="my-8" onSubmit={handleSubmit}>
                 <LabelInputContainer className="mb-4">
                     <Label htmlFor="email">Email Address</Label>
-                    <Input id="email" name="email" placeholder="you@example.com" type="email" />
+                    <Input id="email" name="email" placeholder="you@example.com" type="email" required />
                 </LabelInputContainer>
                 <LabelInputContainer className="mb-4">
                     <Label htmlFor="password">Password</Label>
-                    <Input id="password" name="password" placeholder="••••••••" type="password" />
+                    <Input id="password" name="password" placeholder="••••••••" type="password" required />
                 </LabelInputContainer>
 
                 <button
-                    className="bg-yellow mt-6 relative group/btn from-white to-neutral-600 block w-full text-black rounded-md h-10 font-bold"
+                    className="bg-yellow mt-6 block w-full text-black rounded-md h-10 font-bold"
                     type="submit"
                 >
                     Login &rarr;
@@ -82,17 +75,18 @@ export default function AuthForm() {
                 {errorMessage && <p className="text-red-500 mt-4">{errorMessage}</p>}
             </form>
 
-            {/* No Registration button */}
+            {/* Optionally, you can remove or comment out the Google sign-in button */}
+            {/* 
             <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
 
-            <p
-                className="text-center mt-6 text-sm p-2 rounded-md bg-gray-100 dark:bg-gray-800"
+            <button
+                className="relative flex space-x-2 items-center px-4 w-full text-black rounded-md h-10 font-bold justify-center shadow-input bg-yellow"
+                onClick={signInWithGoogle}
             >
-                Don't have an account? 
-                <span className="font-bold cursor-pointer">
-                    Registration is closed.
-                </span>
-            </p>
+                <IconBrandGoogle className="h-5 w-5" />
+                <span>Login with Google</span>
+            </button>
+            */}
         </div>
     );
 }
